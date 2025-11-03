@@ -1,486 +1,539 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>MASTER English</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MASTER English</title>
+  <meta name="description" content="MASTER English — Inglês real para profissionais. Cursos, HealthTalk e aulas personalizadas." />
+  <meta name="theme-color" content="#17252a" />
+  <!-- Fonte League Spartan -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/favicon.ico" />
 
-<!-- Fonte League Spartan -->
-<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --primary:#3aafa9;
+      --background:#17252a;
+      --title:#fe5f55;
+      --secondary:#def2f1;
+      --text:#f5f7f8;
+      --hero-text-color:#17252a;
+      --max-w:1200px;
+      --glass: rgba(255,255,255,0.04);
+      --ease: cubic-bezier(.2,.9,.3,1);
+    }
 
-<style>
-:root{
-  --primary: #3aafa9;
-  --background: #17252a;
-  --title: #fe5f55;
-  --secondary: #def2f1;
-  --text: #f5f7f8;
-  --hero-text-color: #17252a;
-}
+    /* Reset & base */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:"League Spartan",sans-serif;
+      background:var(--background);
+      color:var(--text);
+      line-height:1.5;
+      overflow-x:hidden;
+      scroll-behavior:smooth;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    a{color:inherit}
+    img{max-width:100%;display:block}
+    main{max-width:var(--max-w);margin:0 auto}
 
-/* Reset */
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{
-  font-family: "League Spartan",sans-serif;
-  background:var(--background);
-  color:var(--text);
-  line-height:1.5;
-  overflow-x:hidden;
-  scroll-behavior:smooth;
-}
+    /* HEADER */
+    header{
+      position:fixed;top:0;left:0;right:0;height:84px;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 40px;background:linear-gradient(180deg, rgba(23,37,42,0.95), rgba(23,37,42,0.86));
+      z-index:200;border-bottom:1px solid rgba(255,255,255,0.03);
+      backdrop-filter: blur(6px);
+    }
+    .logo img{height:56px;display:block}
+    nav{display:flex;align-items:center;gap:18px}
+    ul.menu{list-style:none;display:flex;gap:28px;align-items:center;margin-left:12px}
+    ul.menu li{position:relative}
+    ul.menu a{color:var(--text);text-decoration:none;font-weight:600;padding:8px 10px;border-radius:10px;display:inline-block;transition:all .22s var(--ease)}
+    ul.menu a:hover{color:var(--primary);transform:translateY(-2px)}
+    /* mobile toggle */
+    .menu-toggle{display:none;background:transparent;border:1px solid rgba(255,255,255,0.06);width:46px;height:46px;border-radius:10px;align-items:center;justify-content:center;cursor:pointer}
+    .menu-toggle svg{display:block}
 
-/* HEADER */
-header{
-  position:fixed;top:0;left:0;right:0;height:90px;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 60px;
-  background: url("images/header.png") no-repeat center center;
-  background-size: cover;
-  z-index:200;
-  box-shadow:0 2px 10px rgba(0,0,0,.45);
-}
-.logo img{height:60px;display:block}
-nav ul{list-style:none;display:flex;gap:36px;align-items:center}
-nav a{color:var(--text);text-decoration:none;font-weight:500;transition:color .25s}
-nav a:hover{color:var(--primary)}
-nav ul li{position:relative}
-nav ul ul{display:none;position:absolute;top:36px;left:0;background:#111;padding:12px 0;border-radius:8px;min-width:160px}
-nav ul li:hover>ul{display:block}
-nav ul ul a{display:block;padding:8px 20px;color:var(--text);font-size:14px}
+    /* HERO */
+    .hero{
+      margin-top:84px;
+      background: url("images/hero.png") no-repeat center center;
+      background-size:cover;
+      min-height:76vh;
+      display:flex;gap:36px;align-items:center;justify-content:space-between;
+      padding:72px 40px 48px;flex-wrap:wrap;
+    }
+    .hero-inner{display:flex;gap:36px;align-items:flex-start;width:100%;max-width:var(--max-w)}
+    .hero-text{max-width:660px}
+    .hero-text h1{font-size:64px;color:var(--primary);line-height:0.95;margin-bottom:6px;letter-spacing:-1px;transform:translateY(0);opacity:1;transition:all .6s var(--ease)}
+    .hero-text h1 span{display:block;font-size:96px;color:var(--title);line-height:0.95}
+    .hero-text p{font-size:20px;color:var(--hero-text-color);margin-top:10px;font-weight:500}
 
-/* HERO */
-.hero{
-  margin-top:90px;
-  background: url("images/hero.png") no-repeat center center;
-  background-size:cover;
-  min-height:80vh;
-  display:flex;gap:40px;align-items:center;justify-content:space-between;
-  padding:100px 50px;flex-wrap:wrap;
-}
-.hero-text{max-width:620px}
-.hero-text h1{font-size:88px;color:var(--primary);line-height:1.05;margin-bottom:12px}
-.hero-text h1 span{display:block;font-size:120px;color:var(--title)}
-.hero-text p{font-size:24px;color:var(--hero-text-color);margin-bottom:30px;font-weight:500}
+    /* Formulário Hero */
+    .hero-form{
+      width:420px;background:linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.45));padding:28px;border-radius:16px;
+      box-shadow:0 12px 40px rgba(0,0,0,.5);display:flex;flex-direction:column;gap:12px;backdrop-filter: blur(4px);
+    }
+    .hero-form label{font-size:12px;color:var(--secondary);display:block}
+    .hero-form input, .hero-form select, .hero-form textarea{
+      padding:10px;border-radius:10px;border:none;font-size:14px;width:100%;
+      background: rgba(255,255,255,0.03); color:var(--text);
+    }
+    .hero-form button{background:var(--title);color:#fff;border:none;padding:12px;border-radius:10px;font-weight:800;cursor:pointer}
+    .hero-form .row{display:flex;gap:8px}
 
-/* Formulário Hero */
-.hero-form{
-  width:400px;background:rgba(0,0,0,.55);padding:36px;border-radius:18px;
-  box-shadow:0 8px 30px rgba(0,0,0,.4);display:flex;flex-direction:column;gap:12px;
-}
-.hero-form label{font-size:12px;color:var(--secondary)}
-.hero-form input{padding:10px;border-radius:8px;border:none;font-size:14px;width:100%}
-.hero-form button{background:var(--title);color:#fff;border:none;padding:10px;border-radius:8px;font-weight:700;cursor:pointer}
+    /* MASTER (Por que) */
+    .master-section{padding:84px 40px;background: url("images/por-que.png") center/cover no-repeat;color:var(--text)}
+    .master-container{display:flex;gap:48px;align-items:flex-start;flex-wrap:wrap;max-width:var(--max-w);margin:0 auto}
+    .master-text{flex:1;min-width:280px;max-width:660px}
+    .master-text h1{color:var(--title);font-size:2.2rem;margin-bottom:14px}
+    .master-text ul{list-style:none;padding-left:0}
+    .master-text li{color:var(--secondary);font-size:1.05rem;margin-bottom:12px}
+    .master-text h3{color:var(--primary);margin-top:18px;margin-bottom:8px}
+    .master-text h3.special{color:var(--title)}
 
-/* MASTER */
-.master-section{
-  padding:120px 60px;background:url("images/por-que.png") center/cover no-repeat; color:var(--text);
-}
-.master-container{max-width:1200px;margin:0 auto;display:flex;gap:60px;align-items:flex-start;flex-wrap:wrap}
-.master-text{flex:1;min-width:320px;max-width:620px}
-.master-text h1{color:var(--title);font-size:2.4rem;margin-bottom:18px}
-.master-text ul{list-style:none;padding-left:0}
-.master-text li{color:var(--secondary);font-size:1.05rem;margin-bottom:12px}
-.master-text h3{color:var(--primary);margin-top:18px;margin-bottom:8px}
-.master-text h3.special{color:var(--title)}
+    .cta-box{flex:0 0 420px;background:rgba(0,0,0,0.45);padding:28px;border-radius:14px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:12px}
+    .cta-box h3{font-size:1.4rem;color:var(--text)}
+    .btn-saiba-mais{background:var(--primary);color:#fff;padding:12px 22px;border-radius:28px;text-decoration:none;font-weight:800;display:inline-block;transition:transform .18s var(--ease)}
+    .btn-saiba-mais:hover{transform:translateY(-3px)}
 
-.cta-box{flex:0 0 420px;background:rgba(0,0,0,.5);padding:36px;border-radius:16px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:12px}
-.cta-box h3{font-size:1.6rem;color:var(--text)}
-.btn-saiba-mais{background:var(--primary);color:#fff;padding:12px 26px;border-radius:30px;text-decoration:none;font-weight:700;display:inline-block}
+    /* CURSOS */
+    #cursos{padding:84px 40px;background:var(--secondary);display:flex;flex-direction:column;align-items:center;gap:28px}
+    #cursos h2{width:100%;text-align:center;color:var(--title); font-size:2.6rem;margin-bottom:18px;}
+    .courses-row{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;width:100%;max-width:var(--max-w)}
+    .course-box{background:#fff;padding:28px;border-radius:14px;max-width:340px;min-width:240px;flex:1;display:flex;flex-direction:column;align-items:center;gap:20px;box-shadow:0 12px 30px rgba(0,0,0,.06);transition:transform .22s var(--ease)}
+    .course-box:hover{transform:translateY(-6px)}
+    .course-box img{max-width:140px}
+    .course-box h3{color:var(--title);font-size:1.4rem}
+    .course-box p{color:#111; font-size:1rem; text-align:center}
 
-/* CURSOS */
-#cursos{padding:140px 60px;background:var(--secondary);display:flex;gap:34px;justify-content:center;flex-wrap:wrap}
-#cursos h2{width:100%;text-align:center;color:var(--title); font-size:3rem;margin-bottom:36px;}
-.course-box{background:#fff;padding:40px 36px;border-radius:16px;max-width:360px;min-width:280px;flex:1;display:flex;flex-direction:column;align-items:center;gap:24px;box-shadow:0 8px 25px rgba(0,0,0,.08)}
-.course-box img{max-width:160px}
-.course-box h3{color:#fe5f55;font-size:1.8rem}
-.course-box p{color:#111; font-size:1.15rem; text-align:center}
-.course-box a.btn-saiba-mais{margin-top:auto}
+    /* DEPOIMENTOS 3D (aumentado e sem autoplay) */
+    .testimonials-section{padding:84px 40px;text-align:center;position:relative;border-radius:18px;overflow:visible;background: url("images/depoimento.png") center/cover no-repeat}
+    .testimonials-section h2{color:#fe5f55;font-size:2.4rem;margin-bottom:18px}
+    .testimonials-3d-carousel{max-width:1000px;margin:0 auto;position:relative}
+    .carousel-wrapper{position:relative;height:640px;perspective:1400px;display:flex;align-items:center;justify-content:center}
+    .carousel-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100%;height:100%;pointer-events:none;z-index:0;display:flex;justify-content:space-between;align-items:center}
+    .carousel-bg .bg-left,.carousel-bg .bg-right{width:300px;height:520px;background-size:cover;background-position:center;filter:blur(14px);opacity:0.28;border-radius:20px}
+    .carousel-bg .bg-left{background-image:url('images/depo1-bg.jpg');}
+    .carousel-bg .bg-right{background-image:url('images/depo2-bg.jpg');}
+    .carousel-item{
+      position:absolute;top:0;left:50%;transform:translateX(-50%) scale(0.65);opacity:0.25;transition:all .5s var(--ease);
+      border-radius:18px;overflow:hidden;width:320px;height:520px;box-shadow:0 20px 60px rgba(0,0,0,.55);background:#000;z-index:1;
+    }
+    .carousel-item.active{transform:translateX(-50%) scale(1);opacity:1;z-index:4;width:420px;height:640px}
+    .carousel-item.prev{transform:translateX(-260px) scale(0.8);opacity:0.55;z-index:3}
+    .carousel-item.next{transform:translateX(260px) scale(0.8);opacity:0.55;z-index:3}
+    .carousel-item video{width:100%;height:100%;object-fit:cover;display:block}
+    .carousel-controls{position:absolute;top:50%;width:100%;display:flex;justify-content:space-between;pointer-events:none;padding:0 20px;transform:translateY(-50%);z-index:6}
+    .carousel-btn{pointer-events:auto;background:rgba(0,0,0,0.45);border:none;color:#fff;width:56px;height:56px;border-radius:50%;font-size:26px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);box-shadow:0 12px 30px rgba(0,0,0,.5)}
+    .carousel-indicators{display:flex;justify-content:center;gap:10px;margin-top:20px;z-index:6;position:relative}
+    .carousel-indicators button{width:14px;height:14px;border-radius:50%;border:none;background:rgba(255,255,255,0.38);cursor:pointer;transition:transform .18s var(--ease)}
+    .carousel-indicators button.active{background:var(--title);transform:scale(1.1)}
 
-/* DEPOIMENTOS 3D */
-.testimonials-section{
-  padding:120px 60px;text-align:center;
-  position:relative;
-  border-radius:28px;
-  overflow:hidden;
-  background: url("images/depoimento.png") center/cover no-repeat;
-}
-.testimonials-section h2{
-  color:#fe5f55;
-  font-size:2.8rem;
-  margin-bottom:40px;
-}
+    /* TEACHER */
+    .teacher-section{padding:84px 40px;background:linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.06))}
+    .teacher-container{display:flex;gap:36px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+    .teacher-text{flex:1;min-width:300px}
+    .teacher-text h2{color:var(--title);font-size:2rem;margin-bottom:12px}
+    .teacher-text p{color:var(--secondary);margin-bottom:12px;line-height:1.7}
+    .teacher-text .btn-master{margin-top:12px;background:var(--primary);padding:12px 22px;border-radius:28px;color:#fff;font-weight:700;text-decoration:none;display:inline-block}
+    .teacher-photo{width:420px;height:520px;border-radius:18px;background-size:cover;background-position:center;box-shadow:0 20px 60px rgba(0,0,0,.6);flex:0 0 420px;display:flex;align-items:flex-end;justify-content:center;padding:18px;background-color:#0f1516;border:2px solid rgba(255,255,255,.03)}
+    .teacher-photo .label{width:100%;text-align:left;color:var(--text);font-weight:700;background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.45));padding:12px;border-radius:10px}
 
-/* Carousel 3D */
-.testimonials-3d-carousel{
-  perspective:1200px;
-  position:relative;
-  max-width:900px;
-  margin:0 auto;
-}
+    /* FOOTER */
+    .footer{padding:28px 40px;text-align:center;color:var(--secondary);border-top:1px solid rgba(255,255,255,.04);margin-top:10px}
 
-.carousel-bg{
-  position:absolute;
-  top:50%;
-  left:50%;
-  width:100%;
-  height:100%;
-  pointer-events:none;
-  transform:translate(-50%,-50%);
-  z-index:0;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-.carousel-bg .bg-left,
-.carousel-bg .bg-right{
-  width:250px;
-  height:450px;
-  background-size:cover;
-  background-position:center;
-  filter:blur(12px);
-  opacity:0.3;
-  border-radius:20px;
-}
-.carousel-bg .bg-left{background-image:url('images/depo1-bg.jpg');}
-.carousel-bg .bg-right{background-image:url('images/depo2-bg.jpg');}
+    /* small screens */
+    @media (max-width:980px){
+      header{padding:0 20px}
+      .hero{padding:48px 20px;min-height:68vh}
+      .hero-text h1{font-size:44px}
+      .hero-text h1 span{font-size:64px}
+      .hero-form{width:100%}
+      .cta-box{width:100%}
+      .teacher-photo{width:300px;height:380px}
+      .carousel-wrapper{height:520px}
+      .carousel-item{width:260px;height:420px}
+      .carousel-item.active{width:320px;height:480px}
+    }
+    @media (max-width:640px){
+      .menu-toggle{display:flex}
+      ul.menu{display:none}
+      .hero-inner{flex-direction:column-reverse;gap:20px}
+      .hero-text h1{font-size:32px}
+      .hero-text h1 span{font-size:44px}
+      .master-section{padding:48px 20px}
+      #cursos{padding:48px 20px}
+      .courses-row{flex-direction:column;align-items:center}
+      .testimonials-section{padding:48px 20px}
+      .teacher-section{padding:48px 20px}
+      .carousel-wrapper{height:420px}
+      .carousel-item{width:200px;height:320px}
+      .carousel-item.active{width:240px;height:360px}
+      .teacher-photo{width:260px;height:320px}
+    }
 
-/* Carousel items */
-.carousel-wrapper{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  position:relative;
-  transform-style:preserve-3d;
-  transition: transform 0.6s ease;
-}
-
-.carousel-item{
-  position:absolute;
-  top:0;
-  left:50%;
-  transform:translateX(-50%) scale(0.6);
-  opacity:0.3;
-  transition: all 0.6s ease;
-  border-radius:20px;
-  overflow:hidden;
-  width:250px;
-  height:450px;
-  box-shadow:0 10px 30px rgba(0,0,0,.5);
-  filter:blur(2px);
-  z-index:1;
-}
-
-.carousel-item.active{
-  transform:translateX(-50%) scale(1);
-  opacity:1;
-  filter:blur(0);
-  z-index:2;
-  width:300px;
-  height:520px;
-}
-
-.carousel-item.prev{
-  transform:translateX(-180px) scale(0.7);
-  opacity:0.5;
-  filter:blur(2px);
-  z-index:1;
-}
-
-.carousel-item.next{
-  transform:translateX(180px) scale(0.7);
-  opacity:0.5;
-  filter:blur(2px);
-  z-index:1;
-}
-
-.carousel-item video{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  border-radius:20px;
-}
-
-/* Controls */
-.carousel-controls{
-  position:absolute;
-  top:50%;
-  width:100%;
-  display:flex;
-  justify-content:space-between;
-  transform:translateY(-50%);
-  padding:0 20px;
-  pointer-events:none;
-  z-index:3;
-}
-.carousel-btn{
-  pointer-events:auto;
-  background:rgba(0,0,0,0.45);
-  border:none;
-  color:#fff;
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  font-size:24px;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  backdrop-filter:blur(4px);
-  box-shadow:0 6px 18px rgba(0,0,0,.5);
-}
-
-/* Indicators */
-.carousel-indicators{
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  margin-top:20px;
-  z-index:3;
-  position:relative;
-}
-.carousel-indicators button{
-  width:12px;
-  height:12px;
-  border-radius:50%;
-  border:none;
-  background:rgba(255,255,255,0.45);
-  cursor:pointer;
-}
-.carousel-indicators button.active{background:#fe5f55;}
-
-/* TEACHER LARI */
-.teacher-section{
-  padding:120px 60px;background:linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.08));
-}
-.teacher-container{max-width:1200px;margin:0 auto;display:flex;gap:40px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-.teacher-text{flex:1;min-width:320px}
-.teacher-text h2{color:var(--title);font-size:2rem;margin-bottom:12px}
-.teacher-text p{color:var(--secondary);margin-bottom:12px;line-height:1.75}
-.teacher-text .btn-master{margin-top:12px;background:var(--primary);padding:12px 24px;border-radius:30px;color:#fff;font-weight:700;text-decoration:none;display:inline-block}
-
-.teacher-photo{
-  width:420px;height:520px;border-radius:18px;background-size:cover;background-position:center;
-  box-shadow:0 20px 60px rgba(0,0,0,.6);flex:0 0 420px;
-  display:flex;align-items:flex-end;justify-content:center;padding:18px;
-  background-color:#0f1516;
-  border:2px solid rgba(255,255,255,.03);
-}
-.teacher-photo .label{
-  width:100%;text-align:left;color:var(--text);font-weight:700;
-  background: linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.45));
-  padding:12px;border-radius:10px;
-}
-
-/* FOOTER */
-.footer{padding:40px 60px;text-align:center;color:var(--secondary);border-top:1px solid rgba(255,255,255,.04)}
-
-@media (max-width:980px){
-  header{padding:0 24px}
-  .hero{padding:48px 20px;flex-direction:column;align-items:flex-start}
-  .hero-form{width:100%}
-  .master-container{flex-direction:column;align-items:center}
-  .cta-box{width:100%}
-  #cursos{padding:60px 20px}
-  .teacher-container{flex-direction:column-reverse;align-items:center}
-  .teacher-photo{width:260px;height:360px}
-}
-@media (max-width:520px){
-  .hero-text h1{font-size:36px}
-  .hero-text h1 span{font-size:60px}
-}
-</style>
+    /* Mobile nav panel */
+    .mobile-nav{position:fixed;top:84px;right:16px;left:16px;background:linear-gradient(180deg, rgba(17,22,24,0.98), rgba(17,22,24,0.98));display:none;flex-direction:column;padding:18px;gap:12px;border-radius:12px;z-index:250}
+    .mobile-nav.show{display:flex}
+    .mobile-nav a{padding:10px;border-radius:8px}
+    /* subtle animations on scroll */
+    .fade-up{opacity:0;transform:translateY(16px);transition:all .6s var(--ease)}
+    .fade-up.inview{opacity:1;transform:translateY(0)}
+  </style>
 </head>
 <body>
+  <!-- HEADER -->
+  <header>
+    <div class="logo"><a href="index.html"><img src="images/logo.png" alt="Logo MASTER"></a></div>
 
-<!-- HEADER -->
-<header>
-  <div class="logo"><a href="#"><img src="images/logo.png" alt="Logo MASTER"></a></div>
-  <nav>
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#cursos">Cursos</a></li>
-      <li>
-        <a href="#">Master ▾</a>
-        <ul>
-          <li><a href="master/quem-somos.html">Quem somos</a></li>
-          <li><a href="master/teste.html">Teste seu inglês</a></li>
-        </ul>
-      </li>
-      <li><a href="blog/index.html">Blog</a></li>
-    </ul>
-  </nav>
-</header>
-
-<!-- HERO -->
-<section class="hero" id="top">
-  <div class="hero-text">
-    <h1>Welcome to <span>MASTER</span></h1>
-    <p>Inglês real para quem quer resultados de verdade.</p>
-  </div>
-
-  <form class="hero-form" aria-label="Formulário de contato">
-    <label for="nome">Nome completo*</label>
-    <input id="nome" type="text" placeholder="Seu nome" />
-    <label for="email">Seu melhor e-mail*</label>
-    <input id="email" type="email" placeholder="exemplo@email.com" />
-    <label for="celular">Celular*</label>
-    <input id="celular" type="tel" placeholder="(00) 00000-0000" />
-    <label style="font-size:12px;color:var(--secondary)"><input type="checkbox" /> Concordo em receber comunicações da MASTER</label>
-    <button type="submit">QUERO MAIS INFORMAÇÕES</button>
-  </form>
-</section>
-
-<!-- MASTER -->
-<section class="master-section" id="por-que">
-  <div class="master-container">
-    <div class="master-text">
-      <h1>Por que a MASTER?</h1>
-      <ul>
-        <li><strong>Fale inglês desde o primeiro dia.</strong></li>
-        <li><strong>Aulas práticas, dinâmicas e reais.</strong></li>
-        <li><strong>Aprenda fazendo:</strong> conversando, simulando e praticando.</li>
-        <li><strong>Comece de qualquer nível</strong> e siga até a fluência.</li>
-        <li><strong>Foco total em resultados:</strong> fala, escuta e pensamento crítico.</li>
-        <li><strong>Suporte e plataforma exclusivos</strong> para evoluir rápido.</li>
+    <nav aria-label="Menu principal">
+      <ul class="menu" role="menubar">
+        <li><a href="#por-que">Por que a MASTER?</a></li>
+        <li><a href="#cursos">Cursos</a></li>
+        <li><a href="master/teste.html">Teste seu inglês</a></li>
+        <li><a href="blog/index.html">Blog</a></li>
       </ul>
 
-      <h3 class="special">HealthTalk</h3>
-      <p>Programa exclusivo para profissionais da saúde, com vocabulário técnico, simulações clínicas e comunicação real no hospital.</p>
-    </div>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-label="Abrir menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M3 6h18M3 12h18M3 18h18" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </nav>
+  </header>
 
-    <div class="cta-box">
-      <h3>Pronto para começar?</h3>
-      <p>Agende sua aula experimental gratuita e conheça o método MASTER.</p>
-      <a class="btn-saiba-mais" href="#contato">Saiba mais</a>
-    </div>
-  </div>
-</section>
-
-<!-- CURSOS -->
-<section id="cursos">
-  <h2>Nossos Cursos</h2>
-  <div class="course-box">
-    <img src="images/course1.png" alt="Master Journey" />
-    <h3>Master Journey</h3>
-    <p>Do básico à fluência em 2 anos. Aprenda inglês de forma completa, estruturada e dinâmica.</p>
-    <a href="#contato" class="btn-saiba-mais" style="background:var(--primary)">Saiba mais</a>
+  <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <a href="#por-que">Por que a MASTER?</a>
+    <a href="#cursos">Cursos</a>
+    <a href="master/teste.html">Teste seu inglês</a>
+    <a href="blog/index.html">Blog</a>
   </div>
 
-  <div class="course-box">
-    <img src="images/course2.png" alt="Master Talk" />
-    <h3>Master Talk</h3>
-    <p>Conversação personalizada, prática intensa e feedback constante.</p>
-    <a href="#contato" class="btn-saiba-mais" style="background:var(--primary)">Saiba mais</a>
-  </div>
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="top" aria-label="Apresentação">
+      <div class="hero-inner">
+        <div class="hero-text fade-up" data-anim>
+          <h1>Welcome to <span>MASTER</span></h1>
+          <p>Inglês real para quem quer resultados de verdade.</p>
+        </div>
 
-  <div class="course-box">
-    <img src="images/course3.png" alt="HealthTalk" />
-    <h3>HealthTalk</h3>
-    <p>Inglês especializado para profissionais da saúde, com simulações clínicas.</p>
-    <a href="#contato" class="btn-saiba-mais" style="background:var(--primary)">Saiba mais</a>
-  </div>
-</section>
+        <form class="hero-form fade-up" data-anim id="contactForm" aria-label="Formulário de contato">
+          <label for="nome">Nome completo*</label>
+          <input id="nome" name="nome" type="text" placeholder="Seu nome" required />
 
-<!-- DEPOIMENTOS 3D -->
-<section class="testimonials-section" id="depoimentos">
-  <h2>Escute dos nossos alunos</h2>
+          <label for="email">Seu melhor e-mail*</label>
+          <input id="email" name="email" type="email" placeholder="exemplo@email.com" required />
 
-  <div class="testimonials-3d-carousel" aria-roledescription="carousel">
-    <!-- Imagens de fundo borradas -->
-    <div class="carousel-bg">
-      <div class="bg-left"></div>
-      <div class="bg-right"></div>
-    </div>
+          <label for="celular">Celular*</label>
+          <input id="celular" name="celular" type="tel" placeholder="(00) 00000-0000" required />
 
-    <!-- Carousel wrapper -->
-    <div class="carousel-wrapper">
-      <div class="carousel-item active">
-        <video class="t-video" playsinline preload="metadata" muted>
-          <source src="videos/depoimento1.mp4" type="video/mp4">
-        </video>
+          <label for="curso">Curso</label>
+          <select id="curso" name="curso">
+            <option value="master-journey">Master Journey</option>
+            <option value="master-talk">Master Talk</option>
+            <option value="healthtalk">HealthTalk</option>
+          </select>
+
+          <label for="msg">Mensagem (opcional)</label>
+          <textarea id="msg" name="mensagem" rows="2" placeholder="Como podemos ajudar?"></textarea>
+
+          <label style="font-size:12px;color:var(--secondary)"><input id="consent" type="checkbox" /> Concordo em receber comunicações da MASTER</label>
+
+          <div style="display:flex;gap:8px;margin-top:6px">
+            <button type="button" id="sendWhatsapp" style="flex:1;background:#25D366;color:#fff;border-radius:10px;border:none;padding:10px;font-weight:700;cursor:pointer">Enviar pelo WhatsApp</button>
+            <button type="submit" style="flex:1;background:var(--title);color:#fff;border-radius:10px;border:none;padding:10px;font-weight:800;cursor:pointer">Enviar por E-mail</button>
+          </div>
+
+          <small id="formMessage" style="display:block;margin-top:10px;opacity:.9"></small>
+        </form>
       </div>
-      <div class="carousel-item">
-        <video class="t-video" playsinline preload="metadata" muted>
-          <source src="videos/depoimento2.mp4" type="video/mp4">
-        </video>
+    </section>
+
+    <!-- MASTER / Why -->
+    <section class="master-section" id="por-que" aria-labelledby="masterTitle">
+      <div class="master-container">
+        <div class="master-text fade-up" data-anim>
+          <h1 id="masterTitle">Por que a MASTER?</h1>
+          <ul>
+            <li><strong>Fale inglês desde o primeiro dia.</strong></li>
+            <li><strong>Aulas práticas, dinâmicas e reais.</strong></li>
+            <li><strong>Aprenda fazendo:</strong> conversando, simulando e praticando.</li>
+            <li><strong>Comece de qualquer nível</strong> e siga até a fluência.</li>
+            <li><strong>Foco total em resultados:</strong> fala, escuta e pensamento crítico.</li>
+            <li><strong>Suporte e plataforma exclusivos</strong> para evoluir rápido.</li>
+          </ul>
+
+          <h3 class="special">HealthTalk</h3>
+          <p>Programa exclusivo para profissionais da saúde, com vocabulário técnico, simulações clínicas e comunicação real no hospital.</p>
+        </div>
+
+        <div class="cta-box fade-up" data-anim>
+          <h3>Pronto para começar?</h3>
+          <p>Agende sua aula experimental gratuita e conheça o método MASTER.</p>
+          <a class="btn-saiba-mais" href="#contato">Saiba mais</a>
+        </div>
       </div>
-      <div class="carousel-item">
-        <video class="t-video" playsinline preload="metadata" muted>
-          <source src="videos/depoimento3.mp4" type="video/mp4">
-        </video>
+    </section>
+
+    <!-- CURSOS -->
+    <section id="cursos" aria-labelledby="cursosTitle">
+      <h2 id="cursosTitle">Nossos Cursos</h2>
+
+      <div class="courses-row" role="list">
+        <article class="course-box fade-up" data-anim role="listitem" aria-labelledby="c1">
+          <img src="images/course1.png" alt="Master Journey" loading="lazy" width="160" height="120"/>
+          <h3 id="c1">Master Journey</h3>
+          <p>Do básico à fluência em 2 anos. Aprenda inglês de forma completa, estruturada e dinâmica.</p>
+          <a href="#contato" class="btn-saiba-mais" style="background:var(--primary)">Saiba mais</a>
+        </article>
+
+        <article class="course-box fade-up" data-anim role="listitem" aria-labelledby="c2">
+          <img src="images/course2.png" alt="Master Talk" loading="lazy" width="160" height="120"/>
+          <h3 id="c2">Master Talk</h3>
+          <p>Conversação personalizada, prática intensa e feedback constante.</p>
+          <a href="#contato" class="btn-saiba-mais" style="background:var(--primary)">Saiba mais</a>
+        </article>
+
+        <article class="course-box fade-up" data-anim role="listitem" aria-labelledby="c3">
+          <img src="images/course3.png" alt="HealthTalk" loading="lazy" width="160" height="120"/>
+          <h3 id="c3">HealthTalk</h3>
+          <p>Inglês especializado para profissionais da saúde, com simulações clínicas.</p>
+          <a href="#contato" class="btn-saiba-mais" style="background:var(--primary)">Saiba mais</a>
+        </article>
       </div>
-    </div>
+    </section>
 
-    <!-- Controles -->
-    <div class="carousel-controls">
-      <button class="carousel-btn prev" aria-label="Anterior">&#10094;</button>
-      <button class="carousel-btn next" aria-label="Próximo">&#10095;</button>
-    </div>
+    <!-- DEPOIMENTOS 3D -->
+    <section class="testimonials-section" id="depoimentos" aria-labelledby="depoTitle">
+      <h2 id="depoTitle">Escute dos nossos alunos</h2>
 
-    <!-- Indicadores -->
-    <div class="carousel-indicators" role="tablist" aria-label="Indicadores de depoimentos">
-      <button class="indicator active" data-index="0" aria-label="Depoimento 1"></button>
-      <button class="indicator" data-index="1" aria-label="Depoimento 2"></button>
-      <button class="indicator" data-index="2" aria-label="Depoimento 3"></button>
-    </div>
-  </div>
-</section>
+      <div class="testimonials-3d-carousel" aria-roledescription="carousel">
+        <div class="carousel-bg" aria-hidden="true">
+          <div class="bg-left"></div>
+          <div class="bg-right"></div>
+        </div>
 
-<!-- TEACHER LARI -->
-<section class="teacher-section" id="teacher">
-  <div class="teacher-container">
-    <div class="teacher-text">
-      <h2>Conheça Teacher Lari</h2>
-      <p>Com quase 10 anos de experiência na educação, Teacher Lari transforma o aprendizado em algo eficiente, dinâmico e prazeroso, para todas as idades e níveis.</p>
-      <p>Ela desenvolveu a Master, seu método exclusivo de inglês, criado para resultados reais e rápidos: com dedicação, qualquer aluno pode concluir seu inglês em até 2 anos. Todo o material foi cuidadosamente planejado para o melhor desenvolvimento dos alunos, focando em inglês da vida real, aplicável no trabalho, na área da saúde, no mundo corporativo e em qualquer contexto profissional.</p>
-      <p>Formada na área da saúde e com experiência ensinando alunos universitários de enfermagem, Lari criou o primeiro curso de inglês totalmente voltado para profissionais da saúde, o HealthTalk, ministrado por quem entende do setor. Além disso, oferece cursos personalizados para executivos e profissionais de diversas áreas, todos com a mesma metodologia inovadora, prática e focada em resultados.</p>
-      <a href="#contato" class="btn-master">Quero aprender com a Master</a>
-    </div>
+        <div class="carousel-wrapper" id="carouselWrapper">
+          <div class="carousel-item active" data-index="0" role="group" aria-roledescription="slide" aria-label="Depoimento 1">
+            <video class="t-video" playsinline preload="metadata" muted controlsList="nodownload" tabindex="0">
+              <source src="videos/depoimento1.mp4" type="video/mp4">
+            </video>
+          </div>
 
-    <div class="teacher-photo" id="teacherPhoto" style="background-image:url('images/teacher.jpg');">
-      <div class="label">Teacher Lari</div>
-    </div>
-  </div>
-</section>
+          <div class="carousel-item" data-index="1" role="group" aria-roledescription="slide" aria-label="Depoimento 2">
+            <video class="t-video" playsinline preload="metadata" muted controlsList="nodownload" tabindex="0">
+              <source src="videos/depoimento2.mp4" type="video/mp4">
+            </video>
+          </div>
 
-<!-- FOOTER -->
-<footer class="footer">
-  © <span id="year"></span> MASTER English — Todos os direitos reservados
-</footer>
+          <div class="carousel-item" data-index="2" role="group" aria-roledescription="slide" aria-label="Depoimento 3">
+            <video class="t-video" playsinline preload="metadata" muted controlsList="nodownload" tabindex="0">
+              <source src="videos/depoimento3.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
 
-<script>
-// === CARROSSEL DEPOIMENTOS 3D ===
-const items = Array.from(document.querySelectorAll('.carousel-item'));
-const prevBtn = document.querySelector('.carousel-btn.prev');
-const nextBtn = document.querySelector('.carousel-btn.next');
-const indicators = Array.from(document.querySelectorAll('.indicator'));
-let currentIndex = 0;
+        <div class="carousel-controls" aria-hidden="false">
+          <button class="carousel-btn prev" id="carouselPrev" aria-label="Anterior">&#10094;</button>
+          <button class="carousel-btn next" id="carouselNext" aria-label="Próximo">&#10095;</button>
+        </div>
 
-function updateCarousel(index){
-  if(index<0) index=items.length-1;
-  if(index>=items.length) index=0;
-  items.forEach((item,i)=>{
-    item.classList.remove('prev','active','next');
-    if(i===index)item.classList.add('active');
-    if(i===index-1 || (index===0 && i===items.length-1))item.classList.add('prev');
-    if(i===index+1 || (index===items.length-1 && i===0))item.classList.add('next');
-    item.querySelector('video').currentTime=0;
-    item.querySelector('video').play().catch(()=>{});
-  });
-  indicators.forEach((dot,i)=>dot.classList.toggle('active',i===index));
-  currentIndex=index;
-}
-prevBtn.addEventListener('click',()=>updateCarousel(currentIndex-1));
-nextBtn.addEventListener('click',()=>updateCarousel(currentIndex+1));
-indicators.forEach(dot=>dot.addEventListener('click',(e)=>updateCarousel(parseInt(e.currentTarget.dataset.index))));
+        <div class="carousel-indicators" role="tablist" aria-label="Indicadores de depoimentos">
+          <button class="indicator active" data-index="0" aria-label="Depoimento 1"></button>
+          <button class="indicator" data-index="1" aria-label="Depoimento 2"></button>
+          <button class="indicator" data-index="2" aria-label="Depoimento 3"></button>
+        </div>
+      </div>
+    </section>
 
-// Autoplay
-let autoplay=setInterval(()=>updateCarousel(currentIndex+1),8000);
+    <!-- TEACHER LARI -->
+    <section class="teacher-section" id="teacher" aria-labelledby="teacherTitle">
+      <div class="teacher-container">
+        <div class="teacher-text fade-up" data-anim>
+          <h2 id="teacherTitle">Conheça Teacher Lari</h2>
+          <p>Com quase 10 anos de experiência na educação, Teacher Lari transforma o aprendizado em algo eficiente, dinâmico e prazeroso, para todas as idades e níveis.</p>
+          <p>Ela desenvolveu a Master, seu método exclusivo de inglês, criado para resultados reais e rápidos: com dedicação, qualquer aluno pode concluir seu inglês em até 2 anos. Todo o material foi cuidadosamente planejado para o melhor desenvolvimento dos alunos, focando em inglês da vida real, aplicável no trabalho, na área da saúde, no mundo corporativo e em qualquer contexto profissional.</p>
+          <p>Formada na área da saúde e com experiência ensinando alunos universitários de enfermagem, Lari criou o primeiro curso de inglês totalmente voltado para profissionais da saúde, o HealthTalk, ministrado por quem entende do setor. Além disso, oferece cursos personalizados para executivos e profissionais de diversas áreas, todos com a mesma metodologia inovadora, prática e focada em resultados.</p>
+          <a href="#contato" class="btn-master">Quero aprender com a Master</a>
+        </div>
 
-// Footer year
-document.getElementById('year').textContent=new Date().getFullYear();
-</script>
+        <div class="teacher-photo fade-up" data-anim id="teacherPhoto" style="background-image:url('images/teacher.jpg');">
+          <div class="label">Teacher Lari</div>
+        </div>
+      </div>
+    </section>
 
+    <!-- CONTACT (ancora) -->
+    <section id="contato" style="padding:48px 40px 84px">
+      <div style="max-width:900px;margin:0 auto;background:var(--glass);padding:20px;border-radius:12px">
+        <h3 style="color:var(--title);margin-bottom:8px">Contato</h3>
+        <p style="color:var(--secondary)">Use o formulário no topo ou envie pelo WhatsApp.</p>
+        <p style="font-size:14px;color:var(--secondary)">WhatsApp: <a href="https://wa.me/5511982595575" target="_blank" rel="noopener">+55 11 98259-5575</a></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    © <span id="year"></span> MASTER English — Todos os direitos reservados
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // ---------- Small helpers ----------
+    const qs = sel => document.querySelector(sel);
+    const qsa = sel => Array.from(document.querySelectorAll(sel));
+    // set year
+    qs('#year').textContent = new Date().getFullYear();
+
+    // mobile menu toggle
+    const menuToggle = qs('#menuToggle');
+    const mobileNav = qs('#mobileNav');
+    menuToggle && menuToggle.addEventListener('click', () => {
+      const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', String(!expanded));
+      mobileNav.classList.toggle('show');
+      mobileNav.setAttribute('aria-hidden', expanded ? 'true' : 'false');
+    });
+
+    // simple in-view animation for .fade-up
+    (function(){
+      const elems = qsa('[data-anim]');
+      const obs = new IntersectionObserver((entries)=>{
+        entries.forEach(en=>{
+          if(en.isIntersecting) en.target.classList.add('inview');
+        });
+      }, {threshold: 0.12});
+      elems.forEach(e=>obs.observe(e));
+    })();
+
+    // CAROUSEL (no autoplay — only when clicking)
+    (function(){
+      const items = qsa('.carousel-item');
+      const prevBtn = qs('.carousel-btn.prev');
+      const nextBtn = qs('.carousel-btn.next');
+      const indicators = qsa('.carousel-indicators .indicator');
+      let currentIndex = 0;
+
+      function render(index){
+        if(index < 0) index = items.length - 1;
+        if(index >= items.length) index = 0;
+        items.forEach((it,i)=>{
+          it.classList.remove('prev','active','next');
+          if(i === index) it.classList.add('active');
+          if(i === index - 1 || (index === 0 && i === items.length -1)) it.classList.add('prev');
+          if(i === index + 1 || (index === items.length -1 && i === 0)) it.classList.add('next');
+
+          // pause others, show controls for active
+          const v = it.querySelector('video');
+          if(v){
+            try{
+              if(it.classList.contains('active')){
+                // leave muted; user can press play if they want
+                // ensure video is at start
+                v.currentTime = 0;
+              } else {
+                v.pause();
+              }
+            }catch(e){}
+          }
+        });
+        indicators.forEach((d,i)=>d.classList.toggle('active', i===index));
+        currentIndex = index;
+      }
+
+      prevBtn && prevBtn.addEventListener('click', ()=> render(currentIndex - 1));
+      nextBtn && nextBtn.addEventListener('click', ()=> render(currentIndex + 1));
+      indicators.forEach(btn => btn.addEventListener('click', (e)=> render(parseInt(e.currentTarget.dataset.index))));
+
+      // Keyboard accessibility: left/right to navigate when focus inside carousel
+      const wrapper = qs('#carouselWrapper');
+      wrapper && wrapper.addEventListener('keydown', (e)=>{
+        if(e.key === 'ArrowLeft') render(currentIndex - 1);
+        if(e.key === 'ArrowRight') render(currentIndex + 1);
+      });
+
+      // initial
+      render(0);
+    })();
+
+    // FORM: WhatsApp + Formspree + fallback to /api/submit
+    (function(){
+      const form = qs('#contactForm');
+      const whatsappBtn = qs('#sendWhatsapp');
+      const msgEl = qs('#formMessage');
+
+      function buildMessage(data){
+        // create readable message for WhatsApp
+        return `Olá! Tenho interesse no curso ${data.curso}.%0A%0ANome: ${encodeURIComponent(data.nome)}%0AEmail: ${encodeURIComponent(data.email)}%0ACelular: ${encodeURIComponent(data.celular)}%0AMensagem: ${encodeURIComponent(data.mensagem || '')}`;
+      }
+
+      whatsappBtn && whatsappBtn.addEventListener('click', ()=>{
+        const formData = new FormData(form);
+        if(!formData.get('nome') || !formData.get('email') || !formData.get('celular')) {
+          msgEl.textContent = "Preencha Nome, Email e Celular antes de enviar pelo WhatsApp.";
+          return;
+        }
+        const data = Object.fromEntries(formData);
+        const message = buildMessage(data);
+        const phone = '5511982595575'; // your number (DDI+DDD+number) as requested
+        const url = `https://wa.me/${phone}?text=${message}`;
+        window.open(url, '_blank', 'noopener');
+      });
+
+      form && form.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        msgEl.style.color = 'var(--secondary)';
+        msgEl.textContent = 'Enviando...';
+
+        const data = Object.fromEntries(new FormData(form));
+        // Formspree endpoint placeholder — replace with your endpoint from https://formspree.io
+        const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORMSPREE_ENDPOINT';
+
+        try {
+          const res = await fetch(FORMSPREE_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+          if(res.ok){
+            msgEl.style.color = '#a6f0d8';
+            msgEl.textContent = "Mensagem enviada por e-mail! Entraremos em contato em breve.";
+            form.reset();
+            return;
+          } else {
+            throw new Error('Formspree retornou erro');
+          }
+        } catch(err) {
+          // fallback: try your /api/submit endpoint (if you later add a server)
+          try {
+            const res2 = await fetch('/api/submit', {
+              method: 'POST',
+              headers: {'Content-Type':'application/json'},
+              body: JSON.stringify(data)
+            });
+            if(res2.ok){
+              msgEl.style.color = '#a6f0d8';
+              msgEl.textContent = "Recebemos sua mensagem (via servidor). Obrigado!";
+              form.reset();
+              return;
+            } else {
+              throw new Error('Servidor retornou erro');
+            }
+          } catch(err2){
+            msgEl.style.color = '#ffb4b4';
+            msgEl.textContent = "Não foi possível enviar. Tente pelo WhatsApp ou verifique a configuração do Formspree/servidor.";
+            console.warn(err2);
+          }
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
