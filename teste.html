@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Teste seu Inglês — MASTER</title>
+  <meta name="description" content="Teste rápido para avaliar seu nível inicial no MASTER." />
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#17252a;--text:#f5f7f8;--primary:#3aafa9;--accent:#fe5f55}
+    body{margin:0;font-family:"League Spartan",sans-serif;background:var(--bg);color:var(--text)}
+    header{height:76px;display:flex;align-items:center;padding:0 20px;background:rgba(23,37,42,0.9);border-bottom:1px solid rgba(255,255,255,0.03)}
+    .container{max-width:900px;margin:24px auto;padding:20px}
+    .card{background:rgba(255,255,255,0.03);padding:20px;border-radius:12px}
+    label{display:block;margin-top:12px}
+    select,input{width:100%;padding:10px;border-radius:8px;border:none;background:rgba(255,255,255,0.02);color:var(--text)}
+    button{margin-top:16px;padding:10px 14px;border:none;border-radius:8px;background:var(--primary);color:#fff;font-weight:700;cursor:pointer}
+    footer{padding:20px;text-align:center;color:rgba(255,255,255,0.7)}
+  </style>
+</head>
+<body>
+  <header><a href="../index.html" style="color:#fff;font-weight:700">← Voltar</a></header>
+  <main class="container">
+    <section class="card">
+      <h1>Teste rápido — Estimativa de nível</h1>
+      <p>Responda ao questionário rápido para ter uma estimativa de nível.</p>
+      <form id="quickTest">
+        <label>1) Você consegue se apresentar e falar sobre rotina diária em inglês?</label>
+        <select name="q1">
+          <option value="0">Não</option>
+          <option value="1">Sim, básico</option>
+          <option value="2">Sim, fluentemente</option>
+        </select>
+
+        <label>2) Entende instruções técnicas simples em inglês?</label>
+        <select name="q2">
+          <option value="0">Não</option>
+          <option value="1">Sim, parcialmente</option>
+          <option value="2">Sim, bem</option>
+        </select>
+
+        <label>3) Consegue participar de discussões profissionais em inglês?</label>
+        <select name="q3">
+          <option value="0">Não</option>
+          <option value="1">Com dificuldades</option>
+          <option value="2">Sim</option>
+        </select>
+
+        <button type="submit">Ver resultado</button>
+      </form>
+
+      <div id="result" style="margin-top:14px"></div>
+    </section>
+  </main>
+  <footer>© <span id="year"></span> MASTER</footer>
+
+  <script>
+    document.getElementById('quickTest').addEventListener('submit', function(e){
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const score = Array.from(fd.values()).reduce((s,v)=>s+Number(v),0);
+      let lvl = 'A1-A2';
+      if(score>=3 && score<=4) lvl='B1';
+      if(score>=5) lvl='B2-C1';
+      document.getElementById('result').textContent = 'Nível estimado: ' + lvl + '. Para avaliação completa, agende uma aula experimental.';
+    });
+    document.getElementById('year').textContent=new Date().getFullYear();
+  </script>
+</body>
+</html>
