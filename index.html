@@ -16,6 +16,9 @@
   --secondary: #def2f1;
   --text: #f5f7f8;
   --hero-text-color: #17252a;
+
+  /* controla a opacidade inicial do gradiente - o script atualiza esse valor ao rolar */
+  --grad-opacity: 0.6;
 }
 
 /* Reset */
@@ -28,6 +31,31 @@ body{
   line-height:1.5;
   overflow-x:hidden;
   scroll-behavior:smooth;
+  /* garante que o gradiente (elemento fixo) esteja atrás do conteúdo principal */
+  position:relative;
+  z-index:1;
+}
+
+/* Página: elemento de fundo com gradiente (sem imagem) */
+.page-gradient{
+  position:fixed;
+  inset:0;
+  z-index:0; /* atrás do conteúdo (header/sections tem z-index > 0) */
+  pointer-events:none;
+  /* Gradiente que vai do claro ao escuro utilizando suas cores principais.
+     Começamos com transparente no topo para preservar o visual da hero,
+     depois vamos aparecendo os tons claros e, ao final, o tom profissional escuro. */
+  background: linear-gradient(
+    to bottom,
+    rgba(245,247,248,0.0) 0%,
+    rgba(245,247,248,0.95) 8%,
+    rgba(222,242,241,0.95) 28%,
+    rgba(58,175,169,0.22) 58%,
+    rgba(23,37,42,1) 100%
+  );
+  opacity: var(--grad-opacity);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  will-change: opacity, transform;
 }
 
 /* HEADER */
@@ -54,6 +82,8 @@ nav ul li{position:relative}
   min-height:80vh;
   display:flex;gap:40px;align-items:center;justify-content:space-between;
   padding:100px 50px;flex-wrap:wrap;
+  position:relative;
+  z-index:1; /* garante que hero fique na frente do .page-gradient */
 }
 .hero-text{max-width:620px}
 .hero-text h1{font-size:88px;color:var(--primary);line-height:1.05;margin-bottom:12px}
@@ -64,6 +94,7 @@ nav ul li{position:relative}
 .hero-form{
   width:400px;background:rgba(0,0,0,.55);padding:36px;border-radius:18px;
   box-shadow:0 8px 30px rgba(0,0,0,.4);display:flex;flex-direction:column;gap:12px;
+  z-index:1;
 }
 .hero-form label{font-size:12px;color:var(--secondary)}
 .hero-form input{padding:10px;border-radius:8px;border:none;font-size:14px;width:100%}
@@ -72,6 +103,8 @@ nav ul li{position:relative}
 /* MASTER */
 .master-section{
   padding:120px 60px;background:url("images/por-que.png") center/cover no-repeat; color:var(--text);
+  position:relative;
+  z-index:1;
 }
 .master-container{max-width:1200px;margin:0 auto;display:flex;gap:60px;align-items:flex-start;flex-wrap:wrap}
 .master-text{flex:1;min-width:320px;max-width:620px}
@@ -86,7 +119,7 @@ nav ul li{position:relative}
 .btn-saiba-mais{background:var(--primary);color:#fff;padding:12px 26px;border-radius:30px;text-decoration:none;font-weight:700;display:inline-block}
 
 /* CURSOS */
-#cursos{padding:140px 60px;background:var(--secondary);display:flex;gap:34px;justify-content:center;flex-wrap:wrap}
+#cursos{padding:140px 60px;background:var(--secondary);display:flex;gap:34px;justify-content:center;flex-wrap:wrap; position:relative; z-index:1}
 #cursos h2{width:100%;text-align:center;color:var(--title); font-size:3rem;margin-bottom:36px;}
 .course-box{background:#fff;padding:40px 36px;border-radius:16px;max-width:360px;min-width:280px;flex:1;display:flex;flex-direction:column;align-items:center;gap:24px;box-shadow:0 8px 25px rgba(0,0,0,.08)}
 .course-box img{max-width:160px}
@@ -101,6 +134,7 @@ nav ul li{position:relative}
   border-radius:28px;
   overflow:hidden;
   background: url("images/depoimento.png") center/cover no-repeat;
+  z-index:1;
 }
 .testimonials-section h2{
   color:#fe5f55;
@@ -202,6 +236,8 @@ nav ul li{position:relative}
 /* TEACHER LARI */
 .teacher-section{
   padding:120px 60px;background:linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.08));
+  position:relative;
+  z-index:1;
 }
 .teacher-container{max-width:1200px;margin:0 auto;display:flex;gap:40px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .teacher-text{flex:1;min-width:320px}
@@ -215,6 +251,7 @@ nav ul li{position:relative}
   display:flex;align-items:flex-end;justify-content:center;padding:18px;
   background-color:#0f1516;
   border:2px solid rgba(255,255,255,.03);
+  z-index:1;
 }
 .teacher-photo .label{
   width:100%;text-align:left;color:var(--text);font-weight:700;
@@ -242,8 +279,9 @@ nav ul li{position:relative}
   box-shadow:0 6px 18px rgba(0,0,0,.5);
 }
 
-.footer{padding:40px 60px;text-align:center;color:var(--secondary);border-top:1px solid rgba(255,255,255,.04)}
+.footer{padding:40px 60px;text-align:center;color:var(--secondary);border-top:1px solid rgba(255,255,255,.04); position:relative; z-index:1}
 
+/* Responsive */
 @media (max-width:980px){
   header{padding:0 24px}
   .hero{padding:48px 20px;flex-direction:column;align-items:flex-start}
@@ -261,6 +299,9 @@ nav ul li{position:relative}
 </style>
 </head>
 <body>
+
+<!-- gradiente de fundo (sem imagem) -->
+<div class="page-gradient" aria-hidden="true"></div>
 
 <!-- HEADER -->
 <header>
@@ -450,6 +491,50 @@ items.forEach(item=>{
 });
 
 updateCarousel();
+
+/* ---------------------------
+ Smooth gradient fade on scroll
+ ---------------------------
+ - Mantém o design da hero/header intocados.
+ - Ajusta a opacidade do gradiente conforme o usuário rola,
+   criando um fade suave entre o topo (mais translúcido) e o final (mais dramático).
+ - Você pode ajustar minOpacity / maxOpacity ou a curva facilmente abaixo.
+*/
+(function(){
+  const doc = document.documentElement;
+  const minOpacity = 0.45; // quão translúcido no topo
+  const maxOpacity = 0.98; // quão opaco no final
+  const fullRangeAt = 0.8; // porcentagem da página onde alcança maxOpacity
+
+  function updateGradientOpacity(){
+    const scrollY = window.scrollY;
+    const scrollable = document.body.scrollHeight - window.innerHeight;
+    const rawFraction = scrollable > 0 ? scrollY / scrollable : 0;
+    // suaviza com ease (quadrática)
+    const eased = Math.min(1, rawFraction / fullRangeAt);
+    const easedQuad = eased * eased;
+    const opacity = minOpacity + (maxOpacity - minOpacity) * easedQuad;
+    doc.style.setProperty('--grad-opacity', opacity.toFixed(3));
+  }
+
+  // inicial
+  updateGradientOpacity();
+
+  // throttle simples
+  let ticking = false;
+  window.addEventListener('scroll', function(){
+    if(!ticking){
+      window.requestAnimationFrame(function(){
+        updateGradientOpacity();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, {passive:true});
+
+  // também atualiza ao redimensionar (mudança na altura da página)
+  window.addEventListener('resize', function(){ updateGradientOpacity(); });
+})();
 </script>
 
 </body>
