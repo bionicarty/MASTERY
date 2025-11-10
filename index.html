@@ -5,37 +5,63 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MASTER English</title>
 
+<!-- Fonte League Spartan -->
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --primary: #3AAFA9;
-  --background-dark: #17252A;
-  --middle: #DEF2F1;
-  --light: #F5F7F8;
+  --primary: #3aafa9;    /* teal - cor primária */
+  --dark: #17252a;       /* azul escuro profissional */
   --title: #fe5f55;
-  --text-dark: #17252A;
-  --text-light: #f5f7f8;
+  --secondary: #def2f1;  /* gelo claro */
+  --text: #f5f7f8;       /* quase branco */
+  --hero-text-color: #17252a;
+
+  /* controle do overlay de gradiente (JS altera --grad-opacity) */
+  --grad-opacity: 0;
+  --hero-bottom-stop: calc(90px + 80vh); /* fallback, JS ajusta se necessário */
 }
 
-/* RESET */
+/* Reset */
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{
-  font-family:"League Spartan",sans-serif;
-  color:var(--text-dark);
+  font-family: "League Spartan",sans-serif;
+  background:var(--dark);
+  color:var(--text);
+  line-height:1.5;
   overflow-x:hidden;
   scroll-behavior:smooth;
+  position:relative;
+}
 
-  /* GRADIENTE FIXO NO FUNDO */
+/* ===== page gradient overlay (fixed, behind content) =====
+   This element is created via CSS pseudo-element on body and controlled by JS.
+   It starts visually *below* the hero and gradually increases opacity as user scrolls.
+*/
+body::before{
+  content:"";
+  position:fixed;
+  inset:0; /* full screen */
+  pointer-events:none;
+  z-index:0; /* behind page content (content will be z-index:1) */
+  /* multi-stop vertical gradient: from very light to teal to dark professional */
   background: linear-gradient(
-    180deg,
-    var(--light) 0%,
-    var(--middle) 22%,
-    var(--primary) 56%,
-    var(--background-dark) 100%
+    to bottom,
+    rgba(245,247,248,0.95) 0%,
+    rgba(222,242,241,0.95) 28%,
+    rgba(58,175,169,0.95) 60%,
+    rgba(23,37,42,0.98) 100%
   );
-  background-attachment: fixed;
+  opacity: var(--grad-opacity); /* JS will animate from subtle to stronger */
+  transition: opacity 420ms linear;
+  mix-blend-mode: normal;
+}
+
+/* Put main content above the overlay so elements (boxes) are visible */
+main, header, .hero, section, footer{
+  position:relative;
+  z-index:1;
 }
 
 /* HEADER */
@@ -43,145 +69,507 @@ header{
   position:fixed;top:0;left:0;right:0;height:90px;
   display:flex;align-items:center;justify-content:space-between;
   padding:0 60px;
-  background:url("images/header.png") center/cover no-repeat;
+  background: url("images/header.png") no-repeat center center;
+  background-size: cover;
   z-index:200;
   box-shadow:0 2px 10px rgba(0,0,0,.45);
 }
 .logo img{height:60px;display:block}
-nav ul{list-style:none;display:flex;gap:36px}
-nav a{color:var(--text-light);text-decoration:none;font-weight:500;transition:.25s}
+nav ul{list-style:none;display:flex;gap:36px;align-items:center}
+nav a{color:var(--text);text-decoration:none;font-weight:500;transition:color .25s}
 nav a:hover{color:var(--primary)}
+nav ul li{position:relative}
 
-/* HERO - MANTÉM IMAGEM ORIGINAL */
+/* HERO (mantive tudo igual) */
 .hero{
   margin-top:90px;
-  background:url("images/hero.png") center/cover no-repeat;
+  background: url("images/hero.png") no-repeat center center;
+  background-size:cover;
   min-height:80vh;
   display:flex;gap:40px;align-items:center;justify-content:space-between;
   padding:100px 50px;flex-wrap:wrap;
+  /* ensure hero stays above gradient and visually unchanged */
+  z-index:150;
+  position:relative;
 }
-.hero-text h1{font-size:88px;color:var(--primary)}
-.hero-text h1 span{color:var(--title);font-size:120px;display:block}
-.hero-text p{font-size:24px;color:var(--text-dark);font-weight:500}
+.hero-text{max-width:620px}
+.hero-text h1{font-size:88px;color:var(--primary);line-height:1.05;margin-bottom:12px}
+.hero-text h1 span{display:block;font-size:120px;color:var(--title)}
+.hero-text p{font-size:24px;color:var(--hero-text-color);margin-bottom:30px;font-weight:500}
 
-/* FORM HERO */
+/* Formulário Hero */
 .hero-form{
   width:400px;background:rgba(0,0,0,.55);padding:36px;border-radius:18px;
   box-shadow:0 8px 30px rgba(0,0,0,.4);display:flex;flex-direction:column;gap:12px;
 }
-.hero-form label{font-size:12px;color:var(--middle)}
-.hero-form input{padding:10px;border-radius:8px;border:none}
+.hero-form label{font-size:12px;color:var(--secondary)}
+.hero-form input{padding:10px;border-radius:8px;border:none;font-size:14px;width:100%}
 .hero-form button{background:var(--title);color:#fff;border:none;padding:10px;border-radius:8px;font-weight:700;cursor:pointer}
 
-/* SEÇÕES APÓS HERO – REMOVENDO FUNDO-IMAGEM */
-.master-section,
-#cursos,
-.testimonials-section,
-.teacher-section {
-  background:none !important;
-  backdrop-filter:none;
-}
+/* ===== SECTIONS BELOW HERO: use transparent backgrounds so the page gradient shows =====
+   I removed section-specific background images here to allow the gradient to appear.
+   Content boxes (cards) keep their own backgrounds so layout remains identical.
+*/
 
 /* MASTER */
-.master-section{padding:120px 60px;color:var(--text-dark)}
-.master-container{max-width:1200px;margin:auto;display:flex;gap:60px;flex-wrap:wrap}
-.master-text h1{color:var(--title);margin-bottom:18px}
-.master-text li{color:var(--background-dark);margin-bottom:12px}
-.master-text p{color:var(--background-dark);}
-.cta-box{
-  background:rgba(255,255,255,.25);backdrop-filter:blur(10px);
-  padding:36px;border-radius:16px;text-align:center;
+.master-section{
+  padding:120px 60px;
+  background: transparent; /* rely on page gradient */
+  color:var(--text);
 }
+.master-container{max-width:1200px;margin:0 auto;display:flex;gap:60px;align-items:flex-start;flex-wrap:wrap}
+.master-text{flex:1;min-width:320px;max-width:620px}
+.master-text h1{color:var(--title);font-size:2.4rem;margin-bottom:18px}
+.master-text ul{list-style:none;padding-left:0}
+.master-text li{color:var(--secondary);font-size:1.05rem;margin-bottom:12px}
+.master-text h3{color:var(--primary);margin-top:18px;margin-bottom:8px}
+.master-text h3.special{color:var(--title)}
+
+.cta-box{flex:0 0 420px;background:rgba(0,0,0,.45);padding:36px;border-radius:16px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:12px}
+.cta-box h3{font-size:1.6rem;color:var(--text)}
+.btn-saiba-mais{background:var(--primary);color:#fff;padding:12px 26px;border-radius:30px;text-decoration:none;font-weight:700;display:inline-block}
 
 /* CURSOS */
-#cursos{padding:140px 60px;text-align:center}
-#cursos h2{color:var(--title);margin-bottom:36px}
-.course-box{
-  background:#fff;padding:40px 36px;border-radius:16px;max-width:360px;box-shadow:0 6px 20px rgba(0,0,0,.12);
+#cursos{padding:140px 60px;background:transparent;display:flex;gap:34px;justify-content:center;flex-wrap:wrap}
+#cursos h2{width:100%;text-align:center;color:var(--title); font-size:3rem;margin-bottom:36px;}
+.course-box{background:#fff;padding:40px 36px;border-radius:16px;max-width:360px;min-width:280px;flex:1;display:flex;flex-direction:column;align-items:center;gap:24px;box-shadow:0 8px 25px rgba(0,0,0,.08)}
+.course-box img{max-width:160px}
+.course-box h3{color:#fe5f55;font-size:1.8rem}
+.course-box p{color:#111; font-size:1.15rem; text-align:center}
+.course-box a.btn-saiba-mais{margin-top:auto}
+
+/* CARROSSEL 3D */
+.testimonials-section{
+  padding:120px 60px;text-align:center;
+  position:relative;
+  border-radius:28px;
+  overflow:visible; /* let gradient show behind */
+  background: transparent; /* rely on page gradient */
+}
+.testimonials-section h2{
+  color:#fe5f55;
+  font-size:2.8rem;
+  margin-bottom:40px;
 }
 
-/* DEPOIMENTOS */
-.testimonials-section{padding:120px 60px;text-align:center}
-.testimonials-section h2{color:var(--title);margin-bottom:40px}
+.testimonials-3d-carousel{
+  perspective:1200px;
+  position:relative;
+  max-width:900px;
+  margin:0 auto;
+  height:520px;
+}
 
-/* TEACHER */
-.teacher-section{padding:120px 60px;color:var(--text-dark)}
-.teacher-text h2{color:var(--title)}
+.carousel-wrapper{
+  width:100%;
+  height:100%;
+  position:relative;
+  transform-style:preserve-3d;
+}
+
+.carousel-item{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%) scale(0.6);
+  opacity:0.3;
+  filter:blur(3px);
+  border-radius:20px;
+  overflow:hidden;
+  width:250px;
+  height:450px;
+  box-shadow:0 10px 30px rgba(0,0,0,.5);
+  transition: transform 0.6s ease, opacity 0.6s ease, filter 0.6s ease;
+  cursor:pointer;
+  background:#000;
+}
+
+.carousel-item.active{
+  transform:translate(-50%, -50%) scale(1);
+  opacity:1;
+  filter:blur(0);
+  width:300px;
+  height:520px;
+  z-index:2;
+}
+
+.carousel-item.prev{
+  transform:translate(calc(-50% - 220px), -50%) scale(0.7);
+  opacity:0.4;
+  filter:blur(3px);
+  z-index:1;
+}
+
+.carousel-item.next{
+  transform:translate(calc(-50% + 220px), -50%) scale(0.7);
+  opacity:0.4;
+  filter:blur(3px);
+  z-index:1;
+}
+
+.carousel-item video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:20px;
+}
+
+/* Controls */
+.carousel-controls{
+  position:absolute;
+  top:50%;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  transform:translateY(-50%);
+  padding:0 20px;
+  pointer-events:none;
+  z-index:3;
+}
+.carousel-btn{
+  pointer-events:auto;
+  background:rgba(0,0,0,0.45);
+  border:none;
+  color:#fff;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  font-size:24px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  backdrop-filter:blur(4px);
+  box-shadow:0 6px 18px rgba(0,0,0,.5);
+}
+
+/* TEACHER LARI */
+.teacher-section{
+  padding:120px 60px;
+  background: transparent; /* gradient shows behind; box keeps same layout */
+}
+.teacher-container{max-width:1200px;margin:0 auto;display:flex;gap:40px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.teacher-text{flex:1;min-width:320px}
+.teacher-text h2{color:var(--title);font-size:2rem;margin-bottom:12px}
+.teacher-text p{color:var(--secondary);margin-bottom:12px;line-height:1.75}
+.teacher-text .btn-master{margin-top:12px;background:var(--primary);padding:12px 24px;border-radius:30px;color:#fff;font-weight:700;text-decoration:none;display:inline-block}
+
 .teacher-photo{
   width:420px;height:520px;border-radius:18px;background-size:cover;background-position:center;
-  box-shadow:0 20px 60px rgba(0,0,0,.4);
+  box-shadow:0 20px 60px rgba(0,0,0,.6);flex:0 0 420px;
+  display:flex;align-items:flex-end;justify-content:center;padding:18px;
+  background-color:#0f1516;
+  border:2px solid rgba(255,255,255,.03);
+}
+.teacher-photo .label{
+  width:100%;text-align:left;color:var(--text);font-weight:700;
+  background: linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.45));
+  padding:12px;border-radius:10px;
 }
 
-/* WHATSAPP */
+/* BOTÃO WHATSAPP FIXO HERO */
 #whatsapp-btn{
-  position:fixed;bottom:20px;right:20px;z-index:500;
-  background:#25D366;color:#fff;border:none;border-radius:50%;
-  width:60px;height:60px;font-size:28px;cursor:pointer;
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  z-index:500;
+  background:#25D366;
+  color:#fff;
+  border:none;
+  border-radius:50%;
+  width:60px;
+  height:60px;
+  font-size:28px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 6px 18px rgba(0,0,0,.5);
 }
 
-.footer{padding:40px;text-align:center;color:#fff;}
+.footer{padding:40px 60px;text-align:center;color:var(--secondary);border-top:1px solid rgba(255,255,255,.04)}
 
+/* small screens */
+@media (max-width:980px){
+  header{padding:0 24px}
+  .hero{padding:48px 20px;flex-direction:column;align-items:flex-start}
+  .hero-form{width:100%}
+  .master-container{flex-direction:column;align-items:center}
+  .cta-box{width:100%}
+  #cursos{padding:60px 20px}
+  .teacher-container{flex-direction:column-reverse;align-items:center}
+  .teacher-photo{width:260px;height:360px}
+}
+@media (max-width:520px){
+  .hero-text h1{font-size:36px}
+  .hero-text h1 span{font-size:60px}
+}
+
+/* little polish: ensure clickable cards remain above gradient overlay */
+.course-box, .cta-box, .teacher-photo, .hero-form, .carousel-item{z-index:2;position:relative}
 </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
-  <div class="logo"><img src="images/logo.png"></div>
-  <nav><ul><li><a href="#">Cursos</a></li><li><a href="#">Metodologia</a></li><li><a href="master/teste.html">Teste seu inglês</a></li><li><a href="blog/index.html">Blog</a></li></ul></nav>
+  <div class="logo"><a href="#"><img src="images/logo.png" alt="Logo MASTER"></a></div>
+  <nav>
+    <ul>
+      <li><a href="#">Cursos</a></li>
+      <li><a href="#">Metodologia</a></li>
+      <li><a href="master/teste.html">Teste seu inglês</a></li>
+      <li><a href="blog/index.html">Blog</a></li>
+    </ul>
+  </nav>
 </header>
 
-<section class="hero" id="top">
-  <div class="hero-text"><h1>Welcome to <span>MASTER</span></h1><p>Inglês real para quem quer resultados de verdade.</p></div>
-  <form class="hero-form"><label>Nome*</label><input><label>Email*</label><input><label>Celular*</label><input><button>QUERO MAIS INFORMAÇÕES</button></form>
-</section>
-
-<button id="whatsapp-btn">📲</button>
-
-<section class="master-section" id="por-que">
-  <div class="master-container">
-    <div class="master-text">
-      <h1>Por que a MASTER?</h1>
-      <ul>
-        <li><strong>Fale inglês desde o primeiro dia.</strong></li>
-        <li><strong>Aulas práticas, dinâmicas e reais.</strong></li>
-        <li><strong>Aprenda fazendo:</strong> conversando, simulando e praticando.</li>
-        <li><strong>Comece de qualquer nível</strong> e siga até a fluência.</li>
-        <li><strong>Foco total em resultados:</strong> fala, escuta e pensamento crítico.</li>
-        <li><strong>Suporte e plataforma exclusivos</strong> para evoluir rápido.</li>
-      </ul>
-      <h3 class="special" style="color:var(--title)">HealthTalk</h3>
-      <p>Programa exclusivo para profissionais da saúde...</p>
+<main>
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-text">
+      <h1>Welcome to <span>MASTER</span></h1>
+      <p>Inglês real para quem quer resultados de verdade.</p>
     </div>
-    <div class="cta-box"><h3>Pronto para começar?</h3><p>Agende sua aula...</p><a class="btn-saiba-mais" href="#contato">Saiba mais</a></div>
-  </div>
-</section>
 
-<section id="cursos">
-  <h2>Nossos Cursos</h2>
-  <div class="course-box"><img src="images/course1.png"><h3>Master Journey</h3><p>...</p></div>
-  <div class="course-box"><img src="images/course2.png"><h3>Master Talk</h3><p>...</p></div>
-  <div class="course-box"><img src="images/course3.png"><h3>HealthTalk</h3><p>...</p></div>
-</section>
+    <form class="hero-form" aria-label="Formulário de contato">
+      <label for="nome">Nome completo*</label>
+      <input id="nome" type="text" placeholder="Seu nome" />
+      <label for="email">Seu melhor e-mail*</label>
+      <input id="email" type="email" placeholder="exemplo@email.com" />
+      <label for="celular">Celular*</label>
+      <input id="celular" type="tel" placeholder="(00) 00000-0000" />
+      <label style="font-size:12px;color:var(--secondary)">
+        <input type="checkbox" /> Concordo em receber comunicações da MASTER
+      </label>
+      <button type="button" id="hero-send">QUERO MAIS INFORMAÇÕES</button>
+    </form>
+  </section>
 
-<section class="testimonials-section" id="depoimentos">
-  <h2>O que nossos alunos dizem</h2>
-  <!-- mantém seu carrossel exatamente como estava -->
-</section>
+  <!-- BOTÃO WHATSAPP FIXO -->
+  <button id="whatsapp-btn" title="Enviar WhatsApp">📲</button>
 
-<section class="teacher-section" id="teacher">
-  <div class="teacher-container">
-    <div class="teacher-text">
-      <h2>Conheça a Teacher Lari</h2>
-      <p>...</p>
-      <a href="#contato" class="btn-master" style="background:var(--primary);color:#fff;padding:12px 24px;border-radius:30px;text-decoration:none;font-weight:700;">Agende sua aula</a>
+  <!-- MASTER -->
+  <section class="master-section" id="por-que">
+    <div class="master-container">
+      <div class="master-text">
+        <h1>Por que a MASTER?</h1>
+        <ul>
+          <li><strong>Fale inglês desde o primeiro dia.</strong></li>
+          <li><strong>Aulas práticas, dinâmicas e reais.</strong></li>
+          <li><strong>Aprenda fazendo:</strong> conversando, simulando e praticando.</li>
+          <li><strong>Comece de qualquer nível</strong> e siga até a fluência.</li>
+          <li><strong>Foco total em resultados:</strong> fala, escuta e pensamento crítico.</li>
+          <li><strong>Suporte e plataforma exclusivos</strong> para evoluir rápido.</li>
+        </ul>
+
+        <h3 class="special">HealthTalk</h3>
+        <p>Programa exclusivo para profissionais da saúde, com vocabulário técnico, simulações clínicas e comunicação real no hospital.</p>
+      </div>
+
+      <div class="cta-box">
+        <h3>Pronto para começar?</h3>
+        <p>Agende sua aula experimental gratuita e conheça o método MASTER.</p>
+        <a class="btn-saiba-mais" href="#contato">Saiba mais</a>
+      </div>
     </div>
-    <div class="teacher-photo" style="background-image:url('images/teacher.png')"></div>
-  </div>
-</section>
+  </section>
 
+  <!-- CURSOS -->
+  <section id="cursos">
+    <h2>Nossos Cursos</h2>
+    <div class="course-box">
+      <img src="images/course1.png" alt="Master Journey" />
+      <h3>Master Journey</h3>
+      <p>Do básico à fluência em 2 anos. Aprenda inglês de forma completa, estruturada e dinâmica.</p>
+      <a href="#contato" class="btn-saiba-mais" style="background:var(--primary)">Saiba mais</a>
+    </div>
+
+    <div class="course-box">
+      <img src="images/course2.png" alt="Master Talk" />
+      <h3>Master Talk</h3>
+      <p>Conversação personalizada, prática intensa e feedback constante.</p>
+      <a href="#contato" class="btn-saiba-mais" style="background:var(--primary)">Saiba mais</a>
+    </div>
+
+    <div class="course-box">
+      <img src="images/course3.png" alt="HealthTalk" />
+      <h3>HealthTalk</h3>
+      <p>Inglês especializado para profissionais da saúde, com simulações clínicas.</p>
+      <a href="#contato" class="btn-saiba-mais" style="background:var(--primary)">Saiba mais</a>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS 3D -->
+  <section class="testimonials-section" id="depoimentos">
+    <h2>O que nossos alunos dizem</h2>
+    <div class="testimonials-3d-carousel" id="carousel">
+      <div class="carousel-wrapper">
+        <div class="carousel-item active"><video src="videos/depo1.mp4" muted></video></div>
+        <div class="carousel-item next"><video src="videos/depo2.mp4" muted></video></div>
+        <div class="carousel-item prev"><video src="videos/depo3.mp4" muted></video></div>
+      </div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" id="prev">&#10094;</button>
+        <button class="carousel-btn" id="next">&#10095;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEACHER LARI -->
+  <section class="teacher-section" id="teacher">
+    <div class="teacher-container">
+      <div class="teacher-text">
+        <h2>Conheça a Teacher Lari</h2>
+        <p>Com quase 10 anos de experiência na educação, Teacher Lari transforma o aprendizado em algo eficiente, dinâmico e prazeroso, para todas as idades e níveis.
+        Ela desenvolveu a Master, seu método exclusivo de inglês, criado para resultados reais e rápidos: com dedicação, qualquer aluno pode concluir seu inglês em até 2 anos. Todo o material foi cuidadosamente planejado para o melhor desenvolvimento dos alunos, focando em inglês da vida real, aplicável no trabalho, na área da saúde, no mundo corporativo e em qualquer contexto profissional.
+        Formada na área da saúde e com experiência ensinando alunos universitários de enfermagem, Lari criou o primeiro curso de inglês totalmente voltado para profissionais da saúde, o HealthTalk, ministrado por quem entende do setor. Além disso, oferece cursos personalizados para executivos e profissionais de diversas áreas, todos com a mesma metodologia inovadora, prática e focada em resultados.</p>
+        <a href="#contato" class="btn-master">Agende sua aula</a>
+      </div>
+      <div class="teacher-photo" style="background-image:url('images/teacher.png')">
+        <div class="label">Teacher Lari</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
 <footer class="footer">
   © 2025 MASTER English - Todos os direitos reservados
 </footer>
+
+<script>
+// ===== preserve original scripts (whatsapp + carousel + videos) =====
+// BOTÃO WHATSAPP
+document.getElementById("whatsapp-btn").onclick = function(){
+  window.open("https://wa.me/11982595575","_blank");
+}
+
+// CARROSSEL 3D (mantido)
+const carousel = document.querySelector("#carousel .carousel-wrapper");
+const items = carousel.querySelectorAll(".carousel-item");
+let index = 0;
+
+function updateCarousel(){
+  items.forEach((item,i)=>{
+    item.classList.remove("prev","active","next");
+    if(i===index) item.classList.add("active");
+    if(i===index-1 || (index===0 && i===items.length-1)) item.classList.add("prev");
+    if(i===index+1 || (index===items.length-1 && i===0)) item.classList.add("next");
+  });
+}
+
+document.getElementById("prev").addEventListener("click",()=>{
+  index = (index-1+items.length)%items.length;
+  updateCarousel();
+  resetVideos();
+});
+document.getElementById("next").addEventListener("click",()=>{
+  index = (index+1)%items.length;
+  updateCarousel();
+  resetVideos();
+});
+
+// autoplay ao chegar na seção
+let carouselPlayed = false;
+const carouselSection = document.getElementById("depoimentos");
+window.addEventListener("scroll",()=>{
+  const rect = carouselSection.getBoundingClientRect();
+  if(!carouselPlayed && rect.top < window.innerHeight){
+    carouselPlayed = true;
+    const activeVideo = items[index].querySelector("video");
+    if(activeVideo) activeVideo.play();
+  }
+});
+
+// clicar no vídeo para ativar som
+function resetVideos(){
+  items.forEach((item,i)=>{
+    const vid = item.querySelector("video");
+    if(!vid) return;
+    vid.pause();
+    vid.currentTime=0;
+    vid.muted=true;
+  });
+  const activeVideo = items[index].querySelector("video");
+  if(activeVideo){
+    activeVideo.play();
+    activeVideo.muted=false; // só ativa som ao clicar
+  }
+}
+items.forEach(item=>{
+  const vid = item.querySelector("video");
+  if(!vid) return;
+  vid.addEventListener("click",()=>{
+    vid.muted = !vid.muted;
+  });
+});
+
+updateCarousel();
+
+// ===== Gradient scroll behavior =====
+// We animate the overlay opacity so gradient becomes more intense as user scrolls past hero.
+// Uses CSS variable --grad-opacity on :root.
+
+(function(){
+  const root = document.documentElement;
+  const hero = document.querySelector('.hero');
+  if(!hero) return;
+
+  // Helper clamp
+  function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
+
+  // Compute the starting point (bottom of hero) in document coordinates
+  function getHeroBottom() {
+    const rect = hero.getBoundingClientRect();
+    // rect.bottom is relative to viewport; compute doc offset
+    const docTop = window.pageYOffset || document.documentElement.scrollTop;
+    return rect.bottom + docTop;
+  }
+
+  // On resize, re-evaluate
+  let heroBottom = getHeroBottom();
+
+  window.addEventListener('resize', ()=>{
+    heroBottom = getHeroBottom();
+  });
+
+  // We'll interpolate opacity from subtle (0.12) when just below hero
+  // to stronger (1.0) when near page bottom. Tweak these values to taste.
+  const MIN_OPACITY = 0.12;
+  const MAX_OPACITY = 1.0;
+
+  function onScroll(){
+    const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    const docHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    const vpHeight = window.innerHeight;
+
+    // progress starts when top of viewport reaches heroBottom
+    // end point is when user scrolled to near bottom of page
+    const start = Math.max(0, heroBottom - vpHeight*0.2); // slightly before hero fully leaves
+    const end = docHeight - vpHeight; // bottom of page
+    const progress = clamp((scrollY - start) / (end - start), 0, 1);
+
+    const opacity = MIN_OPACITY + (MAX_OPACITY - MIN_OPACITY) * progress;
+    root.style.setProperty('--grad-opacity', opacity.toFixed(3));
+  }
+
+  // initialize heroBottom then run on load
+  heroBottom = getHeroBottom();
+  // start with tiny opacity until user scrolls
+  root.style.setProperty('--grad-opacity', MIN_OPACITY);
+
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', ()=>{
+    heroBottom = getHeroBottom();
+    onScroll();
+  });
+
+  // run once to set initial correct value
+  onScroll();
+})();
+</script>
 
 </body>
 </html>
