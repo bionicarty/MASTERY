@@ -10,16 +10,12 @@
 
 <style>
 :root{
-  --primary: #3aafa9;    /* teal - cor primária */
-  --dark: #17252a;       /* azul escuro profissional */
+  --primary: #3aafa9;
+  --background: #17252a;
   --title: #fe5f55;
-  --secondary: #def2f1;  /* gelo claro */
-  --text: #f5f7f8;       /* quase branco */
+  --secondary: #def2f1;
+  --text: #f5f7f8;
   --hero-text-color: #17252a;
-
-  /* controle do overlay de gradiente (JS altera --grad-opacity) */
-  --grad-opacity: 0;
-  --hero-bottom-stop: calc(90px + 80vh); /* fallback, JS ajusta se necessário */
 }
 
 /* Reset */
@@ -27,41 +23,11 @@
 html,body{height:100%}
 body{
   font-family: "League Spartan",sans-serif;
-  background:var(--dark);
+  background:var(--background);
   color:var(--text);
   line-height:1.5;
   overflow-x:hidden;
   scroll-behavior:smooth;
-  position:relative;
-}
-
-/* ===== page gradient overlay (fixed, behind content) =====
-   This element is created via CSS pseudo-element on body and controlled by JS.
-   It starts visually *below* the hero and gradually increases opacity as user scrolls.
-*/
-body::before{
-  content:"";
-  position:fixed;
-  inset:0; /* full screen */
-  pointer-events:none;
-  z-index:0; /* behind page content (content will be z-index:1) */
-  /* multi-stop vertical gradient: from very light to teal to dark professional */
-  background: linear-gradient(
-    to bottom,
-    rgba(245,247,248,0.95) 0%,
-    rgba(222,242,241,0.95) 28%,
-    rgba(58,175,169,0.95) 60%,
-    rgba(23,37,42,0.98) 100%
-  );
-  opacity: var(--grad-opacity); /* JS will animate from subtle to stronger */
-  transition: opacity 420ms linear;
-  mix-blend-mode: normal;
-}
-
-/* Put main content above the overlay so elements (boxes) are visible */
-main, header, .hero, section, footer{
-  position:relative;
-  z-index:1;
 }
 
 /* HEADER */
@@ -80,7 +46,7 @@ nav a{color:var(--text);text-decoration:none;font-weight:500;transition:color .2
 nav a:hover{color:var(--primary)}
 nav ul li{position:relative}
 
-/* HERO (mantive tudo igual) */
+/* HERO */
 .hero{
   margin-top:90px;
   background: url("images/hero.png") no-repeat center center;
@@ -88,9 +54,6 @@ nav ul li{position:relative}
   min-height:80vh;
   display:flex;gap:40px;align-items:center;justify-content:space-between;
   padding:100px 50px;flex-wrap:wrap;
-  /* ensure hero stays above gradient and visually unchanged */
-  z-index:150;
-  position:relative;
 }
 .hero-text{max-width:620px}
 .hero-text h1{font-size:88px;color:var(--primary);line-height:1.05;margin-bottom:12px}
@@ -106,16 +69,9 @@ nav ul li{position:relative}
 .hero-form input{padding:10px;border-radius:8px;border:none;font-size:14px;width:100%}
 .hero-form button{background:var(--title);color:#fff;border:none;padding:10px;border-radius:8px;font-weight:700;cursor:pointer}
 
-/* ===== SECTIONS BELOW HERO: use transparent backgrounds so the page gradient shows =====
-   I removed section-specific background images here to allow the gradient to appear.
-   Content boxes (cards) keep their own backgrounds so layout remains identical.
-*/
-
 /* MASTER */
 .master-section{
-  padding:120px 60px;
-  background: transparent; /* rely on page gradient */
-  color:var(--text);
+  padding:120px 60px;background:url("images/por-que.png") center/cover no-repeat; color:var(--text);
 }
 .master-container{max-width:1200px;margin:0 auto;display:flex;gap:60px;align-items:flex-start;flex-wrap:wrap}
 .master-text{flex:1;min-width:320px;max-width:620px}
@@ -125,12 +81,12 @@ nav ul li{position:relative}
 .master-text h3{color:var(--primary);margin-top:18px;margin-bottom:8px}
 .master-text h3.special{color:var(--title)}
 
-.cta-box{flex:0 0 420px;background:rgba(0,0,0,.45);padding:36px;border-radius:16px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:12px}
+.cta-box{flex:0 0 420px;background:rgba(0,0,0,.5);padding:36px;border-radius:16px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:12px}
 .cta-box h3{font-size:1.6rem;color:var(--text)}
 .btn-saiba-mais{background:var(--primary);color:#fff;padding:12px 26px;border-radius:30px;text-decoration:none;font-weight:700;display:inline-block}
 
 /* CURSOS */
-#cursos{padding:140px 60px;background:transparent;display:flex;gap:34px;justify-content:center;flex-wrap:wrap}
+#cursos{padding:140px 60px;background:var(--secondary);display:flex;gap:34px;justify-content:center;flex-wrap:wrap}
 #cursos h2{width:100%;text-align:center;color:var(--title); font-size:3rem;margin-bottom:36px;}
 .course-box{background:#fff;padding:40px 36px;border-radius:16px;max-width:360px;min-width:280px;flex:1;display:flex;flex-direction:column;align-items:center;gap:24px;box-shadow:0 8px 25px rgba(0,0,0,.08)}
 .course-box img{max-width:160px}
@@ -143,8 +99,8 @@ nav ul li{position:relative}
   padding:120px 60px;text-align:center;
   position:relative;
   border-radius:28px;
-  overflow:visible; /* let gradient show behind */
-  background: transparent; /* rely on page gradient */
+  overflow:hidden;
+  background: url("images/depoimento.png") center/cover no-repeat;
 }
 .testimonials-section h2{
   color:#fe5f55;
@@ -245,8 +201,7 @@ nav ul li{position:relative}
 
 /* TEACHER LARI */
 .teacher-section{
-  padding:120px 60px;
-  background: transparent; /* gradient shows behind; box keeps same layout */
+  padding:120px 60px;background:linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.08));
 }
 .teacher-container{max-width:1200px;margin:0 auto;display:flex;gap:40px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .teacher-text{flex:1;min-width:320px}
@@ -289,7 +244,6 @@ nav ul li{position:relative}
 
 .footer{padding:40px 60px;text-align:center;color:var(--secondary);border-top:1px solid rgba(255,255,255,.04)}
 
-/* small screens */
 @media (max-width:980px){
   header{padding:0 24px}
   .hero{padding:48px 20px;flex-direction:column;align-items:flex-start}
@@ -304,9 +258,6 @@ nav ul li{position:relative}
   .hero-text h1{font-size:36px}
   .hero-text h1 span{font-size:60px}
 }
-
-/* little polish: ensure clickable cards remain above gradient overlay */
-.course-box, .cta-box, .teacher-photo, .hero-form, .carousel-item{z-index:2;position:relative}
 </style>
 </head>
 <body>
@@ -324,115 +275,112 @@ nav ul li{position:relative}
   </nav>
 </header>
 
-<main>
-  <!-- HERO -->
-  <section class="hero" id="top">
-    <div class="hero-text">
-      <h1>Welcome to <span>MASTER</span></h1>
-      <p>Inglês real para quem quer resultados de verdade.</p>
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-text">
+    <h1>Welcome to <span>MASTER</span></h1>
+    <p>Inglês real para quem quer resultados de verdade.</p>
+  </div>
+
+  <form class="hero-form" aria-label="Formulário de contato">
+    <label for="nome">Nome completo*</label>
+    <input id="nome" type="text" placeholder="Seu nome" />
+    <label for="email">Seu melhor e-mail*</label>
+    <input id="email" type="email" placeholder="exemplo@email.com" />
+    <label for="celular">Celular*</label>
+    <input id="celular" type="tel" placeholder="(00) 00000-0000" />
+    <label style="font-size:12px;color:var(--secondary)">
+      <input type="checkbox" /> Concordo em receber comunicações da MASTER
+    </label>
+    <button type="button" id="hero-send">QUERO MAIS INFORMAÇÕES</button>
+  </form>
+</section>
+
+<!-- BOTÃO WHATSAPP FIXO -->
+<button id="whatsapp-btn" title="Enviar WhatsApp">📲</button>
+
+<!-- MASTER -->
+<section class="master-section" id="por-que">
+  <div class="master-container">
+    <div class="master-text">
+      <h1>Por que a MASTER?</h1>
+      <ul>
+        <li><strong>Fale inglês desde o primeiro dia.</strong></li>
+        <li><strong>Aulas práticas, dinâmicas e reais.</strong></li>
+        <li><strong>Aprenda fazendo:</strong> conversando, simulando e praticando.</li>
+        <li><strong>Comece de qualquer nível</strong> e siga até a fluência.</li>
+        <li><strong>Foco total em resultados:</strong> fala, escuta e pensamento crítico.</li>
+        <li><strong>Suporte e plataforma exclusivos</strong> para evoluir rápido.</li>
+      </ul>
+
+      <h3 class="special">HealthTalk</h3>
+      <p>Programa exclusivo para profissionais da saúde, com vocabulário técnico, simulações clínicas e comunicação real no hospital.</p>
     </div>
 
-    <form class="hero-form" aria-label="Formulário de contato">
-      <label for="nome">Nome completo*</label>
-      <input id="nome" type="text" placeholder="Seu nome" />
-      <label for="email">Seu melhor e-mail*</label>
-      <input id="email" type="email" placeholder="exemplo@email.com" />
-      <label for="celular">Celular*</label>
-      <input id="celular" type="tel" placeholder="(00) 00000-0000" />
-      <label style="font-size:12px;color:var(--secondary)">
-        <input type="checkbox" /> Concordo em receber comunicações da MASTER
-      </label>
-      <button type="button" id="hero-send">QUERO MAIS INFORMAÇÕES</button>
-    </form>
-  </section>
-
-  <!-- BOTÃO WHATSAPP FIXO -->
-  <button id="whatsapp-btn" title="Enviar WhatsApp">📲</button>
-
-  <!-- MASTER -->
-  <section class="master-section" id="por-que">
-    <div class="master-container">
-      <div class="master-text">
-        <h1>Por que a MASTER?</h1>
-        <ul>
-          <li><strong>Fale inglês desde o primeiro dia.</strong></li>
-          <li><strong>Aulas práticas, dinâmicas e reais.</strong></li>
-          <li><strong>Aprenda fazendo:</strong> conversando, simulando e praticando.</li>
-          <li><strong>Comece de qualquer nível</strong> e siga até a fluência.</li>
-          <li><strong>Foco total em resultados:</strong> fala, escuta e pensamento crítico.</li>
-          <li><strong>Suporte e plataforma exclusivos</strong> para evoluir rápido.</li>
-        </ul>
-
-        <h3 class="special">HealthTalk</h3>
-        <p>Programa exclusivo para profissionais da saúde, com vocabulário técnico, simulações clínicas e comunicação real no hospital.</p>
-      </div>
-
-      <div class="cta-box">
-        <h3>Pronto para começar?</h3>
-        <p>Agende sua aula experimental gratuita e conheça o método MASTER.</p>
-        <a class="btn-saiba-mais" href="#contato">Saiba mais</a>
-      </div>
+    <div class="cta-box">
+      <h3>Pronto para começar?</h3>
+      <p>Agende sua aula experimental gratuita e conheça o método MASTER.</p>
+      <a class="btn-saiba-mais" href="#contato">Saiba mais</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CURSOS -->
-  <section id="cursos">
-    <h2>Nossos Cursos</h2>
-    <div class="course-box">
-      <img src="images/course1.png" alt="Master Journey" />
-      <h3>Master Journey</h3>
-      <p>Do básico à fluência em 2 anos. Aprenda inglês de forma completa, estruturada e dinâmica.</p>
-      <a href="#contato" class="btn-saiba-mais" style="background:var(--primary)">Saiba mais</a>
+<!-- CURSOS -->
+<section id="cursos">
+  <h2>Nossos Cursos</h2>
+  <div class="course-box">
+    <img src="images/course1.png" alt="Master Journey" />
+    <h3>Master Journey</h3>
+    <p>Do básico à fluência em 2 anos. Aprenda inglês de forma completa, estruturada e dinâmica.</p>
+    <a href="#contato" class="btn-saiba-mais" style="background:var(--primary)">Saiba mais</a>
+  </div>
+
+  <div class="course-box">
+    <img src="images/course2.png" alt="Master Talk" />
+    <h3>Master Talk</h3>
+    <p>Conversação personalizada, prática intensa e feedback constante.</p>
+    <a href="#contato" class="btn-saiba-mais" style="background:var(--primary)">Saiba mais</a>
+  </div>
+
+  <div class="course-box">
+    <img src="images/course3.png" alt="HealthTalk" />
+    <h3>HealthTalk</h3>
+    <p>Inglês especializado para profissionais da saúde, com simulações clínicas.</p>
+    <a href="#contato" class="btn-saiba-mais" style="background:var(--primary)">Saiba mais</a>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS 3D -->
+<section class="testimonials-section" id="depoimentos">
+  <h2>O que nossos alunos dizem</h2>
+  <div class="testimonials-3d-carousel" id="carousel">
+    <div class="carousel-wrapper">
+      <div class="carousel-item active"><video src="videos/depo1.mp4" muted></video></div>
+      <div class="carousel-item next"><video src="videos/depo2.mp4" muted></video></div>
+      <div class="carousel-item prev"><video src="videos/depo3.mp4" muted></video></div>
     </div>
-
-    <div class="course-box">
-      <img src="images/course2.png" alt="Master Talk" />
-      <h3>Master Talk</h3>
-      <p>Conversação personalizada, prática intensa e feedback constante.</p>
-      <a href="#contato" class="btn-saiba-mais" style="background:var(--primary)">Saiba mais</a>
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="prev">&#10094;</button>
+      <button class="carousel-btn" id="next">&#10095;</button>
     </div>
+  </div>
+</section>
 
-    <div class="course-box">
-      <img src="images/course3.png" alt="HealthTalk" />
-      <h3>HealthTalk</h3>
-      <p>Inglês especializado para profissionais da saúde, com simulações clínicas.</p>
-      <a href="#contato" class="btn-saiba-mais" style="background:var(--primary)">Saiba mais</a>
+<!-- TEACHER LARI -->
+<section class="teacher-section" id="teacher">
+  <div class="teacher-container">
+    <div class="teacher-text">
+      <h2>Conheça a Teacher Lari</h2>
+      <p>Com quase 10 anos de experiência na educação, Teacher Lari transforma o aprendizado em algo eficiente, dinâmico e prazeroso, para todas as idades e níveis.
+Ela desenvolveu a Master, seu método exclusivo de inglês, criado para resultados reais e rápidos: com dedicação, qualquer aluno pode concluir seu inglês em até 2 anos. Todo o material foi cuidadosamente planejado para o melhor desenvolvimento dos alunos, focando em inglês da vida real, aplicável no trabalho, na área da saúde, no mundo corporativo e em qualquer contexto profissional.
+Formada na área da saúde e com experiência ensinando alunos universitários de enfermagem, Lari criou o primeiro curso de inglês totalmente voltado para profissionais da saúde, o HealthTalk, ministrado por quem entende do setor. Além disso, oferece cursos personalizados para executivos e profissionais de diversas áreas, todos com a mesma metodologia inovadora, prática e focada em resultados.</p>
+      <a href="#contato" class="btn-master">Agende sua aula</a>
     </div>
-  </section>
-
-  <!-- DEPOIMENTOS 3D -->
-  <section class="testimonials-section" id="depoimentos">
-    <h2>O que nossos alunos dizem</h2>
-    <div class="testimonials-3d-carousel" id="carousel">
-      <div class="carousel-wrapper">
-        <div class="carousel-item active"><video src="videos/depo1.mp4" muted></video></div>
-        <div class="carousel-item next"><video src="videos/depo2.mp4" muted></video></div>
-        <div class="carousel-item prev"><video src="videos/depo3.mp4" muted></video></div>
-      </div>
-      <div class="carousel-controls">
-        <button class="carousel-btn" id="prev">&#10094;</button>
-        <button class="carousel-btn" id="next">&#10095;</button>
-      </div>
+    <div class="teacher-photo" style="background-image:url('images/teacher.png')">
+      <div class="label">Teacher Lari</div>
     </div>
-  </section>
-
-  <!-- TEACHER LARI -->
-  <section class="teacher-section" id="teacher">
-    <div class="teacher-container">
-      <div class="teacher-text">
-        <h2>Conheça a Teacher Lari</h2>
-        <p>Com quase 10 anos de experiência na educação, Teacher Lari transforma o aprendizado em algo eficiente, dinâmico e prazeroso, para todas as idades e níveis.
-        Ela desenvolveu a Master, seu método exclusivo de inglês, criado para resultados reais e rápidos: com dedicação, qualquer aluno pode concluir seu inglês em até 2 anos. Todo o material foi cuidadosamente planejado para o melhor desenvolvimento dos alunos, focando em inglês da vida real, aplicável no trabalho, na área da saúde, no mundo corporativo e em qualquer contexto profissional.
-        Formada na área da saúde e com experiência ensinando alunos universitários de enfermagem, Lari criou o primeiro curso de inglês totalmente voltado para profissionais da saúde, o HealthTalk, ministrado por quem entende do setor. Além disso, oferece cursos personalizados para executivos e profissionais de diversas áreas, todos com a mesma metodologia inovadora, prática e focada em resultados.</p>
-        <a href="#contato" class="btn-master">Agende sua aula</a>
-      </div>
-      <div class="teacher-photo" style="background-image:url('images/teacher.png')">
-        <div class="label">Teacher Lari</div>
-      </div>
-    </div>
-  </section>
-
-</main>
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -440,13 +388,12 @@ nav ul li{position:relative}
 </footer>
 
 <script>
-// ===== preserve original scripts (whatsapp + carousel + videos) =====
 // BOTÃO WHATSAPP
 document.getElementById("whatsapp-btn").onclick = function(){
   window.open("https://wa.me/11982595575","_blank");
 }
 
-// CARROSSEL 3D (mantido)
+// CARROSSEL 3D
 const carousel = document.querySelector("#carousel .carousel-wrapper");
 const items = carousel.querySelectorAll(".carousel-item");
 let index = 0;
@@ -479,7 +426,7 @@ window.addEventListener("scroll",()=>{
   if(!carouselPlayed && rect.top < window.innerHeight){
     carouselPlayed = true;
     const activeVideo = items[index].querySelector("video");
-    if(activeVideo) activeVideo.play();
+    activeVideo.play();
   }
 });
 
@@ -487,88 +434,22 @@ window.addEventListener("scroll",()=>{
 function resetVideos(){
   items.forEach((item,i)=>{
     const vid = item.querySelector("video");
-    if(!vid) return;
     vid.pause();
     vid.currentTime=0;
     vid.muted=true;
   });
   const activeVideo = items[index].querySelector("video");
-  if(activeVideo){
-    activeVideo.play();
-    activeVideo.muted=false; // só ativa som ao clicar
-  }
+  activeVideo.play();
+  activeVideo.muted=false; // só ativa som ao clicar
 }
 items.forEach(item=>{
   const vid = item.querySelector("video");
-  if(!vid) return;
   vid.addEventListener("click",()=>{
     vid.muted = !vid.muted;
   });
 });
 
 updateCarousel();
-
-// ===== Gradient scroll behavior =====
-// We animate the overlay opacity so gradient becomes more intense as user scrolls past hero.
-// Uses CSS variable --grad-opacity on :root.
-
-(function(){
-  const root = document.documentElement;
-  const hero = document.querySelector('.hero');
-  if(!hero) return;
-
-  // Helper clamp
-  function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
-
-  // Compute the starting point (bottom of hero) in document coordinates
-  function getHeroBottom() {
-    const rect = hero.getBoundingClientRect();
-    // rect.bottom is relative to viewport; compute doc offset
-    const docTop = window.pageYOffset || document.documentElement.scrollTop;
-    return rect.bottom + docTop;
-  }
-
-  // On resize, re-evaluate
-  let heroBottom = getHeroBottom();
-
-  window.addEventListener('resize', ()=>{
-    heroBottom = getHeroBottom();
-  });
-
-  // We'll interpolate opacity from subtle (0.12) when just below hero
-  // to stronger (1.0) when near page bottom. Tweak these values to taste.
-  const MIN_OPACITY = 0.12;
-  const MAX_OPACITY = 1.0;
-
-  function onScroll(){
-    const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-    const docHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-    const vpHeight = window.innerHeight;
-
-    // progress starts when top of viewport reaches heroBottom
-    // end point is when user scrolled to near bottom of page
-    const start = Math.max(0, heroBottom - vpHeight*0.2); // slightly before hero fully leaves
-    const end = docHeight - vpHeight; // bottom of page
-    const progress = clamp((scrollY - start) / (end - start), 0, 1);
-
-    const opacity = MIN_OPACITY + (MAX_OPACITY - MIN_OPACITY) * progress;
-    root.style.setProperty('--grad-opacity', opacity.toFixed(3));
-  }
-
-  // initialize heroBottom then run on load
-  heroBottom = getHeroBottom();
-  // start with tiny opacity until user scrolls
-  root.style.setProperty('--grad-opacity', MIN_OPACITY);
-
-  window.addEventListener('scroll', onScroll, {passive:true});
-  window.addEventListener('resize', ()=>{
-    heroBottom = getHeroBottom();
-    onScroll();
-  });
-
-  // run once to set initial correct value
-  onScroll();
-})();
 </script>
 
 </body>
