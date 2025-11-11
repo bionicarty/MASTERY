@@ -10,12 +10,16 @@
 
 <style>
 :root{
-  --primary: #3aafa9;
-  --background: #17252a;
+  --primary: #3aafa9;   /* teal */
+  --background: #17252a;/* dark professional */
   --title: #fe5f55;
-  --secondary: #def2f1;
-  --text: #f5f7f8;
+  --secondary: #def2f1; /* light cyan */
+  --text: #f5f7f8;      /* very light / gelo */
   --hero-text-color: #17252a;
+  --grad-top: #F5F7F8;  /* gelo */
+  --grad-mid: #DEF2F1;  /* gelo-ciano */
+  --grad-mid2: #3AAFA9; /* primary teal */
+  --grad-bottom: #17252a;/* dark */
 }
 
 /* Reset */
@@ -23,11 +27,35 @@
 html,body{height:100%}
 body{
   font-family: "League Spartan",sans-serif;
-  background:var(--background);
+  background:var(--background); /* fallback */
   color:var(--text);
   line-height:1.5;
   overflow-x:hidden;
   scroll-behavior:smooth;
+  position:relative;
+}
+
+/* --- PAGE GRADIENT (aplica a partir de baixo do HERO até o final) --- */
+#page-gradient{
+  position:fixed;
+  left:0;
+  right:0;
+  top:0;             /* JS vai reposicionar para começar abaixo do hero */
+  height:100vh;      /* JS atualiza para cobrir do hero até o fim */
+  z-index:-2;        /* atrás de tudo */
+  pointer-events:none;
+  background: linear-gradient(
+    180deg,
+    var(--grad-top) 0%,
+    var(--grad-mid) 32%,
+    var(--grad-mid2) 70%,
+    var(--grad-bottom) 100%
+  );
+  background-size: 100% 200%; /* permite deslocamento suave */
+  background-position: center 0%;
+  transition: background-position 0.25s linear, top 0.35s ease, height 0.35s ease, opacity 0.25s linear;
+  opacity:1;
+  will-change: background-position, top, height;
 }
 
 /* HEADER */
@@ -46,7 +74,7 @@ nav a{color:var(--text);text-decoration:none;font-weight:500;transition:color .2
 nav a:hover{color:var(--primary)}
 nav ul li{position:relative}
 
-/* HERO */
+/* HERO (mantive identico ao seu) */
 .hero{
   margin-top:90px;
   background: url("images/hero.png") no-repeat center center;
@@ -54,6 +82,7 @@ nav ul li{position:relative}
   min-height:80vh;
   display:flex;gap:40px;align-items:center;justify-content:space-between;
   padding:100px 50px;flex-wrap:wrap;
+  z-index:2; /* acima do gradient */
 }
 .hero-text{max-width:620px}
 .hero-text h1{font-size:88px;color:var(--primary);line-height:1.05;margin-bottom:12px}
@@ -69,9 +98,14 @@ nav ul li{position:relative}
 .hero-form input{padding:10px;border-radius:8px;border:none;font-size:14px;width:100%}
 .hero-form button{background:var(--title);color:#fff;border:none;padding:10px;border-radius:8px;font-weight:700;cursor:pointer}
 
+/* --- SECTIONS FROM HERE ON WILL LET THE GRADIENT SHOW --- */
 /* MASTER */
 .master-section{
-  padding:120px 60px;background:url("images/por-que.png") center/cover no-repeat; color:var(--text);
+  padding:120px 60px;
+  background: transparent; /* removed background image to let the gradient show */
+  color:var(--text);
+  position:relative;
+  z-index:1;
 }
 .master-container{max-width:1200px;margin:0 auto;display:flex;gap:60px;align-items:flex-start;flex-wrap:wrap}
 .master-text{flex:1;min-width:320px;max-width:620px}
@@ -81,12 +115,16 @@ nav ul li{position:relative}
 .master-text h3{color:var(--primary);margin-top:18px;margin-bottom:8px}
 .master-text h3.special{color:var(--title)}
 
-.cta-box{flex:0 0 420px;background:rgba(0,0,0,.5);padding:36px;border-radius:16px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:12px}
+.cta-box{flex:0 0 420px;background:rgba(0,0,0,.45);padding:36px;border-radius:16px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:12px}
 .cta-box h3{font-size:1.6rem;color:var(--text)}
 .btn-saiba-mais{background:var(--primary);color:#fff;padding:12px 26px;border-radius:30px;text-decoration:none;font-weight:700;display:inline-block}
 
 /* CURSOS */
-#cursos{padding:140px 60px;background:var(--secondary);display:flex;gap:34px;justify-content:center;flex-wrap:wrap}
+#cursos{
+  padding:140px 60px;
+  background: transparent; /* transparent so gradient is visible */
+  display:flex;gap:34px;justify-content:center;flex-wrap:wrap;
+}
 #cursos h2{width:100%;text-align:center;color:var(--title); font-size:3rem;margin-bottom:36px;}
 .course-box{background:#fff;padding:40px 36px;border-radius:16px;max-width:360px;min-width:280px;flex:1;display:flex;flex-direction:column;align-items:center;gap:24px;box-shadow:0 8px 25px rgba(0,0,0,.08)}
 .course-box img{max-width:160px}
@@ -99,8 +137,9 @@ nav ul li{position:relative}
   padding:120px 60px;text-align:center;
   position:relative;
   border-radius:28px;
-  overflow:hidden;
-  background: url("images/depoimento.png") center/cover no-repeat;
+  overflow:visible; /* keep overflow visible for 3D feel */
+  background: transparent; /* let gradient show */
+  z-index:1;
 }
 .testimonials-section h2{
   color:#fe5f55;
@@ -201,7 +240,10 @@ nav ul li{position:relative}
 
 /* TEACHER LARI */
 .teacher-section{
-  padding:120px 60px;background:linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.08));
+  padding:120px 60px;
+  background: transparent; /* let the gradient show and deepen toward the end */
+  position:relative;
+  z-index:1;
 }
 .teacher-container{max-width:1200px;margin:0 auto;display:flex;gap:40px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .teacher-text{flex:1;min-width:320px}
@@ -242,8 +284,9 @@ nav ul li{position:relative}
   box-shadow:0 6px 18px rgba(0,0,0,.5);
 }
 
-.footer{padding:40px 60px;text-align:center;color:var(--secondary);border-top:1px solid rgba(255,255,255,.04)}
+.footer{padding:40px 60px;text-align:center;color:var(--secondary);border-top:1px solid rgba(255,255,255,.04);position:relative;z-index:1}
 
+/* Responsivo (mantive suas regras) */
 @media (max-width:980px){
   header{padding:0 24px}
   .hero{padding:48px 20px;flex-direction:column;align-items:flex-start}
@@ -261,6 +304,9 @@ nav ul li{position:relative}
 </style>
 </head>
 <body>
+
+<!-- page gradient element (JS reposiciona para começar logo abaixo do hero) -->
+<div id="page-gradient" aria-hidden="true"></div>
 
 <!-- HEADER -->
 <header>
@@ -355,9 +401,12 @@ nav ul li{position:relative}
   <h2>O que nossos alunos dizem</h2>
   <div class="testimonials-3d-carousel" id="carousel">
     <div class="carousel-wrapper">
+      <!-- Você pode adicionar mais .carousel-item aqui; os itens distantes ficam blurados por design -->
       <div class="carousel-item active"><video src="videos/depo1.mp4" muted></video></div>
       <div class="carousel-item next"><video src="videos/depo2.mp4" muted></video></div>
       <div class="carousel-item prev"><video src="videos/depo3.mp4" muted></video></div>
+      <!-- Exemplo de item extra (borrado): -->
+      <!-- <div class="carousel-item"><video src="videos/depo4.mp4" muted></video></div> -->
     </div>
     <div class="carousel-controls">
       <button class="carousel-btn" id="prev">&#10094;</button>
@@ -393,12 +442,13 @@ document.getElementById("whatsapp-btn").onclick = function(){
   window.open("https://wa.me/11982595575","_blank");
 }
 
-// CARROSSEL 3D
+// CARROSSEL 3D (mantive seu código)
 const carousel = document.querySelector("#carousel .carousel-wrapper");
-const items = carousel.querySelectorAll(".carousel-item");
+const items = carousel ? carousel.querySelectorAll(".carousel-item") : [];
 let index = 0;
 
 function updateCarousel(){
+  if(!items.length) return;
   items.forEach((item,i)=>{
     item.classList.remove("prev","active","next");
     if(i===index) item.classList.add("active");
@@ -407,12 +457,14 @@ function updateCarousel(){
   });
 }
 
-document.getElementById("prev").addEventListener("click",()=>{
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+if(prevBtn) prevBtn.addEventListener("click",()=>{
   index = (index-1+items.length)%items.length;
   updateCarousel();
   resetVideos();
 });
-document.getElementById("next").addEventListener("click",()=>{
+if(nextBtn) nextBtn.addEventListener("click",()=>{
   index = (index+1)%items.length;
   updateCarousel();
   resetVideos();
@@ -422,11 +474,11 @@ document.getElementById("next").addEventListener("click",()=>{
 let carouselPlayed = false;
 const carouselSection = document.getElementById("depoimentos");
 window.addEventListener("scroll",()=>{
-  const rect = carouselSection.getBoundingClientRect();
+  const rect = carouselSection ? carouselSection.getBoundingClientRect() : {top: Infinity};
   if(!carouselPlayed && rect.top < window.innerHeight){
     carouselPlayed = true;
-    const activeVideo = items[index].querySelector("video");
-    activeVideo.play();
+    const activeVideo = items[index] ? items[index].querySelector("video") : null;
+    if(activeVideo) activeVideo.play().catch(()=>{});
   }
 });
 
@@ -434,22 +486,73 @@ window.addEventListener("scroll",()=>{
 function resetVideos(){
   items.forEach((item,i)=>{
     const vid = item.querySelector("video");
+    if(!vid) return;
     vid.pause();
     vid.currentTime=0;
     vid.muted=true;
   });
-  const activeVideo = items[index].querySelector("video");
-  activeVideo.play();
-  activeVideo.muted=false; // só ativa som ao clicar
+  const activeVideo = items[index] ? items[index].querySelector("video") : null;
+  if(activeVideo){
+    activeVideo.play().catch(()=>{});
+    activeVideo.muted=false; // só ativa som ao clicar (comportamento mantido)
+  }
 }
 items.forEach(item=>{
   const vid = item.querySelector("video");
-  vid.addEventListener("click",()=>{
+  if(vid) vid.addEventListener("click",()=>{
     vid.muted = !vid.muted;
   });
 });
 
 updateCarousel();
+
+/* --- GRADIENT POSITION + SCROLL DEPTH EFFECT --- */
+/* O elemento #page-gradient é reposicionado para começar logo abaixo do HERO
+   e seu height cobre do final do hero até o final do documento.
+   Em scroll, ajustamos background-position para dar sensação de profundidade. */
+
+const grad = document.getElementById('page-gradient');
+function updateGradientPosition(){
+  const header = document.querySelector('header');
+  const hero = document.querySelector('.hero');
+  if(!grad || !hero || !header) return;
+
+  // coordenadas absolutas do fim do hero (em relação ao documento)
+  const heroRect = hero.getBoundingClientRect();
+  const heroBottom = window.scrollY + heroRect.top + heroRect.height;
+
+  // define top do grad ao final do hero
+  const top = Math.max(heroBottom, header.offsetHeight); // garante que comece abaixo do header/hero
+  const docHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+  const height = Math.max(docHeight - top, window.innerHeight);
+
+  grad.style.top = top + 'px';
+  grad.style.height = height + 'px';
+}
+
+// atualiza background-position com base no scroll relativo (0..1)
+function updateGradientOnScroll(){
+  if(!grad) return;
+  const docH = document.body.scrollHeight - window.innerHeight;
+  const pct = docH > 0 ? window.scrollY / docH : 0;
+  // multiplique pct para intensificar levemente o deslocamento vertical do background
+  const offsetPct = Math.min(60, pct * 60); // limitado a 60%
+  grad.style.backgroundPosition = 'center ' + offsetPct + '%';
+  // opcional: ajuste a opacidade levemente para dar "aprofundar" no fim
+  // aqui deixei sutil: quanto mais perto do final, mais escuro (reduzimos opacidade do topo)
+  grad.style.opacity = 1; // mantive full opacity para consistência; altere se quiser
+}
+
+// inicializa
+window.addEventListener('load', ()=>{
+  updateGradientPosition();
+  updateGradientOnScroll();
+  // small timeout para garantir que imagens e fontes afetando layout já carregaram
+  setTimeout(()=>{ updateGradientPosition(); updateGradientOnScroll(); }, 300);
+});
+window.addEventListener('resize', ()=>{ updateGradientPosition(); updateGradientOnScroll(); });
+window.addEventListener('scroll', ()=>{ updateGradientOnScroll(); });
+
 </script>
 
 </body>
