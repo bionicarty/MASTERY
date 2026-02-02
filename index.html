@@ -1,559 +1,211 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MASTER English</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projeto Educacional</title>
 
-<!-- Fonte League Spartan -->
-<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Fonte (opcional) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --primary: #3aafa9;   /* teal */
-  --background: #17252a;/* dark professional */
-  --title: #fe5f55;
-  --secondary: #def2f1; /* light cyan */
-  --text: #f5f7f8;      /* very light / gelo */
-  --hero-text-color: #17252a;
-  --grad-top: #F5F7F8;  /* gelo */
-  --grad-mid: #DEF2F1;  /* gelo-ciano */
-  --grad-mid2: #3AAFA9; /* primary teal */
-  --grad-bottom: #17252a;/* dark */
-}
+  <style>
+    :root {
+      --bg-main: #0f172a;
+      --bg-soft: #111827;
+      --accent: #38bdf8;
+      --accent-soft: #0ea5e9;
+      --text-main: #f8fafc;
+      --text-muted: #cbd5f5;
+      --card-bg: rgba(255,255,255,0.06);
+      --blur: blur(14px);
+    }
 
-/* Reset */
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{
-  font-family: "League Spartan",sans-serif;
-  background:var(--background); /* fallback */
-  color:var(--text);
-  line-height:1.5;
-  overflow-x:hidden;
-  scroll-behavior:smooth;
-  position:relative;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
 
-/* --- PAGE GRADIENT (aplica a partir de baixo do HERO até o final) --- */
-#page-gradient{
-  position:fixed;
-  left:0;
-  right:0;
-  top:0;             /* JS vai reposicionar para começar abaixo do hero */
-  height:100vh;      /* JS atualiza para cobrir do hero até o fim */
-  z-index:-2;        /* atrás de tudo */
-  pointer-events:none;
-  background: linear-gradient(
-    180deg,
-    var(--grad-top) 0%,
-    var(--grad-mid) 32%,
-    var(--grad-mid2) 70%,
-    var(--grad-bottom) 100%
-  );
-  background-size: 100% 200%; /* permite deslocamento suave */
-  background-position: center 0%;
-  transition: background-position 0.25s linear, top 0.35s ease, height 0.35s ease, opacity 0.25s linear;
-  opacity:1;
-  will-change: background-position, top, height;
-}
+    body {
+      background: radial-gradient(circle at top, #1e293b, var(--bg-main));
+      color: var(--text-main);
+      overflow-x: hidden;
+    }
 
-/* HEADER */
-header{
-  position:fixed;top:0;left:0;right:0;height:90px;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 60px;
-  background: url("images/header.png") no-repeat center center;
-  background-size: cover;
-  z-index:200;
-  box-shadow:0 2px 10px rgba(0,0,0,.45);
-}
-.logo img{height:60px;display:block}
-nav ul{list-style:none;display:flex;gap:36px;align-items:center}
-nav a{color:var(--text);text-decoration:none;font-weight:500;transition:color .25s}
-nav a:hover{color:var(--primary)}
-nav ul li{position:relative}
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(10px);
+      padding: 18px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-/* HERO (mantive identico ao seu) */
-.hero{
-  margin-top:90px;
-  background: url("images/hero.png") no-repeat center center;
-  background-size:cover;
-  min-height:80vh;
-  display:flex;gap:40px;align-items:center;justify-content:space-between;
-  padding:100px 50px;flex-wrap:wrap;
-  z-index:2; /* acima do gradient */
-}
-.hero-text{max-width:620px}
-.hero-text h1{font-size:88px;color:var(--primary);line-height:1.05;margin-bottom:12px}
-.hero-text h1 span{display:block;font-size:120px;color:var(--title)}
-.hero-text p{font-size:24px;color:var(--hero-text-color);margin-bottom:30px;font-weight:500}
+    header nav a {
+      margin-left: 32px;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 500;
+      transition: color .3s;
+    }
 
-/* Formulário Hero */
-.hero-form{
-  width:400px;background:rgba(0,0,0,.55);padding:36px;border-radius:18px;
-  box-shadow:0 8px 30px rgba(0,0,0,.4);display:flex;flex-direction:column;gap:12px;
-}
-.hero-form label{font-size:12px;color:var(--secondary)}
-.hero-form input{padding:10px;border-radius:8px;border:none;font-size:14px;width:100%}
-.hero-form button{background:var(--title);color:#fff;border:none;padding:10px;border-radius:8px;font-weight:700;cursor:pointer}
+    header nav a:hover {
+      color: var(--accent);
+    }
 
-/* --- SECTIONS FROM HERE ON WILL LET THE GRADIENT SHOW --- */
-/* MASTER */
-.master-section{
-  padding:120px 60px;
-  background: transparent; /* removed background image to let the gradient show */
-  color:var(--text);
-  position:relative;
-  z-index:1;
-}
-.master-container{max-width:1200px;margin:0 auto;display:flex;gap:60px;align-items:flex-start;flex-wrap:wrap}
-.master-text{flex:1;min-width:320px;max-width:620px}
-.master-text h1{color:var(--title);font-size:2.4rem;margin-bottom:18px}
-.master-text ul{list-style:none;padding-left:0}
-.master-text li{color:var(--secondary);font-size:1.05rem;margin-bottom:12px}
-.master-text h3{color:var(--primary);margin-top:18px;margin-bottom:8px}
-.master-text h3.special{color:var(--title)}
+    .hero {
+      min-height: 100vh;
+      padding: 140px 60px 80px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: center;
+    }
 
-.cta-box{flex:0 0 420px;background:rgba(0,0,0,.45);padding:36px;border-radius:16px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:12px}
-.cta-box h3{font-size:1.6rem;color:var(--text)}
-.btn-saiba-mais{background:var(--primary);color:#fff;padding:12px 26px;border-radius:30px;text-decoration:none;font-weight:700;display:inline-block}
+    .hero h1 {
+      font-size: 3.2rem;
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
 
-/* CURSOS */
-#cursos{
-  padding:140px 60px;
-  background: transparent; /* transparent so gradient is visible */
-  display:flex;gap:34px;justify-content:center;flex-wrap:wrap;
-}
-#cursos h2{width:100%;text-align:center;color:var(--title); font-size:3rem;margin-bottom:36px;}
-.course-box{background:#fff;padding:40px 36px;border-radius:16px;max-width:360px;min-width:280px;flex:1;display:flex;flex-direction:column;align-items:center;gap:24px;box-shadow:0 8px 25px rgba(0,0,0,.08)}
-.course-box img{max-width:160px}
-.course-box h3{color:#fe5f55;font-size:1.8rem}
-.course-box p{color:#111; font-size:1.15rem; text-align:center}
-.course-box a.btn-saiba-mais{margin-top:auto}
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      max-width: 520px;
+    }
 
-/* CARROSSEL 3D */
-.testimonials-section{
-  padding:120px 60px;text-align:center;
-  position:relative;
-  border-radius:28px;
-  overflow:visible; /* keep overflow visible for 3D feel */
-  background: transparent; /* let gradient show */
-  z-index:1;
-}
-.testimonials-section h2{
-  color:#fe5f55;
-  font-size:2.8rem;
-  margin-bottom:40px;
-}
+    .hero-buttons a {
+      display: inline-block;
+      margin-right: 16px;
+      padding: 14px 26px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform .2s, box-shadow .2s;
+    }
 
-.testimonials-3d-carousel{
-  perspective:1200px;
-  position:relative;
-  max-width:900px;
-  margin:0 auto;
-  height:520px;
-}
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+      color: #020617;
+    }
 
-.carousel-wrapper{
-  width:100%;
-  height:100%;
-  position:relative;
-  transform-style:preserve-3d;
-}
+    .btn-secondary {
+      border: 1px solid var(--accent);
+      color: var(--accent);
+    }
 
-.carousel-item{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%) scale(0.6);
-  opacity:0.3;
-  filter:blur(3px);
-  border-radius:20px;
-  overflow:hidden;
-  width:250px;
-  height:450px;
-  box-shadow:0 10px 30px rgba(0,0,0,.5);
-  transition: transform 0.6s ease, opacity 0.6s ease, filter 0.6s ease;
-  cursor:pointer;
-  background:#000;
-}
+    .hero-buttons a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(56,189,248,0.25);
+    }
 
-.carousel-item.active{
-  transform:translate(-50%, -50%) scale(1);
-  opacity:1;
-  filter:blur(0);
-  width:300px;
-  height:520px;
-  z-index:2;
-}
+    .hero-image img {
+      width: 100%;
+      border-radius: 24px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.45);
+    }
 
-.carousel-item.prev{
-  transform:translate(calc(-50% - 220px), -50%) scale(0.7);
-  opacity:0.4;
-  filter:blur(3px);
-  z-index:1;
-}
+    /* ===== CARROSSEL 3D ===== */
+    .carousel-section {
+      padding: 120px 0;
+      perspective: 1400px;
+      overflow: hidden;
+    }
 
-.carousel-item.next{
-  transform:translate(calc(-50% + 220px), -50%) scale(0.7);
-  opacity:0.4;
-  filter:blur(3px);
-  z-index:1;
-}
+    .carousel {
+      width: 100%;
+      height: 420px;
+      position: relative;
+      transform-style: preserve-3d;
+    }
 
-.carousel-item video{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  border-radius:20px;
-}
+    .carousel-track {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform-style: preserve-3d;
+      transform: translate(-50%, -50%);
+      transition: transform 1s ease;
+    }
 
-/* Controls */
-.carousel-controls{
-  position:absolute;
-  top:50%;
-  width:100%;
-  display:flex;
-  justify-content:space-between;
-  transform:translateY(-50%);
-  padding:0 20px;
-  pointer-events:none;
-  z-index:3;
-}
-.carousel-btn{
-  pointer-events:auto;
-  background:rgba(0,0,0,0.45);
-  border:none;
-  color:#fff;
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  font-size:24px;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  backdrop-filter:blur(4px);
-  box-shadow:0 6px 18px rgba(0,0,0,.5);
-}
+    .carousel-item {
+      position: absolute;
+      width: 420px;
+      height: 240px;
+      border-radius: 22px;
+      overflow: hidden;
+      background: var(--card-bg);
+      backdrop-filter: var(--blur);
+      box-shadow: 0 30px 70px rgba(0,0,0,0.45);
+      transition: transform .8s ease, opacity .8s ease;
+    }
 
-/* TEACHER LARI */
-.teacher-section{
-  padding:120px 60px;
-  background: transparent; /* let the gradient show and deepen toward the end */
-  position:relative;
-  z-index:1;
-}
-.teacher-container{max-width:1200px;margin:0 auto;display:flex;gap:40px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-.teacher-text{flex:1;min-width:320px}
-.teacher-text h2{color:var(--title);font-size:2rem;margin-bottom:12px}
-.teacher-text p{color:var(--secondary);margin-bottom:12px;line-height:1.75}
-.teacher-text .btn-master{margin-top:12px;background:var(--primary);padding:12px 24px;border-radius:30px;color:#fff;font-weight:700;text-decoration:none;display:inline-block}
+    .carousel-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      cursor: pointer;
+    }
 
-.teacher-photo{
-  width:420px;height:520px;border-radius:18px;background-size:cover;background-position:center;
-  box-shadow:0 20px 60px rgba(0,0,0,.6);flex:0 0 420px;
-  display:flex;align-items:flex-end;justify-content:center;padding:18px;
-  background-color:#0f1516;
-  border:2px solid rgba(255,255,255,.03);
-}
-.teacher-photo .label{
-  width:100%;text-align:left;color:var(--text);font-weight:700;
-  background: linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.45));
-  padding:12px;border-radius:10px;
-}
+    /* ===== POSICIONAMENTO 3D ===== */
+    .item-0 { transform: translateX(-520px) translateZ(-380px) rotateY(25deg); opacity: 0.45; }
+    .item-1 { transform: translateX(-260px) translateZ(-180px) rotateY(15deg); opacity: 0.65; }
+    .item-2 { transform: translateX(0) translateZ(0) rotateY(0deg); opacity: 1; }
+    .item-3 { transform: translateX(260px) translateZ(-180px) rotateY(-15deg); opacity: 0.65; }
+    .item-4 { transform: translateX(520px) translateZ(-380px) rotateY(-25deg); opacity: 0.45; }
 
-/* BOTÃO WHATSAPP FIXO HERO */
-#whatsapp-btn{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  z-index:500;
-  background:#25D366;
-  color:#fff;
-  border:none;
-  border-radius:50%;
-  width:60px;
-  height:60px;
-  font-size:28px;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 6px 18px rgba(0,0,0,.5);
-}
+    /* ===== RESPONSIVO ===== */
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 120px;
+      }
 
-.footer{padding:40px 60px;text-align:center;color:var(--secondary);border-top:1px solid rgba(255,255,255,.04);position:relative;z-index:1}
-
-/* Responsivo (mantive suas regras) */
-@media (max-width:980px){
-  header{padding:0 24px}
-  .hero{padding:48px 20px;flex-direction:column;align-items:flex-start}
-  .hero-form{width:100%}
-  .master-container{flex-direction:column;align-items:center}
-  .cta-box{width:100%}
-  #cursos{padding:60px 20px}
-  .teacher-container{flex-direction:column-reverse;align-items:center}
-  .teacher-photo{width:260px;height:360px}
-}
-@media (max-width:520px){
-  .hero-text h1{font-size:36px}
-  .hero-text h1 span{font-size:60px}
-}
-</style>
+      .carousel-item {
+        width: 300px;
+        height: 180px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- page gradient element (JS reposiciona para começar logo abaixo do hero) -->
-<div id="page-gradient" aria-hidden="true"></div>
-
-<!-- HEADER -->
 <header>
-  <div class="logo"><a href="#"><img src="images/logo.png" alt="Logo MASTER"></a></div>
+  <strong>Projeto</strong>
   <nav>
-    <ul>
-      <li><a href="#">Cursos</a></li>
-      <li><a href="#">Metodologia</a></li>
-      <li><a href="master/teste.html">Teste seu inglês</a></li>
-      <li><a href="blog/index.html">Blog</a></li>
-    </ul>
+    <a href="#metodologia">Metodologia</a>
+    <a href="#projeto">Projeto</a>
+    <a href="#contato">Contato</a>
   </nav>
 </header>
 
-<!-- HERO -->
-<section class="hero" id="top">
-  <div class="hero-text">
-    <h1>Welcome to <span>MASTER</span></h1>
-    <p>Inglês real para quem quer resultados de verdade.</p>
+<section class="hero">
+  <div>
+    <h1>Educação que constrói identidade, não apenas conteúdo.</h1>
+    <p>
+      Um projeto que une língua, pensamento crítico e posicionamento profissional
+      de forma prática, humana e transformadora.
+    </p>
+    <div class="hero-buttons">
+      <a href="https://wa.me/5500000000000" class="btn-primary">Falar no WhatsApp</a>
+      <a href="mailto:contato@email.com" class="btn-secondary">Enviar e-mail</a>
+    </div>
   </div>
 
-  <form class="hero-form" aria-label="Formulário de contato">
-    <label for="nome">Nome completo*</label>
-    <input id="nome" type="text" placeholder="Seu nome" />
-    <label for="email">Seu melhor e-mail*</label>
-    <input id="email" type="email" placeholder="exemplo@email.com" />
-    <label for="celular">Celular*</label>
-    <input id="celular" type="tel" placeholder="(00) 00000-0000" />
-    <label style="font-size:12px;color:var(--secondary)">
-      <input type="checkbox" /> Concordo em receber comunicações da MASTER
-    </label>
-    <button type="button" id="hero-send">QUERO MAIS INFORMAÇÕES</button>
-  </form>
-</section>
-
-<!-- BOTÃO WHATSAPP FIXO -->
-<button id="whatsapp-btn" title="Enviar WhatsApp">📲</button>
-
-<!-- MASTER -->
-<section class="master-section" id="por-que">
-  <div class="master-container">
-    <div class="master-text">
-      <h1>Por que a MASTER?</h1>
-      <ul>
-        <li><strong>Fale inglês desde o primeiro dia.</strong></li>
-        <li><strong>Aulas práticas, dinâmicas e reais.</strong></li>
-        <li><strong>Aprenda fazendo:</strong> conversando, simulando e praticando.</li>
-        <li><strong>Comece de qualquer nível</strong> e siga até a fluência.</li>
-        <li><strong>Foco total em resultados:</strong> fala, escuta e pensamento crítico.</li>
-        <li><strong>Suporte e plataforma exclusivos</strong> para evoluir rápido.</li>
-      </ul>
-
-      <h3 class="special">HealthTalk</h3>
-      <p>Programa exclusivo para profissionais da saúde, com vocabulário técnico, simulações clínicas e comunicação real no hospital.</p>
-    </div>
-
-    <div class="cta-box">
-      <h3>Pronto para começar?</h3>
-      <p>Agende sua aula experimental gratuita e conheça o método MASTER.</p>
-      <a class="btn-saiba-mais" href="#contato">Saiba mais</a>
-    </div>
+  <div class="hero-image">
+    <img src="images/hero.jpg" alt="Imagem principal">
   </div>
 </section>
 
-<!-- CURSOS -->
-<section id="cursos">
-  <h2>Nossos Cursos</h2>
-  <div class="course-box">
-    <img src="images/course1.png" alt="Master Journey" />
-    <h3>Master Journey</h3>
-    <p>Do básico à fluência em 2 anos. Aprenda inglês de forma completa, estruturada e dinâmica.</p>
-    <a href="#contato" class="btn-saiba-mais" style="background:var(--primary)">Saiba mais</a>
-  </div>
-
-  <div class="course-box">
-    <img src="images/course2.png" alt="Master Talk" />
-    <h3>Master Talk</h3>
-    <p>Conversação personalizada, prática intensa e feedback constante.</p>
-    <a href="#contato" class="btn-saiba-mais" style="background:var(--primary)">Saiba mais</a>
-  </div>
-
-  <div class="course-box">
-    <img src="images/course3.png" alt="HealthTalk" />
-    <h3>HealthTalk</h3>
-    <p>Inglês especializado para profissionais da saúde, com simulações clínicas.</p>
-    <a href="#contato" class="btn-saiba-mais" style="background:var(--primary)">Saiba mais</a>
-  </div>
-</section>
-
-<!-- DEPOIMENTOS 3D -->
-<section class="testimonials-section" id="depoimentos">
-  <h2>O que nossos alunos dizem</h2>
-  <div class="testimonials-3d-carousel" id="carousel">
-    <div class="carousel-wrapper">
-      <!-- Você pode adicionar mais .carousel-item aqui; os itens distantes ficam blurados por design -->
-      <div class="carousel-item active"><video src="videos/depo1.mp4" muted></video></div>
-      <div class="carousel-item next"><video src="videos/depo2.mp4" muted></video></div>
-      <div class="carousel-item prev"><video src="videos/depo3.mp4" muted></video></div>
-      <!-- Exemplo de item extra (borrado): -->
-      <!-- <div class="carousel-item"><video src="videos/depo4.mp4" muted></video></div> -->
-    </div>
-    <div class="carousel-controls">
-      <button class="carousel-btn" id="prev">&#10094;</button>
-      <button class="carousel-btn" id="next">&#10095;</button>
-    </div>
-  </div>
-</section>
-
-<!-- TEACHER LARI -->
-<section class="teacher-section" id="teacher">
-  <div class="teacher-container">
-    <div class="teacher-text">
-      <h2>Conheça a Teacher Lari</h2>
-      <p>Com quase 10 anos de experiência na educação, Teacher Lari transforma o aprendizado em algo eficiente, dinâmico e prazeroso, para todas as idades e níveis.
-Ela desenvolveu a Master, seu método exclusivo de inglês, criado para resultados reais e rápidos: com dedicação, qualquer aluno pode concluir seu inglês em até 2 anos. Todo o material foi cuidadosamente planejado para o melhor desenvolvimento dos alunos, focando em inglês da vida real, aplicável no trabalho, na área da saúde, no mundo corporativo e em qualquer contexto profissional.
-Formada na área da saúde e com experiência ensinando alunos universitários de enfermagem, Lari criou o primeiro curso de inglês totalmente voltado para profissionais da saúde, o HealthTalk, ministrado por quem entende do setor. Além disso, oferece cursos personalizados para executivos e profissionais de diversas áreas, todos com a mesma metodologia inovadora, prática e focada em resultados.</p>
-      <a href="#contato" class="btn-master">Agende sua aula</a>
-    </div>
-    <div class="teacher-photo" style="background-image:url('images/teacher.png')">
-      <div class="label">Teacher Lari</div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  © 2025 MASTER English - Todos os direitos reservados
-</footer>
-
-<script>
-// BOTÃO WHATSAPP
-document.getElementById("whatsapp-btn").onclick = function(){
-  window.open("https://wa.me/11982595575","_blank");
-}
-
-// CARROSSEL 3D (mantive seu código)
-const carousel = document.querySelector("#carousel .carousel-wrapper");
-const items = carousel ? carousel.querySelectorAll(".carousel-item") : [];
-let index = 0;
-
-function updateCarousel(){
-  if(!items.length) return;
-  items.forEach((item,i)=>{
-    item.classList.remove("prev","active","next");
-    if(i===index) item.classList.add("active");
-    if(i===index-1 || (index===0 && i===items.length-1)) item.classList.add("prev");
-    if(i===index+1 || (index===items.length-1 && i===0)) item.classList.add("next");
-  });
-}
-
-const prevBtn = document.getElementById("prev");
-const nextBtn = document.getElementById("next");
-if(prevBtn) prevBtn.addEventListener("click",()=>{
-  index = (index-1+items.length)%items.length;
-  updateCarousel();
-  resetVideos();
-});
-if(nextBtn) nextBtn.addEventListener("click",()=>{
-  index = (index+1)%items.length;
-  updateCarousel();
-  resetVideos();
-});
-
-// autoplay ao chegar na seção
-let carouselPlayed = false;
-const carouselSection = document.getElementById("depoimentos");
-window.addEventListener("scroll",()=>{
-  const rect = carouselSection ? carouselSection.getBoundingClientRect() : {top: Infinity};
-  if(!carouselPlayed && rect.top < window.innerHeight){
-    carouselPlayed = true;
-    const activeVideo = items[index] ? items[index].querySelector("video") : null;
-    if(activeVideo) activeVideo.play().catch(()=>{});
-  }
-});
-
-// clicar no vídeo para ativar som
-function resetVideos(){
-  items.forEach((item,i)=>{
-    const vid = item.querySelector("video");
-    if(!vid) return;
-    vid.pause();
-    vid.currentTime=0;
-    vid.muted=true;
-  });
-  const activeVideo = items[index] ? items[index].querySelector("video") : null;
-  if(activeVideo){
-    activeVideo.play().catch(()=>{});
-    activeVideo.muted=false; // só ativa som ao clicar (comportamento mantido)
-  }
-}
-items.forEach(item=>{
-  const vid = item.querySelector("video");
-  if(vid) vid.addEventListener("click",()=>{
-    vid.muted = !vid.muted;
-  });
-});
-
-updateCarousel();
-
-/* --- GRADIENT POSITION + SCROLL DEPTH EFFECT --- */
-/* O elemento #page-gradient é reposicionado para começar logo abaixo do HERO
-   e seu height cobre do final do hero até o final do documento.
-   Em scroll, ajustamos background-position para dar sensação de profundidade. */
-
-const grad = document.getElementById('page-gradient');
-function updateGradientPosition(){
-  const header = document.querySelector('header');
-  const hero = document.querySelector('.hero');
-  if(!grad || !hero || !header) return;
-
-  // coordenadas absolutas do fim do hero (em relação ao documento)
-  const heroRect = hero.getBoundingClientRect();
-  const heroBottom = window.scrollY + heroRect.top + heroRect.height;
-
-  // define top do grad ao final do hero
-  const top = Math.max(heroBottom, header.offsetHeight); // garante que comece abaixo do header/hero
-  const docHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-  const height = Math.max(docHeight - top, window.innerHeight);
-
-  grad.style.top = top + 'px';
-  grad.style.height = height + 'px';
-}
-
-// atualiza background-position com base no scroll relativo (0..1)
-function updateGradientOnScroll(){
-  if(!grad) return;
-  const docH = document.body.scrollHeight - window.innerHeight;
-  const pct = docH > 0 ? window.scrollY / docH : 0;
-  // multiplique pct para intensificar levemente o deslocamento vertical do background
-  const offsetPct = Math.min(60, pct * 60); // limitado a 60%
-  grad.style.backgroundPosition = 'center ' + offsetPct + '%';
-  // opcional: ajuste a opacidade levemente para dar "aprofundar" no fim
-  // aqui deixei sutil: quanto mais perto do final, mais escuro (reduzimos opacidade do topo)
-  grad.style.opacity = 1; // mantive full opacity para consistência; altere se quiser
-}
-
-// inicializa
-window.addEventListener('load', ()=>{
-  updateGradientPosition();
-  updateGradientOnScroll();
-  // small timeout para garantir que imagens e fontes afetando layout já carregaram
-  setTimeout(()=>{ updateGradientPosition(); updateGradientOnScroll(); }, 300);
-});
-window.addEventListener('resize', ()=>{ updateGradientPosition(); updateGradientOnScroll(); });
-window.addEventListener('scroll', ()=>{ updateGradientOnScroll(); });
-
-</script>
-
-</body>
-</html>
+<section class="carousel-section">
+  <div class="carousel">
+    <div class="carousel-track">
+      <div class="carousel-item item-0">
+        <video src="videos/video1.mp
