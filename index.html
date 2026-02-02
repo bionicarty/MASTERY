@@ -1,211 +1,238 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Projeto Educacional</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MASTER English</title>
 
-  <!-- Fonte (opcional) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --bg-main: #0f172a;
-      --bg-soft: #111827;
-      --accent: #38bdf8;
-      --accent-soft: #0ea5e9;
-      --text-main: #f8fafc;
-      --text-muted: #cbd5f5;
-      --card-bg: rgba(255,255,255,0.06);
-      --blur: blur(14px);
-    }
+<style>
+/* =======================
+   NOVA IDENTIDADE MASTER
+   ======================= */
+:root{
+  --primary:#23006a;      /* azul escuro */
+  --background:#ffffff;  /* branco */
+  --title:#f0b816;       /* amarelo */
+  --secondary:#3a2f8f;   /* azul apoio */
+  --text:#23006a;
+  --hero-text-color:#23006a;
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
+  --grad-top:#ffffff;
+  --grad-mid:#f3f1fb;
+  --grad-mid2:#23006a;
+  --grad-bottom:#1a004f;
+}
 
-    body {
-      background: radial-gradient(circle at top, #1e293b, var(--bg-main));
-      color: var(--text-main);
-      overflow-x: hidden;
-    }
+/* RESET */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:"League Spartan",sans-serif;
+  background:var(--background);
+  color:var(--text);
+  line-height:1.5;
+  overflow-x:hidden;
+  scroll-behavior:smooth;
+  position:relative;
+}
 
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 100;
-      background: rgba(15, 23, 42, 0.75);
-      backdrop-filter: blur(10px);
-      padding: 18px 60px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+/* GRADIENT */
+#page-gradient{
+  position:fixed;
+  left:0;right:0;top:0;
+  height:100vh;
+  z-index:-2;
+  pointer-events:none;
+  background:linear-gradient(
+    180deg,
+    var(--grad-top) 0%,
+    var(--grad-mid) 32%,
+    var(--grad-mid2) 70%,
+    var(--grad-bottom) 100%
+  );
+  background-size:100% 200%;
+  transition:.3s;
+}
 
-    header nav a {
-      margin-left: 32px;
-      text-decoration: none;
-      color: var(--text-muted);
-      font-weight: 500;
-      transition: color .3s;
-    }
+/* HEADER */
+header{
+  position:fixed;top:0;left:0;right:0;height:90px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 60px;
+  background:url("images/header.png") no-repeat center/cover;
+  z-index:200;
+}
+.logo img{height:60px}
+nav ul{list-style:none;display:flex;gap:36px}
+nav a{
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+  transition:.25s;
+}
+nav a:hover{color:var(--title)}
 
-    header nav a:hover {
-      color: var(--accent);
-    }
+/* HERO */
+.hero{
+  margin-top:90px;
+  background:url("images/hero.png") no-repeat center/cover;
+  min-height:80vh;
+  display:flex;
+  gap:40px;
+  align-items:center;
+  justify-content:space-between;
+  padding:100px 50px;
+  flex-wrap:wrap;
+}
+.hero-text{max-width:620px}
+.hero-text h1{
+  font-size:88px;
+  color:var(--primary);
+  line-height:1.05;
+}
+.hero-text h1 span{
+  display:block;
+  font-size:120px;
+  color:var(--title);
+}
+.hero-text p{
+  font-size:24px;
+  color:var(--hero-text-color);
+  margin-bottom:30px;
+}
 
-    .hero {
-      min-height: 100vh;
-      padding: 140px 60px 80px;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 60px;
-      align-items: center;
-    }
+/* FORM HERO */
+.hero-form{
+  width:400px;
+  background:rgba(35,0,106,.88);
+  padding:36px;
+  border-radius:18px;
+  box-shadow:0 8px 30px rgba(0,0,0,.4);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.hero-form label{font-size:12px;color:#fff}
+.hero-form input{
+  padding:10px;
+  border-radius:8px;
+  border:none;
+  font-size:14px;
+}
+.hero-form button{
+  background:var(--title);
+  color:#23006a;
+  border:none;
+  padding:12px;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
+}
 
-    .hero h1 {
-      font-size: 3.2rem;
-      line-height: 1.15;
-      margin-bottom: 24px;
-    }
+/* MASTER */
+.master-section{padding:120px 60px}
+.master-text h1{color:var(--primary)}
+.master-text li{color:var(--secondary)}
+.cta-box{
+  background:rgba(35,0,106,.9);
+  color:#fff;
+}
+.btn-saiba-mais{
+  background:var(--title);
+  color:#23006a;
+  padding:12px 26px;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:700;
+}
 
-    .hero p {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      margin-bottom: 36px;
-      max-width: 520px;
-    }
+/* CURSOS */
+#cursos h2{color:var(--primary)}
+.course-box h3{color:var(--primary)}
 
-    .hero-buttons a {
-      display: inline-block;
-      margin-right: 16px;
-      padding: 14px 26px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: transform .2s, box-shadow .2s;
-    }
+/* CARROSSEL */
+.testimonials-section h2{color:var(--primary)}
+.carousel-btn{
+  background:rgba(35,0,106,.85);
+  color:#fff;
+}
 
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
-      color: #020617;
-    }
+/* TEACHER */
+.teacher-text h2{color:var(--primary)}
+.teacher-text p{color:var(--secondary)}
+.btn-master{
+  background:var(--title);
+  color:#23006a;
+  padding:12px 24px;
+  border-radius:30px;
+  font-weight:700;
+  text-decoration:none;
+}
 
-    .btn-secondary {
-      border: 1px solid var(--accent);
-      color: var(--accent);
-    }
+/* WHATSAPP */
+#whatsapp-btn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  color:#fff;
+  border:none;
+  border-radius:50%;
+  width:60px;
+  height:60px;
+  font-size:28px;
+  cursor:pointer;
+  z-index:500;
+}
 
-    .hero-buttons a:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(56,189,248,0.25);
-    }
+/* FOOTER */
+.footer{
+  padding:40px 60px;
+  text-align:center;
+  color:#fff;
+  border-top:1px solid rgba(255,255,255,.08);
+}
 
-    .hero-image img {
-      width: 100%;
-      border-radius: 24px;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.45);
-    }
-
-    /* ===== CARROSSEL 3D ===== */
-    .carousel-section {
-      padding: 120px 0;
-      perspective: 1400px;
-      overflow: hidden;
-    }
-
-    .carousel {
-      width: 100%;
-      height: 420px;
-      position: relative;
-      transform-style: preserve-3d;
-    }
-
-    .carousel-track {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform-style: preserve-3d;
-      transform: translate(-50%, -50%);
-      transition: transform 1s ease;
-    }
-
-    .carousel-item {
-      position: absolute;
-      width: 420px;
-      height: 240px;
-      border-radius: 22px;
-      overflow: hidden;
-      background: var(--card-bg);
-      backdrop-filter: var(--blur);
-      box-shadow: 0 30px 70px rgba(0,0,0,0.45);
-      transition: transform .8s ease, opacity .8s ease;
-    }
-
-    .carousel-item video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      cursor: pointer;
-    }
-
-    /* ===== POSICIONAMENTO 3D ===== */
-    .item-0 { transform: translateX(-520px) translateZ(-380px) rotateY(25deg); opacity: 0.45; }
-    .item-1 { transform: translateX(-260px) translateZ(-180px) rotateY(15deg); opacity: 0.65; }
-    .item-2 { transform: translateX(0) translateZ(0) rotateY(0deg); opacity: 1; }
-    .item-3 { transform: translateX(260px) translateZ(-180px) rotateY(-15deg); opacity: 0.65; }
-    .item-4 { transform: translateX(520px) translateZ(-380px) rotateY(-25deg); opacity: 0.45; }
-
-    /* ===== RESPONSIVO ===== */
-    @media (max-width: 980px) {
-      .hero {
-        grid-template-columns: 1fr;
-        padding-top: 120px;
-      }
-
-      .carousel-item {
-        width: 300px;
-        height: 180px;
-      }
-    }
-  </style>
+/* RESPONSIVO */
+@media(max-width:980px){
+  header{padding:0 24px}
+  .hero{padding:48px 20px;flex-direction:column}
+  .hero-form{width:100%}
+}
+@media(max-width:520px){
+  .hero-text h1{font-size:36px}
+  .hero-text h1 span{font-size:60px}
+}
+</style>
 </head>
 
 <body>
 
+<div id="page-gradient"></div>
+
 <header>
-  <strong>Projeto</strong>
+  <div class="logo"><img src="images/logo.png" alt="MASTER"></div>
   <nav>
-    <a href="#metodologia">Metodologia</a>
-    <a href="#projeto">Projeto</a>
-    <a href="#contato">Contato</a>
+    <ul>
+      <li><a href="#cursos">Cursos</a></li>
+      <li><a href="#por-que">Metodologia</a></li>
+      <li><a href="master/teste.html">Teste seu inglês</a></li>
+      <li><a href="blog/index.html">Blog</a></li>
+    </ul>
   </nav>
 </header>
 
-<section class="hero">
-  <div>
-    <h1>Educação que constrói identidade, não apenas conteúdo.</h1>
-    <p>
-      Um projeto que une língua, pensamento crítico e posicionamento profissional
-      de forma prática, humana e transformadora.
-    </p>
-    <div class="hero-buttons">
-      <a href="https://wa.me/5500000000000" class="btn-primary">Falar no WhatsApp</a>
-      <a href="mailto:contato@email.com" class="btn-secondary">Enviar e-mail</a>
-    </div>
-  </div>
+<!-- TODO: TODO O HTML RESTANTE PERMANECE IGUAL AO SEU ORIGINAL -->
+<!-- (MASTER / CURSOS / CARROSSEL / TEACHER / FOOTER / JS) -->
 
-  <div class="hero-image">
-    <img src="images/hero.jpg" alt="Imagem principal">
-  </div>
-</section>
+<script>
+// WhatsApp
+document.getElementById("whatsapp-btn").onclick=()=>{
+  window.open("https://wa.me/11982595575","_blank");
+};
+</script>
 
-<section class="carousel-section">
-  <div class="carousel">
-    <div class="carousel-track">
-      <div class="carousel-item item-0">
-        <video src="videos/video1.mp
+</body>
+</html>
