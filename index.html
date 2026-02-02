@@ -1,4 +1,3 @@
-<!-- TRECHO INICIAL IGUAL AO SEU -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -10,114 +9,304 @@
 
 <style>
 :root{
-  --primary:#3aafa9;
-  --background:#17252a;
-  --title:#fe5f55;
-  --secondary:#def2f1;
-  --text:#f5f7f8;
-  --hero-text-color:#17252a;
+  --primary:#23006a;
+  --accent:#f0b816;
+  --dark:#23006a;
+  --light:#ffffff;
+  --text-dark:#111111;
+  --text-light:#ffffff;
 }
 
 /* RESET */
 *{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
 body{
   font-family:"League Spartan",sans-serif;
-  background:var(--background);
-  color:var(--text);
+  background:var(--dark);
+  color:var(--text-light);
   overflow-x:hidden;
+  scroll-behavior:smooth;
 }
 
-/* HEADER — apenas clareado levemente */
+/* HEADER */
 header{
-  position:fixed;top:0;left:0;right:0;height:90px;
-  display:flex;justify-content:space-between;align-items:center;
+  position:fixed;
+  top:0;left:0;right:0;
+  height:90px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
   padding:0 60px;
   background:url("images/header.png") center/cover no-repeat;
   z-index:100;
 }
+.logo img{height:60px}
+nav ul{list-style:none;display:flex;gap:36px}
+nav a{
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+}
+nav a:hover{color:var(--accent)}
 
-/* HERO — mantido visual */
+/* HERO */
 .hero{
   margin-top:90px;
   min-height:80vh;
   background:url("images/hero.png") center/cover no-repeat;
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   padding:100px 60px;
+  gap:40px;
+  flex-wrap:wrap;
+}
+.hero-text{max-width:620px}
+.hero-text h1{
+  font-size:88px;
+  color:#fff;
+}
+.hero-text h1 span{
+  display:block;
+  font-size:120px;
+  color:var(--accent);
+}
+.hero-text p{
+  font-size:24px;
+  color:#fff;
+  margin-top:16px;
 }
 
-/* ===== CARROSSEL 3D CORRIGIDO ===== */
+/* FORM */
+.hero-form{
+  width:400px;
+  background:rgba(0,0,0,.55);
+  padding:36px;
+  border-radius:18px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.hero-form label{font-size:12px;color:#fff}
+.hero-form input{
+  padding:12px;
+  border-radius:8px;
+  border:none;
+}
+.hero-form button{
+  background:var(--accent);
+  color:#111;
+  border:none;
+  padding:12px;
+  font-weight:700;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* WHATSAPP HERO */
+#whatsapp-btn{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background:#25D366;
+  color:#fff;
+  font-size:28px;
+  border:none;
+  cursor:pointer;
+  z-index:200;
+}
+
+/* MASTER */
+.master-section{
+  padding:120px 60px;
+}
+.master-container{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  gap:60px;
+  flex-wrap:wrap;
+}
+.master-text{max-width:620px}
+.master-text h1{color:var(--accent);font-size:2.6rem}
+.master-text li{margin:12px 0}
+.cta-box{
+  background:rgba(0,0,0,.4);
+  padding:36px;
+  border-radius:16px;
+  text-align:center;
+}
+.btn-saiba-mais{
+  background:var(--accent);
+  color:#111;
+  padding:12px 28px;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:700;
+}
+
+/* CURSOS */
+#cursos{
+  padding:140px 60px;
+  display:flex;
+  gap:36px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+#cursos h2{
+  width:100%;
+  text-align:center;
+  color:var(--accent);
+  font-size:3rem;
+}
+.course-box{
+  background:#fff;
+  color:#111;
+  padding:36px;
+  border-radius:16px;
+  max-width:360px;
+  text-align:center;
+}
+.course-box h3{color:var(--primary)}
+.course-box a{margin-top:20px;display:inline-block}
+
+/* DEPOIMENTOS 3D */
+.testimonials-section{
+  padding:120px 60px;
+  text-align:center;
+}
+.testimonials-section h2{
+  color:var(--accent);
+  font-size:2.8rem;
+  margin-bottom:40px;
+}
 .testimonials-3d-carousel{
-  perspective:1400px;
-  height:520px;
   position:relative;
+  height:520px;
+  max-width:900px;
+  margin:auto;
+  perspective:1200px;
 }
-
+.carousel-wrapper{
+  position:relative;
+  height:100%;
+  transform-style:preserve-3d;
+}
 .carousel-item{
   position:absolute;
   top:50%;left:50%;
-  width:300px;height:520px;
-  transform-style:preserve-3d;
-  transition:all .6s ease;
-  opacity:.4;
-  filter:blur(4px);
+  transform:translate(-50%,-50%) scale(.6);
+  opacity:.3;
+  filter:blur(3px);
+  width:250px;height:450px;
+  border-radius:20px;
+  overflow:hidden;
+  transition:.6s;
 }
-
-/* FIX: perspectiva circular real */
 .carousel-item.active{
-  transform:translate(-50%,-50%) translateZ(300px);
+  transform:translate(-50%,-50%) scale(1);
   opacity:1;
   filter:none;
-  z-index:3;
+  z-index:2;
 }
 .carousel-item.prev{
-  transform:translate(-50%,-50%) rotateY(35deg) translateZ(0);
+  transform:translate(calc(-50% - 220px),-50%) scale(.7);
 }
 .carousel-item.next{
-  transform:translate(-50%,-50%) rotateY(-35deg) translateZ(0);
+  transform:translate(calc(-50% + 220px),-50%) scale(.7);
 }
-
-/* VIDEO */
 .carousel-item video{
-  width:100%;height:100%;
+  width:100%;
+  height:100%;
   object-fit:cover;
-  border-radius:20px;
 }
 
-/* RESPONSIVO — sem encolher hero */
-@media(max-width:900px){
-  .hero{
-    flex-direction:column;
-    padding:80px 20px;
-  }
+/* CONTROLES */
+.carousel-controls{
+  position:absolute;
+  top:50%;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  transform:translateY(-50%);
+}
+.carousel-btn{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:none;
+  background:rgba(0,0,0,.5);
+  color:#fff;
+  font-size:24px;
+  cursor:pointer;
+}
+
+/* TEACHER */
+.teacher-section{
+  padding:120px 60px;
+}
+.teacher-container{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  gap:40px;
+  flex-wrap:wrap;
+}
+.teacher-photo{
+  width:420px;
+  height:520px;
+  background:url("images/teacher.png") center/cover no-repeat;
+  border-radius:18px;
+}
+
+/* FOOTER */
+footer{
+  padding:40px;
+  text-align:center;
+  color:#fff;
 }
 </style>
 </head>
+
 <body>
 
-<!-- TODO O RESTANTE DO HTML É IGUAL AO SEU -->
-<!-- JS do carrossel ajustado para autoplay muted + click ativa som -->
-<script>
-const items=document.querySelectorAll(".carousel-item");
-let index=0;
+<header>
+  <div class="logo"><img src="images/logo.png"></div>
+  <nav>
+    <ul>
+      <li><a href="#">Cursos</a></li>
+      <li><a href="#">Metodologia</a></li>
+      <li><a href="#">Teste seu inglês</a></li>
+      <li><a href="#">Blog</a></li>
+    </ul>
+  </nav>
+</header>
 
-function update(){
- items.forEach((el,i)=>{
-  el.className="carousel-item";
-  if(i===index) el.classList.add("active");
-  if(i===index-1) el.classList.add("prev");
-  if(i===index+1) el.classList.add("next");
- });
-}
-update();
+<section class="hero">
+  <div class="hero-text">
+    <h1>Welcome to <span>MASTER</span></h1>
+    <p>Inglês real para quem quer resultados de verdade.</p>
+  </div>
 
-items.forEach(item=>{
- const v=item.querySelector("video");
- v.muted=true;
- item.onclick=()=>v.muted=false;
-});
-</script>
+  <form class="hero-form">
+    <label>Nome completo</label>
+    <input>
+    <label>Email</label>
+    <input>
+    <label>Celular</label>
+    <input>
+    <button>QUERO MAIS INFORMAÇÕES</button>
+  </form>
+</section>
+
+<button id="whatsapp-btn" onclick="window.open('https://wa.me/11982595575')">📲</button>
+
+<footer>
+  © 2025 MASTER English
+</footer>
 
 </body>
 </html>
