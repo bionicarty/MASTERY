@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MASTER English</title>
 
+<!-- Fonte League Spartan -->
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -15,216 +16,195 @@
   --light:#ffffff;
   --text-dark:#111111;
   --text-light:#ffffff;
-}
 
-/* RESET */
-*{margin:0;padding:0;box-sizing:border-box}
+/* Reset */
+*{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{
-  font-family:"League Spartan",sans-serif;
-  background:var(--dark);
-  color:var(--text-light);
+  font-family: "League Spartan",sans-serif;
+  background:var(--background); /* fallback */
+  color:var(--text);
+  line-height:1.5;
   overflow-x:hidden;
   scroll-behavior:smooth;
+  position:relative;
+}
+
+/* --- PAGE GRADIENT (aplica a partir de baixo do HERO até o final) --- */
+#page-gradient{
+  position:fixed;
+  left:0;
+  right:0;
+  top:0;             /* JS vai reposicionar para começar abaixo do hero */
+  height:100vh;      /* JS atualiza para cobrir do hero até o fim */
+  z-index:-2;        /* atrás de tudo */
+  pointer-events:none;
+  background: linear-gradient(
+    180deg,
+    var(--grad-top) 0%,
+    var(--grad-mid) 32%,
+    var(--grad-mid2) 70%,
+    var(--grad-bottom) 100%
+  );
+  background-size: 100% 200%; /* permite deslocamento suave */
+  background-position: center 0%;
+  transition: background-position 0.25s linear, top 0.35s ease, height 0.35s ease, opacity 0.25s linear;
+  opacity:1;
+  will-change: background-position, top, height;
 }
 
 /* HEADER */
 header{
-  position:fixed;
-  top:0;left:0;right:0;
-  height:90px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  position:fixed;top:0;left:0;right:0;height:90px;
+  display:flex;align-items:center;justify-content:space-between;
   padding:0 60px;
-  background:url("images/header.png") center/cover no-repeat;
-  z-index:100;
+  background: url("images/header.png") no-repeat center center;
+  background-size: cover;
+  z-index:200;
+  box-shadow:0 2px 10px rgba(0,0,0,.45);
 }
-.logo img{height:60px}
-nav ul{list-style:none;display:flex;gap:36px}
-nav a{
-  color:#fff;
-  text-decoration:none;
-  font-weight:600;
-}
-nav a:hover{color:var(--accent)}
+.logo img{height:60px;display:block}
+nav ul{list-style:none;display:flex;gap:36px;align-items:center}
+nav a{color:var(--text);text-decoration:none;font-weight:500;transition:color .25s}
+nav a:hover{color:var(--primary)}
+nav ul li{position:relative}
 
-/* HERO */
+/* HERO (mantive identico ao seu) */
 .hero{
   margin-top:90px;
+  background: url("images/hero.png") no-repeat center center;
+  background-size:cover;
   min-height:80vh;
-  background:url("images/hero.png") center/cover no-repeat;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:100px 60px;
-  gap:40px;
-  flex-wrap:wrap;
+  display:flex;gap:40px;align-items:center;justify-content:space-between;
+  padding:100px 50px;flex-wrap:wrap;
+  z-index:2; /* acima do gradient */
 }
 .hero-text{max-width:620px}
-.hero-text h1{
-  font-size:88px;
-  color:#fff;
-}
-.hero-text h1 span{
-  display:block;
-  font-size:120px;
-  color:var(--accent);
-}
-.hero-text p{
-  font-size:24px;
-  color:#fff;
-  margin-top:16px;
-}
+.hero-text h1{font-size:88px;color:var(--primary);line-height:1.05;margin-bottom:12px}
+.hero-text h1 span{display:block;font-size:120px;color:var(--title)}
+.hero-text p{font-size:24px;color:var(--hero-text-color);margin-bottom:30px;font-weight:500}
 
-/* FORM */
+/* Formulário Hero */
 .hero-form{
-  width:400px;
-  background:rgba(0,0,0,.55);
-  padding:36px;
-  border-radius:18px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
+  width:400px;background:rgba(0,0,0,.55);padding:36px;border-radius:18px;
+  box-shadow:0 8px 30px rgba(0,0,0,.4);display:flex;flex-direction:column;gap:12px;
 }
-.hero-form label{font-size:12px;color:#fff}
-.hero-form input{
-  padding:12px;
-  border-radius:8px;
-  border:none;
-}
-.hero-form button{
-  background:var(--accent);
-  color:#111;
-  border:none;
-  padding:12px;
-  font-weight:700;
-  border-radius:8px;
-  cursor:pointer;
-}
+.hero-form label{font-size:12px;color:var(--secondary)}
+.hero-form input{padding:10px;border-radius:8px;border:none;font-size:14px;width:100%}
+.hero-form button{background:var(--title);color:#fff;border:none;padding:10px;border-radius:8px;font-weight:700;cursor:pointer}
 
-/* WHATSAPP HERO */
-#whatsapp-btn{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  background:#25D366;
-  color:#fff;
-  font-size:28px;
-  border:none;
-  cursor:pointer;
-  z-index:200;
-}
-
+/* --- SECTIONS FROM HERE ON WILL LET THE GRADIENT SHOW --- */
 /* MASTER */
 .master-section{
   padding:120px 60px;
+  background: transparent; /* removed background image to let the gradient show */
+  color:var(--text);
+  position:relative;
+  z-index:1;
 }
-.master-container{
-  max-width:1200px;
-  margin:auto;
-  display:flex;
-  gap:60px;
-  flex-wrap:wrap;
-}
-.master-text{max-width:620px}
-.master-text h1{color:var(--accent);font-size:2.6rem}
-.master-text li{margin:12px 0}
-.cta-box{
-  background:rgba(0,0,0,.4);
-  padding:36px;
-  border-radius:16px;
-  text-align:center;
-}
-.btn-saiba-mais{
-  background:var(--accent);
-  color:#111;
-  padding:12px 28px;
-  border-radius:30px;
-  text-decoration:none;
-  font-weight:700;
-}
+.master-container{max-width:1200px;margin:0 auto;display:flex;gap:60px;align-items:flex-start;flex-wrap:wrap}
+.master-text{flex:1;min-width:320px;max-width:620px}
+.master-text h1{color:var(--title);font-size:2.4rem;margin-bottom:18px}
+.master-text ul{list-style:none;padding-left:0}
+.master-text li{color:var(--secondary);font-size:1.05rem;margin-bottom:12px}
+.master-text h3{color:var(--primary);margin-top:18px;margin-bottom:8px}
+.master-text h3.special{color:var(--title)}
+
+.cta-box{flex:0 0 420px;background:rgba(0,0,0,.45);padding:36px;border-radius:16px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:12px}
+.cta-box h3{font-size:1.6rem;color:var(--text)}
+.btn-saiba-mais{background:var(--primary);color:#fff;padding:12px 26px;border-radius:30px;text-decoration:none;font-weight:700;display:inline-block}
 
 /* CURSOS */
 #cursos{
   padding:140px 60px;
-  display:flex;
-  gap:36px;
-  flex-wrap:wrap;
-  justify-content:center;
+  background: transparent; /* transparent so gradient is visible */
+  display:flex;gap:34px;justify-content:center;flex-wrap:wrap;
 }
-#cursos h2{
-  width:100%;
-  text-align:center;
-  color:var(--accent);
-  font-size:3rem;
-}
-.course-box{
-  background:#fff;
-  color:#111;
-  padding:36px;
-  border-radius:16px;
-  max-width:360px;
-  text-align:center;
-}
-.course-box h3{color:var(--primary)}
-.course-box a{margin-top:20px;display:inline-block}
+#cursos h2{width:100%;text-align:center;color:var(--title); font-size:3rem;margin-bottom:36px;}
+.course-box{background:#fff;padding:40px 36px;border-radius:16px;max-width:360px;min-width:280px;flex:1;display:flex;flex-direction:column;align-items:center;gap:24px;box-shadow:0 8px 25px rgba(0,0,0,.08)}
+.course-box img{max-width:160px}
+.course-box h3{color:#fe5f55;font-size:1.8rem}
+.course-box p{color:#111; font-size:1.15rem; text-align:center}
+.course-box a.btn-saiba-mais{margin-top:auto}
 
-/* DEPOIMENTOS 3D */
+/* CARROSSEL 3D */
 .testimonials-section{
-  padding:120px 60px;
-  text-align:center;
+  padding:120px 60px;text-align:center;
+  position:relative;
+  border-radius:28px;
+  overflow:visible; /* keep overflow visible for 3D feel */
+  background: transparent; /* let gradient show */
+  z-index:1;
 }
 .testimonials-section h2{
-  color:var(--accent);
+  color:#fe5f55;
   font-size:2.8rem;
   margin-bottom:40px;
 }
+
 .testimonials-3d-carousel{
-  position:relative;
-  height:520px;
-  max-width:900px;
-  margin:auto;
   perspective:1200px;
-}
-.carousel-wrapper{
   position:relative;
+  max-width:900px;
+  margin:0 auto;
+  height:520px;
+}
+
+.carousel-wrapper{
+  width:100%;
   height:100%;
+  position:relative;
   transform-style:preserve-3d;
 }
+
 .carousel-item{
   position:absolute;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%) scale(.6);
-  opacity:.3;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%) scale(0.6);
+  opacity:0.3;
   filter:blur(3px);
-  width:250px;height:450px;
   border-radius:20px;
   overflow:hidden;
-  transition:.6s;
+  width:250px;
+  height:450px;
+  box-shadow:0 10px 30px rgba(0,0,0,.5);
+  transition: transform 0.6s ease, opacity 0.6s ease, filter 0.6s ease;
+  cursor:pointer;
+  background:#000;
 }
+
 .carousel-item.active{
-  transform:translate(-50%,-50%) scale(1);
+  transform:translate(-50%, -50%) scale(1);
   opacity:1;
-  filter:none;
+  filter:blur(0);
+  width:300px;
+  height:520px;
   z-index:2;
 }
+
 .carousel-item.prev{
-  transform:translate(calc(-50% - 220px),-50%) scale(.7);
+  transform:translate(calc(-50% - 220px), -50%) scale(0.7);
+  opacity:0.4;
+  filter:blur(3px);
+  z-index:1;
 }
+
 .carousel-item.next{
-  transform:translate(calc(-50% + 220px),-50%) scale(.7);
+  transform:translate(calc(-50% + 220px), -50%) scale(0.7);
+  opacity:0.4;
+  filter:blur(3px);
+  z-index:1;
 }
+
 .carousel-item video{
   width:100%;
   height:100%;
   object-fit:cover;
+  border-radius:20px;
 }
 
-/* CONTROLES */
+/* Controls */
 .carousel-controls{
   position:absolute;
   top:50%;
@@ -232,81 +212,343 @@ nav a:hover{color:var(--accent)}
   display:flex;
   justify-content:space-between;
   transform:translateY(-50%);
+  padding:0 20px;
+  pointer-events:none;
+  z-index:3;
 }
 .carousel-btn{
+  pointer-events:auto;
+  background:rgba(0,0,0,0.45);
+  border:none;
+  color:#fff;
   width:42px;
   height:42px;
   border-radius:50%;
-  border:none;
-  background:rgba(0,0,0,.5);
-  color:#fff;
   font-size:24px;
   cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  backdrop-filter:blur(4px);
+  box-shadow:0 6px 18px rgba(0,0,0,.5);
 }
 
-/* TEACHER */
+/* TEACHER LARI */
 .teacher-section{
   padding:120px 60px;
+  background: transparent; /* let the gradient show and deepen toward the end */
+  position:relative;
+  z-index:1;
 }
-.teacher-container{
-  max-width:1200px;
-  margin:auto;
-  display:flex;
-  gap:40px;
-  flex-wrap:wrap;
-}
+.teacher-container{max-width:1200px;margin:0 auto;display:flex;gap:40px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.teacher-text{flex:1;min-width:320px}
+.teacher-text h2{color:var(--title);font-size:2rem;margin-bottom:12px}
+.teacher-text p{color:var(--secondary);margin-bottom:12px;line-height:1.75}
+.teacher-text .btn-master{margin-top:12px;background:var(--primary);padding:12px 24px;border-radius:30px;color:#fff;font-weight:700;text-decoration:none;display:inline-block}
+
 .teacher-photo{
-  width:420px;
-  height:520px;
-  background:url("images/teacher.png") center/cover no-repeat;
-  border-radius:18px;
+  width:420px;height:520px;border-radius:18px;background-size:cover;background-position:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);flex:0 0 420px;
+  display:flex;align-items:flex-end;justify-content:center;padding:18px;
+  background-color:#0f1516;
+  border:2px solid rgba(255,255,255,.03);
+}
+.teacher-photo .label{
+  width:100%;text-align:left;color:var(--text);font-weight:700;
+  background: linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.45));
+  padding:12px;border-radius:10px;
 }
 
-/* FOOTER */
-footer{
-  padding:40px;
-  text-align:center;
+/* BOTÃO WHATSAPP FIXO HERO */
+#whatsapp-btn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  z-index:500;
+  background:#25D366;
   color:#fff;
+  border:none;
+  border-radius:50%;
+  width:60px;
+  height:60px;
+  font-size:28px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 6px 18px rgba(0,0,0,.5);
+}
+
+.footer{padding:40px 60px;text-align:center;color:var(--secondary);border-top:1px solid rgba(255,255,255,.04);position:relative;z-index:1}
+
+/* Responsivo (mantive suas regras) */
+@media (max-width:980px){
+  header{padding:0 24px}
+  .hero{padding:48px 20px;flex-direction:column;align-items:flex-start}
+  .hero-form{width:100%}
+  .master-container{flex-direction:column;align-items:center}
+  .cta-box{width:100%}
+  #cursos{padding:60px 20px}
+  .teacher-container{flex-direction:column-reverse;align-items:center}
+  .teacher-photo{width:260px;height:360px}
+}
+@media (max-width:520px){
+  .hero-text h1{font-size:36px}
+  .hero-text h1 span{font-size:60px}
 }
 </style>
 </head>
-
 <body>
 
+<!-- page gradient element (JS reposiciona para começar logo abaixo do hero) -->
+<div id="page-gradient" aria-hidden="true"></div>
+
+<!-- HEADER -->
 <header>
-  <div class="logo"><img src="images/logo.png"></div>
+  <div class="logo"><a href="#"><img src="images/logo.png" alt="Logo MASTER"></a></div>
   <nav>
     <ul>
       <li><a href="#">Cursos</a></li>
       <li><a href="#">Metodologia</a></li>
-      <li><a href="#">Teste seu inglês</a></li>
-      <li><a href="#">Blog</a></li>
+      <li><a href="master/teste.html">Teste seu inglês</a></li>
+      <li><a href="blog/index.html">Blog</a></li>
     </ul>
   </nav>
 </header>
 
-<section class="hero">
+<!-- HERO -->
+<section class="hero" id="top">
   <div class="hero-text">
     <h1>Welcome to <span>MASTER</span></h1>
     <p>Inglês real para quem quer resultados de verdade.</p>
   </div>
 
-  <form class="hero-form">
-    <label>Nome completo</label>
-    <input>
-    <label>Email</label>
-    <input>
-    <label>Celular</label>
-    <input>
-    <button>QUERO MAIS INFORMAÇÕES</button>
+  <form class="hero-form" aria-label="Formulário de contato">
+    <label for="nome">Nome completo*</label>
+    <input id="nome" type="text" placeholder="Seu nome" />
+    <label for="email">Seu melhor e-mail*</label>
+    <input id="email" type="email" placeholder="exemplo@email.com" />
+    <label for="celular">Celular*</label>
+    <input id="celular" type="tel" placeholder="(00) 00000-0000" />
+    <label style="font-size:12px;color:var(--secondary)">
+      <input type="checkbox" /> Concordo em receber comunicações da MASTER
+    </label>
+    <button type="button" id="hero-send">QUERO MAIS INFORMAÇÕES</button>
   </form>
 </section>
 
-<button id="whatsapp-btn" onclick="window.open('https://wa.me/11982595575')">📲</button>
+<!-- BOTÃO WHATSAPP FIXO -->
+<button id="whatsapp-btn" title="Enviar WhatsApp">📲</button>
 
-<footer>
-  © 2025 MASTER English
+<!-- MASTER -->
+<section class="master-section" id="por-que">
+  <div class="master-container">
+    <div class="master-text">
+      <h1>Por que a MASTER?</h1>
+      <ul>
+        <li><strong>Fale inglês desde o primeiro dia.</strong></li>
+        <li><strong>Aulas práticas, dinâmicas e reais.</strong></li>
+        <li><strong>Aprenda fazendo:</strong> conversando, simulando e praticando.</li>
+        <li><strong>Comece de qualquer nível</strong> e siga até a fluência.</li>
+        <li><strong>Foco total em resultados:</strong> fala, escuta e pensamento crítico.</li>
+        <li><strong>Suporte e plataforma exclusivos</strong> para evoluir rápido.</li>
+      </ul>
+
+      <h3 class="special">HealthTalk</h3>
+      <p>Programa exclusivo para profissionais da saúde, com vocabulário técnico, simulações clínicas e comunicação real no hospital.</p>
+    </div>
+
+    <div class="cta-box">
+      <h3>Pronto para começar?</h3>
+      <p>Agende sua aula experimental gratuita e conheça o método MASTER.</p>
+      <a class="btn-saiba-mais" href="#contato">Saiba mais</a>
+    </div>
+  </div>
+</section>
+
+<!-- CURSOS -->
+<section id="cursos">
+  <h2>Nossos Cursos</h2>
+  <div class="course-box">
+    <img src="images/course1.png" alt="Master Journey" />
+    <h3>Master Journey</h3>
+    <p>Do básico à fluência em 2 anos. Aprenda inglês de forma completa, estruturada e dinâmica.</p>
+    <a href="#contato" class="btn-saiba-mais" style="background:var(--primary)">Saiba mais</a>
+  </div>
+
+  <div class="course-box">
+    <img src="images/course2.png" alt="Master Talk" />
+    <h3>Master Talk</h3>
+    <p>Conversação personalizada, prática intensa e feedback constante.</p>
+    <a href="#contato" class="btn-saiba-mais" style="background:var(--primary)">Saiba mais</a>
+  </div>
+
+  <div class="course-box">
+    <img src="images/course3.png" alt="HealthTalk" />
+    <h3>HealthTalk</h3>
+    <p>Inglês especializado para profissionais da saúde, com simulações clínicas.</p>
+    <a href="#contato" class="btn-saiba-mais" style="background:var(--primary)">Saiba mais</a>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS 3D -->
+<section class="testimonials-section" id="depoimentos">
+  <h2>O que nossos alunos dizem</h2>
+  <div class="testimonials-3d-carousel" id="carousel">
+    <div class="carousel-wrapper">
+      <!-- Você pode adicionar mais .carousel-item aqui; os itens distantes ficam blurados por design -->
+      <div class="carousel-item active"><video src="videos/depo1.mp4" muted></video></div>
+      <div class="carousel-item next"><video src="videos/depo2.mp4" muted></video></div>
+      <div class="carousel-item prev"><video src="videos/depo3.mp4" muted></video></div>
+      <!-- Exemplo de item extra (borrado): -->
+      <!-- <div class="carousel-item"><video src="videos/depo4.mp4" muted></video></div> -->
+    </div>
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="prev">&#10094;</button>
+      <button class="carousel-btn" id="next">&#10095;</button>
+    </div>
+  </div>
+</section>
+
+<!-- TEACHER LARI -->
+<section class="teacher-section" id="teacher">
+  <div class="teacher-container">
+    <div class="teacher-text">
+      <h2>Conheça a Teacher Lari</h2>
+      <p>Com quase 10 anos de experiência na educação, Teacher Lari transforma o aprendizado em algo eficiente, dinâmico e prazeroso, para todas as idades e níveis.
+Ela desenvolveu a Master, seu método exclusivo de inglês, criado para resultados reais e rápidos: com dedicação, qualquer aluno pode concluir seu inglês em até 2 anos. Todo o material foi cuidadosamente planejado para o melhor desenvolvimento dos alunos, focando em inglês da vida real, aplicável no trabalho, na área da saúde, no mundo corporativo e em qualquer contexto profissional.
+Formada na área da saúde e com experiência ensinando alunos universitários de enfermagem, Lari criou o primeiro curso de inglês totalmente voltado para profissionais da saúde, o HealthTalk, ministrado por quem entende do setor. Além disso, oferece cursos personalizados para executivos e profissionais de diversas áreas, todos com a mesma metodologia inovadora, prática e focada em resultados.</p>
+      <a href="#contato" class="btn-master">Agende sua aula</a>
+    </div>
+    <div class="teacher-photo" style="background-image:url('images/teacher.png')">
+      <div class="label">Teacher Lari</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  © 2025 MASTER English - Todos os direitos reservados
 </footer>
+
+<script>
+// BOTÃO WHATSAPP
+document.getElementById("whatsapp-btn").onclick = function(){
+  window.open("https://wa.me/11982595575","_blank");
+}
+
+// CARROSSEL 3D (mantive seu código)
+const carousel = document.querySelector("#carousel .carousel-wrapper");
+const items = carousel ? carousel.querySelectorAll(".carousel-item") : [];
+let index = 0;
+
+function updateCarousel(){
+  if(!items.length) return;
+  items.forEach((item,i)=>{
+    item.classList.remove("prev","active","next");
+    if(i===index) item.classList.add("active");
+    if(i===index-1 || (index===0 && i===items.length-1)) item.classList.add("prev");
+    if(i===index+1 || (index===items.length-1 && i===0)) item.classList.add("next");
+  });
+}
+
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+if(prevBtn) prevBtn.addEventListener("click",()=>{
+  index = (index-1+items.length)%items.length;
+  updateCarousel();
+  resetVideos();
+});
+if(nextBtn) nextBtn.addEventListener("click",()=>{
+  index = (index+1)%items.length;
+  updateCarousel();
+  resetVideos();
+});
+
+// autoplay ao chegar na seção
+let carouselPlayed = false;
+const carouselSection = document.getElementById("depoimentos");
+window.addEventListener("scroll",()=>{
+  const rect = carouselSection ? carouselSection.getBoundingClientRect() : {top: Infinity};
+  if(!carouselPlayed && rect.top < window.innerHeight){
+    carouselPlayed = true;
+    const activeVideo = items[index] ? items[index].querySelector("video") : null;
+    if(activeVideo) activeVideo.play().catch(()=>{});
+  }
+});
+
+// clicar no vídeo para ativar som
+function resetVideos(){
+  items.forEach((item,i)=>{
+    const vid = item.querySelector("video");
+    if(!vid) return;
+    vid.pause();
+    vid.currentTime=0;
+    vid.muted=true;
+  });
+  const activeVideo = items[index] ? items[index].querySelector("video") : null;
+  if(activeVideo){
+    activeVideo.play().catch(()=>{});
+    activeVideo.muted=false; // só ativa som ao clicar (comportamento mantido)
+  }
+}
+items.forEach(item=>{
+  const vid = item.querySelector("video");
+  if(vid) vid.addEventListener("click",()=>{
+    vid.muted = !vid.muted;
+  });
+});
+
+updateCarousel();
+
+/* --- GRADIENT POSITION + SCROLL DEPTH EFFECT --- */
+/* O elemento #page-gradient é reposicionado para começar logo abaixo do HERO
+   e seu height cobre do final do hero até o final do documento.
+   Em scroll, ajustamos background-position para dar sensação de profundidade. */
+
+const grad = document.getElementById('page-gradient');
+function updateGradientPosition(){
+  const header = document.querySelector('header');
+  const hero = document.querySelector('.hero');
+  if(!grad || !hero || !header) return;
+
+  // coordenadas absolutas do fim do hero (em relação ao documento)
+  const heroRect = hero.getBoundingClientRect();
+  const heroBottom = window.scrollY + heroRect.top + heroRect.height;
+
+  // define top do grad ao final do hero
+  const top = Math.max(heroBottom, header.offsetHeight); // garante que comece abaixo do header/hero
+  const docHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+  const height = Math.max(docHeight - top, window.innerHeight);
+
+  grad.style.top = top + 'px';
+  grad.style.height = height + 'px';
+}
+
+// atualiza background-position com base no scroll relativo (0..1)
+function updateGradientOnScroll(){
+  if(!grad) return;
+  const docH = document.body.scrollHeight - window.innerHeight;
+  const pct = docH > 0 ? window.scrollY / docH : 0;
+  // multiplique pct para intensificar levemente o deslocamento vertical do background
+  const offsetPct = Math.min(60, pct * 60); // limitado a 60%
+  grad.style.backgroundPosition = 'center ' + offsetPct + '%';
+  // opcional: ajuste a opacidade levemente para dar "aprofundar" no fim
+  // aqui deixei sutil: quanto mais perto do final, mais escuro (reduzimos opacidade do topo)
+  grad.style.opacity = 1; // mantive full opacity para consistência; altere se quiser
+}
+
+// inicializa
+window.addEventListener('load', ()=>{
+  updateGradientPosition();
+  updateGradientOnScroll();
+  // small timeout para garantir que imagens e fontes afetando layout já carregaram
+  setTimeout(()=>{ updateGradientPosition(); updateGradientOnScroll(); }, 300);
+});
+window.addEventListener('resize', ()=>{ updateGradientPosition(); updateGradientOnScroll(); });
+window.addEventListener('scroll', ()=>{ updateGradientOnScroll(); });
+
+</script>
 
 </body>
 </html>
