@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MASTERY English</title>
 
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700&display=swap" rel="stylesheet">
@@ -11,181 +11,299 @@
 :root{
 --primary:#23006a;
 --accent:#f0b816;
---dark:#23006a;
---light:#ffffff;
---text-dark:#111111;
---text-light:#ffffff;
-
---title:#23006a;
---secondary:#444444;
---background:#ffffff;
---text:#111111;
-
---grad-top:#ffffff;
---grad-mid:#f3f1ff;
---grad-mid2:#e5e0ff;
---grad-bottom:#23006a;
+--white:#ffffff;
+--black:#111111;
 }
 
-/* RESET */
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
+*{margin:0;padding:0;box-sizing:border-box}
+
 body{
 font-family:"League Spartan",sans-serif;
-background:var(--background);
-color:var(--text);
-line-height:1.5;
+background:#ffffff;
+color:#111111;
 overflow-x:hidden;
-}
-
-/* PAGE GRADIENT */
-#page-gradient{
-position:fixed;
-left:0;right:0;
-z-index:-2;
-pointer-events:none;
-background:linear-gradient(
-180deg,
-var(--grad-top) 0%,
-var(--grad-mid) 30%,
-var(--grad-mid2) 65%,
-var(--grad-bottom) 100%
-);
-background-size:100% 200%;
 }
 
 /* HEADER */
 header{
 position:fixed;
-top:0;left:0;right:0;
+top:0;
+left:0;
+right:0;
 height:90px;
+padding:0 60px;
 display:flex;
 align-items:center;
 justify-content:space-between;
-padding:0 60px;
 background:url("images/header.png") center/cover no-repeat;
-z-index:200;
-box-shadow:0 2px 10px rgba(0,0,0,.4);
+z-index:100;
 }
+
 .logo img{height:60px}
-nav ul{list-style:none;display:flex;gap:36px}
-nav a{color:#fff;text-decoration:none;font-weight:500}
+
+nav ul{
+list-style:none;
+display:flex;
+gap:36px;
+}
+
+nav a{
+color:#ffffff;
+text-decoration:none;
+font-weight:600;
+transition:opacity .25s;
+}
+
+nav a:hover{opacity:.6}
 
 /* HERO */
 .hero{
 margin-top:90px;
-min-height:80vh;
+min-height:90vh;
 padding:100px 60px;
-background:url("images/hero.png") center/cover no-repeat;
 display:flex;
-gap:40px;
 align-items:center;
 justify-content:space-between;
+gap:60px;
+background:url("images/hero.png") center/cover no-repeat;
 flex-wrap:wrap;
-position:relative;
-z-index:2;
 }
-.hero-text{max-width:620px}
-.hero-text h1{font-size:88px;color:var(--primary);line-height:1}
-.hero-text h1 span{display:block;font-size:120px}
-.hero-text p{font-size:24px;margin-top:20px}
+
+.hero-text{
+max-width:620px;
+}
+
+.hero-text h1{
+font-size:88px;
+color:var(--primary);
+line-height:1;
+}
+
+.hero-text h1 span{
+display:block;
+font-size:120px;
+color:var(--accent);
+}
+
+.hero-text p{
+margin-top:20px;
+font-size:24px;
+color:#000000;
+font-weight:500;
+}
 
 .hero-form{
-width:400px;
-background:rgba(0,0,0,.55);
+width:420px;
+background:rgba(0,0,0,.65);
 padding:36px;
 border-radius:18px;
 display:flex;
 flex-direction:column;
-gap:12px;
+gap:14px;
 }
-.hero-form label{color:#fff;font-size:14px}
+
+.hero-form label{
+color:#ffffff;
+font-size:16px;
+}
+
 .hero-form input{
-padding:10px;
+padding:12px;
 border-radius:8px;
 border:none;
+font-size:14px;
 }
-.checkbox-group{display:flex;gap:8px;align-items:center}
-.checkbox-group label{font-size:13px;color:#fff}
-#hero-send{
-background:var(--primary);
-color:#fff;
-border:none;
+
+.checkbox-group{
+display:flex;
+align-items:center;
+gap:8px;
+color:#ffffff;
+font-size:14px;
+}
+
+.hero-form button{
+margin-top:10px;
 padding:14px;
+border:none;
 border-radius:8px;
+background:#23006a;
+color:#ffffff;
+font-size:16px;
 font-weight:700;
 cursor:pointer;
 }
 
-/* SECTIONS */
-section{padding:120px 60px;position:relative;z-index:1}
+/* POR QUE A MASTERY */
+.master-section{
+padding:120px 60px;
+background:#f7f7f7;
+}
 
-/* MASTER */
 .master-container{
 max-width:1200px;
-margin:auto;
+margin:0 auto;
 display:flex;
 gap:60px;
 flex-wrap:wrap;
+align-items:center;
 }
-.master-text{max-width:620px}
-.master-text h1{font-size:2.6rem;margin-bottom:20px}
-.master-text ul{list-style:none}
-.master-text li{margin-bottom:12px}
+
+.master-text{
+flex:1;
+min-width:300px;
+}
+
+.master-text h2{
+font-size:42px;
+color:var(--primary);
+margin-bottom:20px;
+}
+
+.master-text ul{
+list-style:none;
+}
+
+.master-text li{
+font-size:18px;
+margin-bottom:10px;
+}
 
 .cta-box{
-background:rgba(0,0,0,.45);
-padding:36px;
+flex:0 0 360px;
+background:rgba(0,0,0,.05);
+padding:40px;
 border-radius:16px;
-color:#fff;
-max-width:420px;
+text-align:center;
+}
+
+.cta-box h3{
+font-size:24px;
+margin-bottom:16px;
+}
+
+.cta-box a{
+display:inline-block;
+padding:12px 26px;
+border-radius:30px;
+background:var(--primary);
+color:#ffffff;
+text-decoration:none;
+font-weight:700;
 }
 
 /* CURSOS */
 #cursos{
-display:flex;
-gap:30px;
-flex-wrap:wrap;
-justify-content:center;
+padding:120px 60px;
+text-align:center;
 }
-#cursos h2{width:100%;text-align:center;font-size:3rem}
+
+#cursos h2{
+font-size:48px;
+color:var(--primary);
+margin-bottom:60px;
+}
+
+.courses{
+display:flex;
+gap:36px;
+justify-content:center;
+flex-wrap:wrap;
+}
+
 .course-box{
-background:#fff;
+background:#ffffff;
 padding:36px;
 border-radius:16px;
-max-width:340px;
-text-align:center;
-box-shadow:0 8px 25px rgba(0,0,0,.08)
+max-width:320px;
+box-shadow:0 8px 24px rgba(0,0,0,.1);
+display:flex;
+flex-direction:column;
+gap:20px;
+}
+
+.course-box img{
+max-width:160px;
+margin:0 auto;
+}
+
+.course-box h3{
+color:#f0b816;
+font-size:26px;
+}
+
+.course-box p{
+font-size:16px;
 }
 
 /* DEPOIMENTOS */
-.testimonials-section{text-align:center}
-.testimonials-3d-carousel{max-width:900px;margin:auto}
+.testimonials{
+padding:120px 60px;
+background:#f7f7f7;
+text-align:center;
+}
 
-/* TEACHER */
+.testimonials h2{
+font-size:42px;
+color:var(--primary);
+margin-bottom:40px;
+}
+
+.carousel{
+max-width:900px;
+margin:0 auto;
+display:flex;
+gap:20px;
+justify-content:center;
+flex-wrap:wrap;
+}
+
+.carousel video{
+width:260px;
+height:460px;
+border-radius:16px;
+object-fit:cover;
+}
+
+/* TEACHER LARI */
+.teacher{
+padding:120px 60px;
+}
+
 .teacher-container{
 max-width:1200px;
-margin:auto;
+margin:0 auto;
 display:flex;
-gap:40px;
-flex-wrap:wrap;
+gap:60px;
 align-items:center;
+flex-wrap:wrap;
 }
+
+.teacher-text{
+flex:1;
+min-width:300px;
+}
+
+.teacher-text h2{
+font-size:42px;
+color:var(--primary);
+margin-bottom:20px;
+}
+
+.teacher-text p{
+font-size:18px;
+line-height:1.7;
+}
+
 .teacher-photo{
-width:420px;height:520px;
+width:420px;
+height:520px;
 border-radius:18px;
 background:url("images/teacher.png") center/cover no-repeat;
 }
 
-/* FOOTER */
-footer{
-padding:40px;
-text-align:center;
-border-top:1px solid #ddd;
-}
-
 /* WHATSAPP */
-#whatsapp-btn{
+#whatsapp{
 position:fixed;
 bottom:20px;
 right:20px;
@@ -193,17 +311,30 @@ width:60px;
 height:60px;
 border-radius:50%;
 background:#25D366;
-color:#fff;
+color:#ffffff;
 font-size:28px;
-border:none;
+display:flex;
+align-items:center;
+justify-content:center;
 cursor:pointer;
-z-index:500;
+z-index:200;
+}
+
+/* FOOTER */
+footer{
+padding:40px;
+text-align:center;
+background:#111111;
+color:#ffffff;
 }
 
 /* RESPONSIVO */
 @media(max-width:900px){
-.hero{padding:60px 20px}
-.hero-text h1{font-size:48px}
+.hero{
+flex-direction:column;
+align-items:flex-start;
+}
+.hero-text h1{font-size:56px}
 .hero-text h1 span{font-size:72px}
 }
 </style>
@@ -211,10 +342,10 @@ z-index:500;
 
 <body>
 
-<div id="page-gradient"></div>
-
 <header>
-<div class="logo"><img src="images/logo.png"></div>
+<div class="logo">
+<img src="images/logo.png" alt="MASTERY">
+</div>
 <nav>
 <ul>
 <li><a href="#cursos">Cursos</a></li>
@@ -231,82 +362,102 @@ z-index:500;
 </div>
 
 <form class="hero-form">
-<label>Nome completo*</label>
-<input id="nome" required>
-<label>E-mail*</label>
-<input id="email" type="email" required>
-<label>Celular*</label>
-<input id="celular" required>
+<label>Nome completo</label>
+<input id="nome" type="text">
+<label>Seu e-mail</label>
+<input id="email" type="email">
+<label>Celular</label>
+<input id="celular" type="tel">
 <div class="checkbox-group">
-<input type="checkbox" id="consentimento">
-<label>Concordo em receber comunicações</label>
+<input type="checkbox" id="check">
+<label for="check">Concordo em receber comunicações MASTERY</label>
 </div>
-<button type="button" id="hero-send">QUERO MAIS INFORMAÇÕES</button>
+<button type="button" onclick="enviar()">QUERO MAIS INFORMAÇÕES</button>
 </form>
 </section>
 
 <section class="master-section">
 <div class="master-container">
 <div class="master-text">
-<h1>Por que a MASTER?</h1>
+<h2>Por que a MASTERY?</h2>
 <ul>
 <li>Fale inglês desde o primeiro dia</li>
 <li>Aulas práticas e reais</li>
 <li>Resultados mensuráveis</li>
+<li>Comunicação aplicada ao mundo real</li>
 </ul>
 </div>
 <div class="cta-box">
 <h3>Pronto para começar?</h3>
-<p>Agende sua aula experimental gratuita</p>
+<a href="#cursos">Quero entender mais</a>
 </div>
 </div>
 </section>
 
 <section id="cursos">
 <h2>Nossos Cursos</h2>
-<div class="course-box"><h3>Master Journey</h3></div>
-<div class="course-box"><h3>Master Talk</h3></div>
-<div class="course-box"><h3>HealthTalk</h3></div>
+<div class="courses">
+<div class="course-box">
+<img src="images/course1.png">
+<h3>Master Journey</h3>
+<p>Do básico à fluência com método estruturado.</p>
+</div>
+<div class="course-box">
+<img src="images/course2.png">
+<h3>Master Talk</h3>
+<p>Conversação intensiva e personalizada.</p>
+</div>
+<div class="course-box">
+<img src="images/course3.png">
+<h3>HealthTalk</h3>
+<p>Inglês para profissionais da saúde.</p>
+</div>
+</div>
 </section>
 
-<section class="teacher-section">
+<section class="testimonials">
+<h2>Nossos Alunos</h2>
+<div class="carousel">
+<video src="videos/depo1.mp4" controls></video>
+<video src="videos/depo2.mp4" controls></video>
+<video src="videos/depo3.mp4" controls></video>
+</div>
+</section>
+
+<section class="teacher">
 <div class="teacher-container">
 <div class="teacher-text">
 <h2>Teacher Lari</h2>
-<p>Texto completo da metodologia.</p>
+<p>
+A MASTERY nasceu da necessidade de ensinar inglês de forma prática, eficiente e conectada à vida real.
+O método foi desenvolvido a partir de anos de experiência em sala de aula, focando comunicação, autonomia
+e resultados consistentes. O aluno aprende usando o inglês desde o início, com situações reais, vocabulário
+funcional e acompanhamento contínuo, garantindo evolução clara e mensurável.
+</p>
 </div>
 <div class="teacher-photo"></div>
 </div>
 </section>
 
+<div id="whatsapp" onclick="window.open('https://wa.me/11982595575','_blank')">💬</div>
+
 <footer>
-© 2025 MASTER English
+© 2025 MASTERY English - Todos os direitos reservados
 </footer>
 
-<button id="whatsapp-btn">📲</button>
-
 <script>
-document.getElementById("hero-send").onclick=function(){
-if(!nome.value||!email.value||!celular.value||!consentimento.checked){
-alert("Preencha tudo");
+function enviar(){
+const nome=document.getElementById("nome").value;
+const email=document.getElementById("email").value;
+const celular=document.getElementById("celular").value;
+const check=document.getElementById("check").checked;
+if(!nome||!email||!celular||!check){
+alert("Preencha todos os campos.");
 return;
 }
-window.location.href="mailto:larimano74@gmail.com";
-};
-
-document.getElementById("whatsapp-btn").onclick=function(){
-window.open("https://wa.me/11982595575","_blank");
-};
-
-const grad=document.getElementById("page-gradient");
-function updateGrad(){
-const hero=document.querySelector(".hero");
-const top=hero.offsetTop+hero.offsetHeight;
-grad.style.top=top+"px";
-grad.style.height=document.body.scrollHeight-top+"px";
+const body=`Nome: ${nome}%0DEmail: ${email}%0DCelular: ${celular}`;
+window.location.href=`mailto:larimano74@gmail.com?subject=Contato MASTERY&body=${body}`;
 }
-window.onload=updateGrad;
-window.onresize=updateGrad;
 </script>
 
 </body>
