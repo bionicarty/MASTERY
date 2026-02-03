@@ -11,79 +11,64 @@
 :root{
   --primary:#23006a;
   --accent:#f0b816;
-  --dark:#23006a;
   --light:#ffffff;
-  --text-dark:#111111;
-  --text-light:#ffffff;
+  --dark:#111111;
 }
 
-/* RESET */
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
 body{
   font-family:"League Spartan",sans-serif;
-  color:var(--text-light);
-  line-height:1.5;
   overflow-x:hidden;
-  scroll-behavior:smooth;
-  background:#000;
-}
-
-/* GRADIENT */
-#page-gradient{
-  position:fixed;
-  left:0;right:0;
-  z-index:-2;
-  pointer-events:none;
-  background:linear-gradient(
-    180deg,
-    #0b001f 0%,
-    #23006a 40%,
-    #1a012e 75%,
-    #07000f 100%
-  );
 }
 
 /* HEADER */
 header{
-  position:fixed;top:0;left:0;right:0;height:90px;
-  display:flex;align-items:center;justify-content:space-between;
+  position:fixed;
+  top:0;left:0;right:0;
+  height:90px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
   padding:0 60px;
   background:url("images/header.png") center/cover no-repeat;
-  z-index:200;
+  z-index:100;
 }
 .logo img{height:60px}
 nav ul{list-style:none;display:flex;gap:36px}
 nav a{
-  color:#ffffff;
+  color:#fff;
   text-decoration:none;
   font-weight:500;
-  transition:opacity .25s;
+  transition:opacity .3s;
 }
 nav a:hover{opacity:.6}
 
 /* HERO */
 .hero{
   margin-top:90px;
+  min-height:85vh;
   background:url("images/hero.png") center/cover no-repeat;
-  min-height:80vh;
   display:flex;
-  gap:40px;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   padding:100px 60px;
-  flex-wrap:wrap;
-  position:relative;
-  z-index:2;
+  gap:40px;
 }
 .hero-text{max-width:620px}
 .hero-text h1{
   font-size:88px;
+  line-height:1;
   color:var(--primary);
-  line-height:1.05;
 }
-.hero-text h1 span{display:block;font-size:120px}
-.hero-text p{font-size:24px}
+.hero-text h1 span{
+  display:block;
+  font-size:120px;
+}
+.hero-text p{
+  font-size:24px;
+  color:#111;
+  margin-top:20px;
+}
 
 .hero-form{
   width:400px;
@@ -95,7 +80,7 @@ nav a:hover{opacity:.6}
   gap:12px;
 }
 .hero-form label{
-  color:#ffffff;
+  color:#fff;
   font-size:16px;
 }
 .hero-form input{
@@ -107,41 +92,43 @@ nav a:hover{opacity:.6}
   display:flex;
   align-items:center;
   gap:8px;
+  margin:10px 0;
+}
+.checkbox-group label{
+  color:#fff;
   font-size:14px;
 }
-.hero-form button{
-  background:#23006a;
-  color:#ffffff;
+#hero-send{
+  background:var(--primary);
+  color:#fff;
   border:none;
   padding:14px;
   border-radius:8px;
-  font-weight:700;
+  font-size:16px;
+  font-weight:600;
   cursor:pointer;
 }
 
-/* MASTER */
+/* POR QUE A MASTERY */
 .master-section{
   padding:120px 60px;
-  position:relative;
-  z-index:1;
 }
 .master-container{
   max-width:1200px;
-  margin:0 auto;
+  margin:auto;
   display:flex;
   gap:60px;
   flex-wrap:wrap;
 }
-.master-text{flex:1;min-width:320px}
-.master-text h1{color:var(--accent);margin-bottom:18px}
+.master-text{flex:1}
+.master-text h1{color:var(--primary);margin-bottom:20px}
 .master-text ul{list-style:none}
-.master-text li{margin-bottom:10px}
+.master-text li{margin-bottom:12px}
 .cta-box{
-  flex:0 0 420px;
   background:rgba(0,0,0,.45);
   padding:36px;
   border-radius:16px;
-  text-align:center;
+  color:#fff;
 }
 .btn-saiba-mais{
   background:var(--primary);
@@ -149,36 +136,38 @@ nav a:hover{opacity:.6}
   padding:12px 26px;
   border-radius:30px;
   text-decoration:none;
-  font-weight:700;
+  display:inline-block;
+  margin-top:12px;
 }
 
 /* CURSOS */
 #cursos{
-  padding:140px 60px;
+  padding:120px 60px;
   display:flex;
   gap:34px;
-  justify-content:center;
   flex-wrap:wrap;
+  justify-content:center;
 }
 #cursos h2{
   width:100%;
   text-align:center;
   color:var(--primary);
   font-size:3rem;
+  margin-bottom:40px;
 }
 .course-box{
   background:#fff;
-  padding:40px 36px;
+  padding:40px;
   border-radius:16px;
-  max-width:360px;
-  min-width:280px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:24px;
+  max-width:340px;
+  text-align:center;
 }
-.course-box h3{color:var(--accent)}
-.course-box p{color:#111;text-align:center}
+.course-box img{max-width:160px}
+.course-box h3{
+  color:var(--accent);
+  font-size:1.8rem;
+}
+.course-box p{color:#111}
 
 /* DEPOIMENTOS */
 .testimonials-section{
@@ -197,7 +186,7 @@ nav a:hover{opacity:.6}
 }
 .teacher-container{
   max-width:1200px;
-  margin:0 auto;
+  margin:auto;
   display:flex;
   gap:40px;
   flex-wrap:wrap;
@@ -211,50 +200,28 @@ nav a:hover{opacity:.6}
   border-radius:18px;
 }
 
-/* FOOTER */
-footer{
-  padding:40px;
-  text-align:center;
-  opacity:.7;
-}
-
 /* WHATSAPP */
 #whatsapp-btn{
   position:fixed;
   bottom:20px;
   right:20px;
-  background:#25D366;
-  border:none;
-  border-radius:50%;
   width:60px;
   height:60px;
+  border-radius:50%;
+  background:#25D366;
+  color:#fff;
+  border:none;
   font-size:28px;
   cursor:pointer;
-  z-index:300;
-}
-
-/* RESPONSIVO */
-@media(max-width:980px){
-  header{padding:0 24px}
-  .hero{padding:48px 20px;flex-direction:column}
-  .hero-form{width:100%}
-  #cursos{padding:60px 20px}
-  .teacher-container{flex-direction:column}
-}
-@media(max-width:520px){
-  .hero-text h1{font-size:36px}
-  .hero-text h1 span{font-size:60px}
 }
 </style>
 </head>
 
 <body>
 
-<div id="page-gradient"></div>
-
 <header>
   <div class="logo">
-    <img src="images/logo.png" alt="Logo MASTER">
+    <img src="images/logo.png" alt="Logo Mastery">
   </div>
   <nav>
     <ul>
@@ -265,45 +232,62 @@ footer{
   </nav>
 </header>
 
-<section class="hero" id="top">
+<section class="hero">
   <div class="hero-text">
     <h1>Welcome to <span>MASTERY</span></h1>
     <p>Inglês real para quem quer resultados de verdade.</p>
   </div>
 
-  <form class="hero-form" onsubmit="enviarHero(event)">
+  <form class="hero-form">
     <label>Nome completo*</label>
-    <input id="nome" required>
+    <input id="nome" placeholder="Seu nome">
     <label>Seu e-mail*</label>
-    <input id="email" type="email" required>
+    <input id="email" placeholder="exemplo@email.com">
     <label>Celular*</label>
-    <input id="celular" required>
+    <input id="celular" placeholder="(00) 00000-0000">
 
     <div class="checkbox-group">
-      <input type="checkbox" id="consent" required>
-      <label for="consent">Concordo em receber comunicações MASTERY</label>
+      <input type="checkbox" id="consentimento">
+      <label for="consentimento">Concordo em receber comunicações MASTERY</label>
     </div>
 
-    <button type="submit">QUERO MAIS INFORMAÇÕES</button>
+    <button type="button" id="hero-send">QUERO MAIS INFORMAÇÕES</button>
   </form>
+</section>
+
+<section class="master-section">
+  <div class="master-container">
+    <div class="master-text">
+      <h1>Por que a MASTERY?</h1>
+      <ul>
+        <li>Fale inglês desde o primeiro dia</li>
+        <li>Aulas práticas e reais</li>
+        <li>Resultados mensuráveis</li>
+      </ul>
+    </div>
+    <div class="cta-box">
+      <h3>Pronto para começar?</h3>
+      <a class="btn-saiba-mais" href="#cursos">Quero entender mais</a>
+    </div>
+  </div>
 </section>
 
 <section id="cursos">
   <h2>Nossos Cursos</h2>
-
   <div class="course-box">
+    <img src="images/course1.png">
     <h3>Master Journey</h3>
-    <p>Do básico à fluência em 2 anos.</p>
+    <p>Do básico à fluência.</p>
   </div>
-
   <div class="course-box">
+    <img src="images/course2.png">
     <h3>Master Talk</h3>
-    <p>Conversação personalizada.</p>
+    <p>Conversação intensiva.</p>
   </div>
-
   <div class="course-box">
+    <img src="images/course3.png">
     <h3>HealthTalk</h3>
-    <p>Inglês para profissionais da saúde.</p>
+    <p>Inglês para saúde.</p>
   </div>
 </section>
 
@@ -315,29 +299,21 @@ footer{
   <div class="teacher-container">
     <div class="teacher-text">
       <h2>Teacher Lari</h2>
-      <p>Quase 10 anos transformando o aprendizado em algo real, prático e eficiente.</p>
+      <p>Texto completo da metodologia.</p>
     </div>
     <div class="teacher-photo"></div>
   </div>
 </section>
 
-<footer>
-© 2025 MASTER English — Todos os direitos reservados
-</footer>
-
 <button id="whatsapp-btn">📲</button>
 
 <script>
-function enviarHero(e){
-  e.preventDefault();
-  const nome=nome.value,email=email.value,cel=celular.value;
-  window.location.href=`mailto:larimano74@gmail.com?subject=Contato MASTERY&body=${encodeURIComponent(
-    `Nome: ${nome}\nEmail: ${email}\nCelular: ${cel}`
-  )}`;
+document.getElementById("hero-send").onclick=function(){
+  const nome=nome.value,email=email.value,celular=celular.value;
+  if(!nome||!email||!celular){alert("Preencha tudo");return;}
+  location.href=`mailto:larimano74@gmail.com?subject=Contato Mastery&body=Nome:${nome}%0AEmail:${email}%0ACelular:${celular}`;
 }
-document.getElementById("whatsapp-btn").onclick=()=>{
-  window.open("https://wa.me/11982595575","_blank");
-};
+document.getElementById("whatsapp-btn").onclick=()=>window.open("https://wa.me/11982595575","_blank");
 </script>
 
 </body>
