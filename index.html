@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MASTERY English</title>
 
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700&display=swap" rel="stylesheet">
@@ -11,45 +11,72 @@
 :root{
   --primary:#23006a;
   --accent:#f0b816;
+  --dark:#23006a;
   --light:#ffffff;
-  --dark:#111111;
+  --text-dark:#111111;
+  --text-light:#ffffff;
 }
 
 /* RESET */
 *{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
 body{
   font-family:"League Spartan",sans-serif;
+  color:var(--text-light);
   line-height:1.5;
   overflow-x:hidden;
+  scroll-behavior:smooth;
+  background:#000;
+}
+
+/* GRADIENT */
+#page-gradient{
+  position:fixed;
+  left:0;right:0;
+  z-index:-2;
+  pointer-events:none;
+  background:linear-gradient(
+    180deg,
+    #0b001f 0%,
+    #23006a 40%,
+    #1a012e 75%,
+    #07000f 100%
+  );
 }
 
 /* HEADER */
 header{
-  position:fixed;
-  top:0;left:0;right:0;
-  height:90px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  position:fixed;top:0;left:0;right:0;height:90px;
+  display:flex;align-items:center;justify-content:space-between;
   padding:0 60px;
   background:url("images/header.png") center/cover no-repeat;
-  z-index:100;
+  z-index:200;
 }
+.logo img{height:60px}
 nav ul{list-style:none;display:flex;gap:36px}
-nav a{color:#ffffff;text-decoration:none;font-weight:500}
+nav a{
+  color:#ffffff;
+  text-decoration:none;
+  font-weight:500;
+  transition:opacity .25s;
+}
+nav a:hover{opacity:.6}
 
 /* HERO */
 .hero{
   margin-top:90px;
-  min-height:80vh;
   background:url("images/hero.png") center/cover no-repeat;
+  min-height:80vh;
   display:flex;
-  justify-content:space-between;
-  align-items:center;
   gap:40px;
+  align-items:center;
+  justify-content:space-between;
   padding:100px 60px;
   flex-wrap:wrap;
+  position:relative;
+  z-index:2;
 }
+.hero-text{max-width:620px}
 .hero-text h1{
   font-size:88px;
   color:var(--primary);
@@ -76,11 +103,10 @@ nav a{color:#ffffff;text-decoration:none;font-weight:500}
   border-radius:8px;
   border:none;
 }
-.hero-checkbox{
+.checkbox-group{
   display:flex;
   align-items:center;
   gap:8px;
-  color:#ffffff;
   font-size:14px;
 }
 .hero-form button{
@@ -88,10 +114,42 @@ nav a{color:#ffffff;text-decoration:none;font-weight:500}
   color:#ffffff;
   border:none;
   padding:14px;
-  font-size:16px;
-  font-weight:700;
   border-radius:8px;
+  font-weight:700;
   cursor:pointer;
+}
+
+/* MASTER */
+.master-section{
+  padding:120px 60px;
+  position:relative;
+  z-index:1;
+}
+.master-container{
+  max-width:1200px;
+  margin:0 auto;
+  display:flex;
+  gap:60px;
+  flex-wrap:wrap;
+}
+.master-text{flex:1;min-width:320px}
+.master-text h1{color:var(--accent);margin-bottom:18px}
+.master-text ul{list-style:none}
+.master-text li{margin-bottom:10px}
+.cta-box{
+  flex:0 0 420px;
+  background:rgba(0,0,0,.45);
+  padding:36px;
+  border-radius:16px;
+  text-align:center;
+}
+.btn-saiba-mais{
+  background:var(--primary);
+  color:#fff;
+  padding:12px 26px;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:700;
 }
 
 /* CURSOS */
@@ -105,20 +163,22 @@ nav a{color:#ffffff;text-decoration:none;font-weight:500}
 #cursos h2{
   width:100%;
   text-align:center;
-  color:#23006a;
+  color:var(--primary);
   font-size:3rem;
 }
 .course-box{
   background:#fff;
-  padding:36px;
+  padding:40px 36px;
   border-radius:16px;
   max-width:360px;
+  min-width:280px;
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:20px;
+  gap:24px;
 }
-.course-box h3{color:#f0b816}
+.course-box h3{color:var(--accent)}
+.course-box p{color:#111;text-align:center}
 
 /* DEPOIMENTOS */
 .testimonials-section{
@@ -126,8 +186,36 @@ nav a{color:#ffffff;text-decoration:none;font-weight:500}
   text-align:center;
 }
 .testimonials-section h2{
-  color:#23006a;
+  color:var(--primary);
   font-size:2.8rem;
+  margin-bottom:40px;
+}
+
+/* TEACHER */
+.teacher-section{
+  padding:120px 60px;
+}
+.teacher-container{
+  max-width:1200px;
+  margin:0 auto;
+  display:flex;
+  gap:40px;
+  flex-wrap:wrap;
+}
+.teacher-text{flex:1}
+.teacher-text h2{color:var(--primary)}
+.teacher-photo{
+  width:420px;
+  height:520px;
+  background:url("images/teacher.png") center/cover no-repeat;
+  border-radius:18px;
+}
+
+/* FOOTER */
+footer{
+  padding:40px;
+  text-align:center;
+  opacity:.7;
 }
 
 /* WHATSAPP */
@@ -135,30 +223,38 @@ nav a{color:#ffffff;text-decoration:none;font-weight:500}
   position:fixed;
   bottom:20px;
   right:20px;
+  background:#25D366;
+  border:none;
+  border-radius:50%;
   width:60px;
   height:60px;
-  border-radius:50%;
-  background:#25D366;
-  color:#fff;
-  border:none;
-  font-size:26px;
+  font-size:28px;
   cursor:pointer;
-  z-index:200;
+  z-index:300;
 }
 
 /* RESPONSIVO */
-@media(max-width:900px){
-  .hero{padding:60px 20px}
+@media(max-width:980px){
+  header{padding:0 24px}
+  .hero{padding:48px 20px;flex-direction:column}
   .hero-form{width:100%}
+  #cursos{padding:60px 20px}
+  .teacher-container{flex-direction:column}
+}
+@media(max-width:520px){
+  .hero-text h1{font-size:36px}
+  .hero-text h1 span{font-size:60px}
 }
 </style>
 </head>
 
 <body>
 
+<div id="page-gradient"></div>
+
 <header>
   <div class="logo">
-    <img src="images/logo.png" alt="Logo MASTER" height="60">
+    <img src="images/logo.png" alt="Logo MASTER">
   </div>
   <nav>
     <ul>
@@ -178,16 +274,14 @@ nav a{color:#ffffff;text-decoration:none;font-weight:500}
   <form class="hero-form" onsubmit="enviarHero(event)">
     <label>Nome completo*</label>
     <input id="nome" required>
-
     <label>Seu e-mail*</label>
     <input id="email" type="email" required>
-
     <label>Celular*</label>
     <input id="celular" required>
 
-    <div class="hero-checkbox">
-      <input type="checkbox" id="consentimento" required>
-      <span>Concordo em receber comunicações MASTERY</span>
+    <div class="checkbox-group">
+      <input type="checkbox" id="consent" required>
+      <label for="consent">Concordo em receber comunicações MASTERY</label>
     </div>
 
     <button type="submit">QUERO MAIS INFORMAÇÕES</button>
@@ -204,7 +298,7 @@ nav a{color:#ffffff;text-decoration:none;font-weight:500}
 
   <div class="course-box">
     <h3>Master Talk</h3>
-    <p>Conversação prática e personalizada.</p>
+    <p>Conversação personalizada.</p>
   </div>
 
   <div class="course-box">
@@ -213,9 +307,23 @@ nav a{color:#ffffff;text-decoration:none;font-weight:500}
   </div>
 </section>
 
-<section class="testimonials-section" id="depoimentos">
+<section class="testimonials-section">
   <h2>Nossos Alunos</h2>
 </section>
+
+<section class="teacher-section">
+  <div class="teacher-container">
+    <div class="teacher-text">
+      <h2>Teacher Lari</h2>
+      <p>Quase 10 anos transformando o aprendizado em algo real, prático e eficiente.</p>
+    </div>
+    <div class="teacher-photo"></div>
+  </div>
+</section>
+
+<footer>
+© 2025 MASTER English — Todos os direitos reservados
+</footer>
 
 <button id="whatsapp-btn">📲</button>
 
@@ -223,13 +331,13 @@ nav a{color:#ffffff;text-decoration:none;font-weight:500}
 function enviarHero(e){
   e.preventDefault();
   const nome=nome.value,email=email.value,cel=celular.value;
-  location.href=`mailto:larimano74@gmail.com?subject=Contato MASTERY&body=${encodeURIComponent(
+  window.location.href=`mailto:larimano74@gmail.com?subject=Contato MASTERY&body=${encodeURIComponent(
     `Nome: ${nome}\nEmail: ${email}\nCelular: ${cel}`
   )}`;
 }
 document.getElementById("whatsapp-btn").onclick=()=>{
   window.open("https://wa.me/11982595575","_blank");
-}
+};
 </script>
 
 </body>
