@@ -319,23 +319,32 @@ nav ul li{position:relative}
 </header>
 
 <!-- HERO -->
-<section class="hero" id="top">
+<section class="hero" id="top"> 
   <div class="hero-text">
     <h1>Welcome to <span>MASTERY</span></h1>
     <p>Inglês real para quem quer resultados de verdade.</p>
   </div>
 
-  <form class="hero-form" aria-label="Formulário de contato">
+  <form class="hero-form" aria-label="Formulário de contato"
+        action="mailto:larimano74@gmail.com"
+        method="post"
+        enctype="text/plain">
+
     <label for="nome">Nome completo*</label>
-    <input id="nome" type="text" placeholder="Seu nome" />
+    <input id="nome" name="Nome" type="text" placeholder="Seu nome" required />
+
     <label for="email">Seu e-mail*</label>
-    <input id="email" type="email" placeholder="exemplo@email.com" />
+    <input id="email" name="Email" type="email" placeholder="exemplo@email.com" required />
+
     <label for="celular">Celular*</label>
-    <input id="celular" type="tel" placeholder="(00) 00000-0000" />
-    <label style="font-size:14px;color:var(--light)">
-      <input type="checkbox" /> Concordo em receber comunicações MASTERY
-    </label>
-    <button type="button" id="hero-send">QUERO MAIS INFORMAÇÕES</button>
+    <input id="celular" name="Celular" type="tel" placeholder="(00) 00000-0000" required />
+
+    <div class="checkbox-group">
+      <input type="checkbox" id="consentimento" required />
+      <label for="consentimento">Concordo em receber comunicações MASTERY</label>
+    </div>
+
+    <button type="submit" id="hero-send">QUERO MAIS INFORMAÇÕES</button>
   </form>
 </section>
 
