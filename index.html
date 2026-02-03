@@ -325,29 +325,80 @@ nav ul li{position:relative}
     <p>Inglês real para quem quer resultados de verdade.</p>
   </div>
 
-  <form class="hero-form" aria-label="Formulário de contato"
-        action="mailto:larimano74@gmail.com"
-        method="post"
-        enctype="text/plain">
-
+  <form class="hero-form">
     <label for="nome">Nome completo*</label>
-    <input id="nome" name="Nome" type="text" placeholder="Seu nome" required />
+    <input id="nome" type="text" placeholder="Seu nome" required />
 
     <label for="email">Seu e-mail*</label>
-    <input id="email" name="Email" type="email" placeholder="exemplo@email.com" required />
+    <input id="email" type="email" placeholder="exemplo@email.com" required />
 
     <label for="celular">Celular*</label>
-    <input id="celular" name="Celular" type="tel" placeholder="(00) 00000-0000" required />
+    <input id="celular" type="tel" placeholder="(00) 00000-0000" required />
 
     <div class="checkbox-group">
-      <input type="checkbox" id="consentimento" required />
+      <input type="checkbox" id="consentimento" />
       <label for="consentimento">Concordo em receber comunicações MASTERY</label>
     </div>
 
-    <button type="submit" id="hero-send">QUERO MAIS INFORMAÇÕES</button>
+    <button type="button" id="hero-send">QUERO MAIS INFORMAÇÕES</button>
   </form>
 </section>
 
+.hero-form label {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.checkbox-group label {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+#hero-send {
+  background-color: #23006a;
+  color: #ffffff;
+  border: none;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#hero-send:hover {
+  opacity: 0.9;
+}
+
+  <script>
+  document.getElementById("hero-send").addEventListener("click", function () {
+    const nome = document.getElementById("nome").value;
+    const email = document.getElementById("email").value;
+    const celular = document.getElementById("celular").value;
+    const consent = document.getElementById("consentimento").checked;
+
+    if (!nome || !email || !celular || !consent) {
+      alert("Por favor, preencha todos os campos e aceite o consentimento.");
+      return;
+    }
+
+    const assunto = encodeURIComponent("Novo contato pelo site MASTERY");
+    const corpo = encodeURIComponent(
+      `Nome: ${nome}\nE-mail: ${email}\nCelular: ${celular}`
+    );
+
+    window.location.href =
+      "mailto:larimano74@gmail.com?subject=" + assunto + "&body=" + corpo;
+  });
+</script>
+
+  
 <!-- BOTÃO WHATSAPP FIXO -->
 <button id="whatsapp-btn" title="Enviar WhatsApp">📲</button>
 
