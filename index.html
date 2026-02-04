@@ -13,10 +13,11 @@
 --accent:#f0b816;
 --white:#ffffff;
 --black:#111111;
+--gray:#f6f6f6;
 }
 
+/* RESET */
 *{margin:0;padding:0;box-sizing:border-box}
-
 body{
 font-family:"League Spartan",sans-serif;
 background:#ffffff;
@@ -27,9 +28,7 @@ overflow-x:hidden;
 /* HEADER */
 header{
 position:fixed;
-top:0;
-left:0;
-right:0;
+top:0;left:0;right:0;
 height:90px;
 padding:0 60px;
 display:flex;
@@ -38,22 +37,14 @@ justify-content:space-between;
 background:url("images/header.png") center/cover no-repeat;
 z-index:100;
 }
-
 .logo img{height:60px}
-
-nav ul{
-list-style:none;
-display:flex;
-gap:36px;
-}
-
+nav ul{list-style:none;display:flex;gap:36px}
 nav a{
 color:#ffffff;
 text-decoration:none;
 font-weight:600;
 transition:opacity .25s;
 }
-
 nav a:hover{opacity:.6}
 
 /* HERO */
@@ -68,27 +59,20 @@ gap:60px;
 background:url("images/hero.png") center/cover no-repeat;
 flex-wrap:wrap;
 }
-
-.hero-text{
-max-width:620px;
-}
-
+.hero-text{max-width:620px}
 .hero-text h1{
 font-size:88px;
 color:var(--primary);
 line-height:1;
 }
-
 .hero-text h1 span{
 display:block;
 font-size:120px;
 color:var(--accent);
 }
-
 .hero-text p{
 margin-top:20px;
 font-size:24px;
-color:#000000;
 font-weight:500;
 }
 
@@ -101,19 +85,13 @@ display:flex;
 flex-direction:column;
 gap:14px;
 }
-
-.hero-form label{
-color:#ffffff;
-font-size:16px;
-}
-
+.hero-form label{color:#ffffff;font-size:15px}
 .hero-form input{
 padding:12px;
 border-radius:8px;
 border:none;
 font-size:14px;
 }
-
 .checkbox-group{
 display:flex;
 align-items:center;
@@ -121,13 +99,12 @@ gap:8px;
 color:#ffffff;
 font-size:14px;
 }
-
 .hero-form button{
 margin-top:10px;
 padding:14px;
 border:none;
 border-radius:8px;
-background:#23006a;
+background:var(--primary);
 color:#ffffff;
 font-size:16px;
 font-weight:700;
@@ -137,9 +114,8 @@ cursor:pointer;
 /* POR QUE A MASTERY */
 .master-section{
 padding:120px 60px;
-background:#f7f7f7;
+background:var(--gray);
 }
-
 .master-container{
 max-width:1200px;
 margin:0 auto;
@@ -148,43 +124,34 @@ gap:60px;
 flex-wrap:wrap;
 align-items:center;
 }
-
-.master-text{
-flex:1;
-min-width:300px;
-}
-
+.master-text{flex:1;min-width:300px}
 .master-text h2{
 font-size:42px;
 color:var(--primary);
 margin-bottom:20px;
 }
-
-.master-text ul{
-list-style:none;
-}
-
+.master-text ul{list-style:none}
 .master-text li{
 font-size:18px;
-margin-bottom:10px;
+margin-bottom:12px;
 }
-
+.master-text p{
+margin-top:18px;
+font-size:17px;
+line-height:1.6;
+}
 .cta-box{
-flex:0 0 360px;
-background:rgba(0,0,0,.05);
+flex:0 0 380px;
+background:rgba(0,0,0,.08);
 padding:40px;
 border-radius:16px;
 text-align:center;
 }
-
-.cta-box h3{
-font-size:24px;
-margin-bottom:16px;
-}
-
+.cta-box h3{font-size:26px;margin-bottom:14px}
+.cta-box p{font-size:16px;margin-bottom:18px}
 .cta-box a{
 display:inline-block;
-padding:12px 26px;
+padding:12px 28px;
 border-radius:30px;
 background:var(--primary);
 color:#ffffff;
@@ -197,20 +164,17 @@ font-weight:700;
 padding:120px 60px;
 text-align:center;
 }
-
 #cursos h2{
 font-size:48px;
 color:var(--primary);
 margin-bottom:60px;
 }
-
 .courses{
 display:flex;
 gap:36px;
 justify-content:center;
 flex-wrap:wrap;
 }
-
 .course-box{
 background:#ffffff;
 padding:36px;
@@ -221,55 +185,93 @@ display:flex;
 flex-direction:column;
 gap:20px;
 }
+.course-box img{max-width:160px;margin:0 auto}
+.course-box h3{color:var(--accent);font-size:26px}
+.course-box p{font-size:16px;line-height:1.5}
 
-.course-box img{
-max-width:160px;
-margin:0 auto;
-}
-
-.course-box h3{
-color:#f0b816;
-font-size:26px;
-}
-
-.course-box p{
-font-size:16px;
-}
-
-/* DEPOIMENTOS */
+/* DEPOIMENTOS – CARROSSEL 3D */
 .testimonials{
 padding:120px 60px;
-background:#f7f7f7;
+background:var(--gray);
 text-align:center;
 }
-
 .testimonials h2{
 font-size:42px;
 color:var(--primary);
 margin-bottom:40px;
 }
-
-.carousel{
+.carousel-3d{
+perspective:1200px;
+position:relative;
 max-width:900px;
 margin:0 auto;
-display:flex;
-gap:20px;
-justify-content:center;
-flex-wrap:wrap;
+height:520px;
 }
-
-.carousel video{
+.carousel-wrapper{
+position:relative;
+width:100%;
+height:100%;
+transform-style:preserve-3d;
+}
+.carousel-item{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(.6);
+opacity:.3;
+filter:blur(3px);
 width:260px;
 height:460px;
 border-radius:16px;
+overflow:hidden;
+transition:.6s;
+background:#000;
+cursor:pointer;
+}
+.carousel-item video{
+width:100%;
+height:100%;
 object-fit:cover;
 }
+.carousel-item.active{
+transform:translate(-50%,-50%) scale(1);
+opacity:1;
+filter:none;
+width:300px;
+height:520px;
+z-index:2;
+}
+.carousel-item.prev{
+transform:translate(calc(-50% - 220px),-50%) scale(.7);
+}
+.carousel-item.next{
+transform:translate(calc(-50% + 220px),-50%) scale(.7);
+}
+.carousel-controls{
+position:absolute;
+top:50%;
+left:0;
+right:0;
+display:flex;
+justify-content:space-between;
+padding:0 20px;
+transform:translateY(-50%);
+}
+.carousel-btn{
+width:42px;
+height:42px;
+border-radius:50%;
+border:none;
+background:rgba(0,0,0,.5);
+color:#fff;
+font-size:24px;
+cursor:pointer;
+}
 
-/* TEACHER LARI */
+/* TEACHER */
 .teacher{
 padding:120px 60px;
 }
-
 .teacher-container{
 max-width:1200px;
 margin:0 auto;
@@ -278,23 +280,16 @@ gap:60px;
 align-items:center;
 flex-wrap:wrap;
 }
-
-.teacher-text{
-flex:1;
-min-width:300px;
-}
-
+.teacher-text{flex:1;min-width:300px}
 .teacher-text h2{
 font-size:42px;
 color:var(--primary);
 margin-bottom:20px;
 }
-
 .teacher-text p{
 font-size:18px;
 line-height:1.7;
 }
-
 .teacher-photo{
 width:420px;
 height:520px;
@@ -330,12 +325,10 @@ color:#ffffff;
 
 /* RESPONSIVO */
 @media(max-width:900px){
-.hero{
-flex-direction:column;
-align-items:flex-start;
-}
+.hero{flex-direction:column;align-items:flex-start}
 .hero-text h1{font-size:56px}
 .hero-text h1 span{font-size:72px}
+.teacher-container{flex-direction:column}
 }
 </style>
 </head>
@@ -343,9 +336,7 @@ align-items:flex-start;
 <body>
 
 <header>
-<div class="logo">
-<img src="images/logo.png" alt="MASTERY">
-</div>
+<div class="logo"><img src="images/logo.png"></div>
 <nav>
 <ul>
 <li><a href="#cursos">Cursos</a></li>
@@ -358,19 +349,19 @@ align-items:flex-start;
 <section class="hero">
 <div class="hero-text">
 <h1>Welcome to <span>MASTERY</span></h1>
-<p>Inglês real para quem quer resultados de verdade.</p>
+<p>Inglês real, prático e aplicado à vida profissional.</p>
 </div>
 
 <form class="hero-form">
 <label>Nome completo</label>
-<input id="nome" type="text">
-<label>Seu e-mail</label>
-<input id="email" type="email">
+<input id="nome">
+<label>E-mail</label>
+<input id="email">
 <label>Celular</label>
-<input id="celular" type="tel">
+<input id="celular">
 <div class="checkbox-group">
 <input type="checkbox" id="check">
-<label for="check">Concordo em receber comunicações MASTERY</label>
+<label for="check">Aceito receber comunicações</label>
 </div>
 <button type="button" onclick="enviar()">QUERO MAIS INFORMAÇÕES</button>
 </form>
@@ -381,15 +372,17 @@ align-items:flex-start;
 <div class="master-text">
 <h2>Por que a MASTERY?</h2>
 <ul>
-<li>Fale inglês desde o primeiro dia</li>
-<li>Aulas práticas e reais</li>
-<li>Resultados mensuráveis</li>
-<li>Comunicação aplicada ao mundo real</li>
+<li>Inglês desde o primeiro dia</li>
+<li>Comunicação real e prática</li>
+<li>Método estruturado e mensurável</li>
+<li>Resultados claros e objetivos</li>
 </ul>
+<p>Inclui o programa exclusivo <strong>HealthTalk</strong>, voltado para profissionais da saúde.</p>
 </div>
 <div class="cta-box">
 <h3>Pronto para começar?</h3>
-<a href="#cursos">Quero entender mais</a>
+<p>Aula experimental gratuita.</p>
+<a href="#cursos">Quero conhecer</a>
 </div>
 </div>
 </section>
@@ -400,27 +393,33 @@ align-items:flex-start;
 <div class="course-box">
 <img src="images/course1.png">
 <h3>Master Journey</h3>
-<p>Do básico à fluência com método estruturado.</p>
+<p>Do básico à fluência com método completo.</p>
 </div>
 <div class="course-box">
 <img src="images/course2.png">
 <h3>Master Talk</h3>
-<p>Conversação intensiva e personalizada.</p>
+<p>Conversação intensa e personalizada.</p>
 </div>
 <div class="course-box">
 <img src="images/course3.png">
 <h3>HealthTalk</h3>
-<p>Inglês para profissionais da saúde.</p>
+<p>Inglês técnico para profissionais da saúde.</p>
 </div>
 </div>
 </section>
 
 <section class="testimonials">
 <h2>Nossos Alunos</h2>
-<div class="carousel">
-<video src="videos/depo1.mp4" controls></video>
-<video src="videos/depo2.mp4" controls></video>
-<video src="videos/depo3.mp4" controls></video>
+<div class="carousel-3d">
+<div class="carousel-wrapper" id="carousel">
+<div class="carousel-item active"><video src="videos/depo1.mp4" muted></video></div>
+<div class="carousel-item next"><video src="videos/depo2.mp4" muted></video></div>
+<div class="carousel-item prev"><video src="videos/depo3.mp4" muted></video></div>
+</div>
+<div class="carousel-controls">
+<button class="carousel-btn" onclick="prev()">‹</button>
+<button class="carousel-btn" onclick="next()">›</button>
+</div>
 </div>
 </section>
 
@@ -428,12 +427,7 @@ align-items:flex-start;
 <div class="teacher-container">
 <div class="teacher-text">
 <h2>Teacher Lari</h2>
-<p>
-A MASTERY nasceu da necessidade de ensinar inglês de forma prática, eficiente e conectada à vida real.
-O método foi desenvolvido a partir de anos de experiência em sala de aula, focando comunicação, autonomia
-e resultados consistentes. O aluno aprende usando o inglês desde o início, com situações reais, vocabulário
-funcional e acompanhamento contínuo, garantindo evolução clara e mensurável.
-</p>
+<p>Mais de 10 anos de experiência, método próprio e foco em resultados reais.</p>
 </div>
 <div class="teacher-photo"></div>
 </div>
@@ -442,22 +436,28 @@ funcional e acompanhamento contínuo, garantindo evolução clara e mensurável.
 <div id="whatsapp" onclick="window.open('https://wa.me/11982595575','_blank')">💬</div>
 
 <footer>
-© 2025 MASTERY English - Todos os direitos reservados
+© 2025 MASTERY English
 </footer>
 
 <script>
 function enviar(){
-const nome=document.getElementById("nome").value;
-const email=document.getElementById("email").value;
-const celular=document.getElementById("celular").value;
-const check=document.getElementById("check").checked;
-if(!nome||!email||!celular||!check){
-alert("Preencha todos os campos.");
-return;
+const n=nome.value,e=email.value,c=celular.value;
+if(!n||!e||!c||!check.checked){alert("Preencha tudo.");return;}
+window.location.href=`mailto:larimano74@gmail.com?subject=Contato&body=Nome:${n}%0DEmail:${e}%0DCel:${c}`;
 }
-const body=`Nome: ${nome}%0DEmail: ${email}%0DCelular: ${celular}`;
-window.location.href=`mailto:larimano74@gmail.com?subject=Contato MASTERY&body=${body}`;
+
+const items=document.querySelectorAll(".carousel-item");
+let idx=0;
+function update(){
+items.forEach((el,i)=>{
+el.className="carousel-item";
+if(i===idx) el.classList.add("active");
+if(i===(idx+1)%items.length) el.classList.add("next");
+if(i===(idx-1+items.length)%items.length) el.classList.add("prev");
+});
 }
+function next(){idx=(idx+1)%items.length;update();}
+function prev(){idx=(idx-1+items.length)%items.length;update();}
 </script>
 
 </body>
