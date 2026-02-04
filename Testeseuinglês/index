@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>English Level Assessment | MASTER</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --blue:#23006a;
+  --yellow:#f0b816;
+  --white:#ffffff;
+  --light:#f4f4f8;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:'League Spartan',sans-serif;
+  background:var(--blue);
+  color:var(--white);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+
+.card{
+  background:var(--white);
+  color:#222;
+  width:100%;
+  max-width:600px;
+  border-radius:16px;
+  padding:32px;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+}
+
+h1{
+  margin-top:0;
+  color:var(--blue);
+  font-size:28px;
+}
+
+.progress{
+  background:#ddd;
+  height:8px;
+  border-radius:4px;
+  overflow:hidden;
+  margin-bottom:24px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:var(--yellow);
+  transition:width .4s ease;
+}
+
+.question{
+  font-size:20px;
+  margin-bottom:20px;
+}
+
+.options button{
+  display:block;
+  width:100%;
+  margin-bottom:12px;
+  padding:14px;
+  font-size:16px;
+  border-radius:10px;
+  border:2px solid var(--blue);
+  background:transparent;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.options button:hover{
+  background:var(--blue);
+  color:var(--white);
+}
+
+.result{
+  text-align:center;
+}
+
+.level{
+  font-size:36px;
+  color:var(--blue);
+  margin-bottom:10px;
+}
+
+.motivation{
+  font-size:18px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>English Level Assessment</h1>
+
+  <div class="progress">
+    <div class="progress-bar" id="progress"></div>
+  </div>
+
+  <div id="quiz"></div>
+</div>
+
+<script>
+const questions = [
+  { q:"Choose the correct option: She ___ coffee every morning.",
+    a:["drink","drinks","is drink"], c:1, lvl:1 },
+
+  { q:"Which sentence is correct?",
+    a:["He don’t like pizza.","He doesn’t like pizza.","He isn’t like pizza."], c:1, lvl:1 },
+
+  { q:"I’ve worked here ___ 2019.",
+    a:["since","for","during"], c:0, lvl:2 },
+
+  { q:"If I ___ more time, I would travel more.",
+    a:["have","had","will have"], c:1, lvl:3 },
+
+  { q:"Choose the closest meaning of *reliable*:",
+    a:["expensive","trustworthy","fast"], c:1, lvl:3 },
+
+  { q:"She suggested that he ___ earlier.",
+    a:["leaves","leave","left"], c:1, lvl:4 },
+
+  { q:"Hardly ___ the meeting started when the system crashed.",
+    a:["had","has","was"], c:0, lvl:4 },
+
+  { q:"The report was criticized for being overly ___.",
+    a:["simplistic","simple","simplify"], c:0, lvl:5 },
+
+  { q:"No sooner ___ than the consequences became evident.",
+    a:["we acted","had we acted","we had acted"], c:1, lvl:5 },
+
+  { q:"His argument was internally inconsistent and therefore ___.",
+    a:["compelling","flawed","insightful"], c:1, lvl:6 }
+];
+
+let index = 0;
+let score = 0;
+
+const quiz = document.getElementById("quiz");
+const progress = document.getElementById("progress");
+
+function loadQuestion(){
+  progress.style.width = `${(index/questions.length)*100}%`;
+
+  const q = questions[index];
+  quiz.innerHTML = `
+    <div class="question">${q.q}</div>
+    <div class="options">
+      ${q.a.map((opt,i)=>`<button onclick="answer(${i})">${opt}</button>`).join("")}
+    </div>
+  `;
+}
+
+function answer(choice){
+  if(choice === questions[index].c){
+    score += questions[index].lvl;
+  }
+  index++;
+  index < questions.length ? loadQuestion() : showResult();
+}
+
+function showResult(){
+  progress.style.width = "100%";
+
+  let level = "A1";
+  let message = "";
+
+  if(score <= 6){ level="A1"; message="You’re building your foundation. Every expert started here!";}
+  else if(score <= 12){ level="A2"; message="Great progress! You already communicate in everyday situations.";}
+  else if(score <= 20){ level="B1"; message="You can express ideas clearly. Time to gain confidence!";}
+  else if(score <= 28){ level="B2"; message="Strong level! You handle complex conversations well.";}
+  else if(score <= 36){ level="C1"; message="Excellent control of the language. Almost native-like!";}
+  else { level="C2"; message="Outstanding! You demonstrate mastery of English.";}
+
+  quiz.innerHTML = `
+    <div class="result">
+      <div class="level">${level}</div>
+      <div class="motivation">${message}</div>
+    </div>
+  `;
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
