@@ -1,40 +1,174 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Blog — MASTER</title>
-  <meta name="description" content="Blog do MASTER — artigos sobre inglês, saúde e carreira." />
-  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root{--bg:#17252a;--text:#f5f7f8;--accent:#3aafa9;--card:rgba(255,255,255,0.03)}
-    body{margin:0;font-family:"League Spartan",sans-serif;background:var(--bg);color:var(--text)}
-    header{height:76px;display:flex;align-items:center;padding:0 20px;background:rgba(23,37,42,0.9);border-bottom:1px solid rgba(255,255,255,0.03)}
-    .container{max-width:1100px;margin:24px auto;padding:20px}
-    .post{background:var(--card);padding:18px;border-radius:12px;margin-bottom:14px}
-    a{color:var(--accent)}
-    footer{padding:20px;text-align:center;color:rgba(255,255,255,0.7)}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blog — MASTERY</title>
+
+<meta name="description" content="Blog da MASTERY — inglês, saúde, carreira e comunicação profissional.">
+
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#23006a;
+  --accent:#f0b816;
+  --white:#ffffff;
+  --black:#111111;
+  --gray:#f6f6f6;
+}
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:"League Spartan",sans-serif;
+  background:var(--white);
+  color:var(--black);
+}
+
+/* HEADER */
+header{
+  height:80px;
+  display:flex;
+  align-items:center;
+  padding:0 24px;
+  border-bottom:1px solid #eee;
+}
+
+header a{
+  text-decoration:none;
+  font-weight:700;
+  color:var(--primary);
+}
+
+/* CONTAINER */
+.container{
+  max-width:1100px;
+  margin:60px auto;
+  padding:0 24px;
+}
+
+/* TITLES */
+h1{
+  font-size:52px;
+  color:var(--primary);
+  margin-bottom:12px;
+}
+.subtitle{
+  font-size:20px;
+  color:#555;
+  margin-bottom:40px;
+}
+
+/* POSTS GRID */
+.posts{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:28px;
+}
+
+/* POST CARD */
+.post{
+  background:var(--gray);
+  padding:28px;
+  border-radius:18px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.post h2{
+  font-size:26px;
+  color:var(--primary);
+}
+
+.post p{
+  font-size:16px;
+  line-height:1.6;
+}
+
+.post a{
+  margin-top:auto;
+  align-self:flex-start;
+  text-decoration:none;
+  font-weight:700;
+  color:var(--primary);
+}
+
+.post a span{
+  color:var(--accent);
+}
+
+/* FOOTER */
+footer{
+  margin-top:80px;
+  padding:30px;
+  text-align:center;
+  background:#111111;
+  color:#ffffff;
+}
+
+/* RESPONSIVO */
+@media(max-width:700px){
+  h1{font-size:40px}
+}
+</style>
 </head>
+
 <body>
-  <header><a href="../index.html" style="color:#fff;font-weight:700">← Voltar</a></header>
-  <main class="container">
-    <h1>Blog MASTER</h1>
-    <p>Artigos recentes do MASTER — dicas, vocabulário e cases na área da saúde e educação.</p>
 
-    <article class="post">
-      <h2>Como preparar um case clínico em inglês</h2>
-      <p>Resumo: dicas práticas para apresentar casos clínicos em inglês — estrutura, vocabulário e frases úteis para apresentações.</p>
-      <a href="#">Ler mais →</a>
-    </article>
+<header>
+  <a href="../index.html">← Voltar para a MASTERY</a>
+</header>
 
-    <article class="post">
-      <h2>Expressões úteis para enfermagem</h2>
-      <p>Resumo: vocabulário e frases usados no plantão, para comunicar com segurança com pacientes e profissionais.</p>
-      <a href="#">Ler mais →</a>
-    </article>
-  </main>
-  <footer>© <span id="year"></span> MASTER</footer>
-  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+<main class="container">
+  <h1>Blog MASTERY</h1>
+  <p class="subtitle">
+    Conteúdos sobre inglês, saúde, carreira e comunicação profissional.
+  </p>
+
+  <section class="posts" id="posts"></section>
+</main>
+
+<footer>
+  © <span id="year"></span> MASTERY English
+</footer>
+
+<script>
+const posts = [
+  {
+    title: "Como preparar um case clínico em inglês",
+    excerpt: "Dicas práticas para apresentar casos clínicos em inglês com clareza, estrutura e vocabulário adequado.",
+    link: "#"
+  },
+  {
+    title: "Expressões essenciais para enfermagem",
+    excerpt: "Vocabulário e frases usadas no plantão para comunicar com segurança com pacientes e equipes.",
+    link: "#"
+  },
+  {
+    title: "Inglês para a carreira: por onde começar?",
+    excerpt: "Como organizar seus estudos de inglês com foco profissional, mesmo com pouco tempo disponível.",
+    link: "#"
+  }
+];
+
+const container = document.getElementById("posts");
+
+posts.forEach(post=>{
+  const article = document.createElement("article");
+  article.className = "post";
+  article.innerHTML = `
+    <h2>${post.title}</h2>
+    <p>${post.excerpt}</p>
+    <a href="${post.link}">Ler mais <span>→</span></a>
+  `;
+  container.appendChild(article);
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
