@@ -195,30 +195,10 @@ padding:120px 60px;
 background:var(--gray);
 text-align:center;
 }
-.testimonials h2{
-font-size:42px;
-color:var(--primary);
-margin-bottom:40px;
-}
-.carousel{
-max-width:900px;
-margin:0 auto;
-display:flex;
-gap:20px;
-justify-content:center;
-flex-wrap:wrap;
-}
-.carousel video{
-width:260px;
-height:460px;
-border-radius:16px;
-object-fit:cover;
-}
 
-/* TEACHER LARI */
+/* TEACHER */
 .teacher{
 padding:120px 60px;
-background:#ffffff;
 }
 .teacher-container{
 max-width:1200px;
@@ -228,40 +208,69 @@ gap:60px;
 align-items:center;
 flex-wrap:wrap;
 }
-.teacher-photo{
-width:440px;
-height:560px;
-border-radius:22px;
-background:url("images/teacher.png") center/cover no-repeat;
+
+/* CARROSSEL TEACHER */
+.teacher-carousel{
+width:420px;
+height:520px;
+border-radius:18px;
+overflow:hidden;
 position:relative;
 box-shadow:0 20px 60px rgba(0,0,0,.35);
 flex-shrink:0;
 }
-.teacher-label{
+.teacher-carousel input{display:none}
+.teacher-slides{
+display:flex;
+width:300%;
+height:100%;
+transition:.6s ease;
+}
+.teacher-slide{
+width:100%;
+height:100%;
+background-size:cover;
+background-position:center;
+}
+.t1{background-image:url("images/teacher1.jpg")}
+.t2{background-image:url("images/teacher2.jpg")}
+.t3{background-image:url("images/teacher3.jpg")}
+
+.teacher-nav{
 position:absolute;
-bottom:0;
-left:0;
-right:0;
-padding:18px;
-font-size:20px;
-font-weight:700;
-color:#ffffff;
-background:linear-gradient(180deg, transparent, rgba(0,0,0,.7));
-border-radius:0 0 22px 22px;
+bottom:14px;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+gap:8px;
 }
-.teacher-text{
-flex:1;
-min-width:300px;
+.teacher-nav label{
+width:10px;
+height:10px;
+border-radius:50%;
+background:rgba(255,255,255,.6);
+cursor:pointer;
 }
+#tc1:checked ~ .teacher-slides{transform:translateX(0)}
+#tc2:checked ~ .teacher-slides{transform:translateX(-33.33%)}
+#tc3:checked ~ .teacher-slides{transform:translateX(-66.66%)}
+#tc1:checked ~ .teacher-nav label[for="tc1"],
+#tc2:checked ~ .teacher-nav label[for="tc2"],
+#tc3:checked ~ .teacher-nav label[for="tc3"]{
+background:#ffffff;
+}
+
+/* TEXTO TEACHER */
+.teacher-text{flex:1;min-width:300px}
 .teacher-text h2{
 font-size:42px;
 color:var(--primary);
-margin-bottom:22px;
+margin-bottom:20px;
 }
 .teacher-text p{
 font-size:18px;
-line-height:1.8;
-margin-bottom:16px;
+line-height:1.7;
+margin-bottom:14px;
 }
 
 /* WHATSAPP */
@@ -296,11 +305,6 @@ color:#ffffff;
 .hero-text h1{font-size:56px}
 .hero-text h1 span{font-size:72px}
 .teacher-container{flex-direction:column}
-.teacher-photo{
-width:100%;
-max-width:360px;
-height:440px;
-}
 }
 </style>
 </head>
@@ -308,9 +312,7 @@ height:440px;
 <body>
 
 <header>
-<div class="logo">
-<img src="images/logo.png" alt="MASTERY">
-</div>
+<div class="logo"><img src="images/logo.png"></div>
 <nav>
 <ul>
 <li><a href="#cursos">Cursos</a></li>
@@ -341,91 +343,32 @@ height:440px;
 </form>
 </section>
 
-<section class="master-section">
-<div class="master-container">
-<div class="master-text">
-<h2>Por que a MASTERY?</h2>
-<ul>
-<li>Fale inglês desde o primeiro dia</li>
-<li>Aulas práticas, dinâmicas e reais</li>
-<li>Comunicação aplicada ao mundo profissional</li>
-<li>Resultados claros e mensuráveis</li>
-</ul>
-<p>
-A MASTERY foi criada para quem não quer apenas estudar inglês, mas realmente
-<strong>usar o idioma com confiança</strong> no trabalho, nos estudos e na vida.
-</p>
-</div>
-<div class="cta-box">
-<h3>Pronto para começar?</h3>
-<p>Aula experimental gratuita.</p>
-<a href="#cursos">Quero conhecer</a>
-</div>
-</div>
-</section>
-
-<section id="cursos">
-<h2>Nossos Cursos</h2>
-<div class="courses">
-<div class="course-box">
-<img src="images/course1.png">
-<h3>Master Journey</h3>
-<p>Do básico à fluência com método estruturado e acompanhamento constante.</p>
-</div>
-<div class="course-box">
-<img src="images/course2.png">
-<h3>Master Talk</h3>
-<p>Conversação intensiva, personalizada e focada em resultados reais.</p>
-</div>
-<div class="course-box">
-<img src="images/course3.png">
-<h3>HealthTalk</h3>
-<p>Inglês técnico para profissionais da saúde, com simulações reais.</p>
-</div>
-</div>
-</section>
-
-<section class="testimonials">
-<h2>Nossos Alunos</h2>
-<div class="carousel">
-<video src="videos/depo1.mp4" controls></video>
-<video src="videos/depo2.mp4" controls></video>
-<video src="videos/depo3.mp4" controls></video>
-</div>
-</section>
-
 <section class="teacher">
 <div class="teacher-container">
 
-<div class="teacher-photo">
-<div class="teacher-label">Teacher Lari</div>
+<div class="teacher-carousel">
+<input type="radio" name="tc" id="tc1" checked>
+<input type="radio" name="tc" id="tc2">
+<input type="radio" name="tc" id="tc3">
+
+<div class="teacher-slides">
+<div class="teacher-slide t1"></div>
+<div class="teacher-slide t2"></div>
+<div class="teacher-slide t3"></div>
+</div>
+
+<div class="teacher-nav">
+<label for="tc1"></label>
+<label for="tc2"></label>
+<label for="tc3"></label>
+</div>
 </div>
 
 <div class="teacher-text">
-<h2>Quem está por trás da MASTERY</h2>
-
-<p>
-A MASTERY nasceu da experiência real em sala de aula e da necessidade de ensinar
-inglês de forma prática, eficiente e aplicável à vida real.
-</p>
-
-<p>
-Com mais de <strong>10 anos de experiência na educação</strong>, Teacher Lari desenvolveu
-um método próprio focado em comunicação, autonomia e uso real do inglês desde
-o primeiro dia.
-</p>
-
-<p>
-Formada na área da saúde e com vivência ensinando alunos universitários e profissionais
-de enfermagem, criou o <strong>HealthTalk</strong>, um programa exclusivo voltado para
-profissionais da saúde — ministrado por quem realmente entende do contexto.
-</p>
-
-<p>
-Hoje, a MASTERY atende alunos de diferentes níveis e objetivos, sempre com acompanhamento
-próximo, feedback constante e resultados claros.
-Aqui, o aluno não apenas estuda inglês: <strong>ele vive o inglês</strong>.
-</p>
+<h2>Teacher Lari</h2>
+<p>Mais de 10 anos de experiência no ensino de inglês, com método próprio e foco em comunicação real.</p>
+<p>A MASTERY nasceu da prática em sala de aula e da necessidade de ensinar inglês de forma aplicável à vida profissional.</p>
+<p>Com formação na área da saúde, Lari criou o <strong>HealthTalk</strong>, um programa exclusivo para profissionais que precisam do inglês no contexto real de trabalho.</p>
 </div>
 
 </div>
@@ -434,17 +377,14 @@ Aqui, o aluno não apenas estuda inglês: <strong>ele vive o inglês</strong>.
 <div id="whatsapp" onclick="window.open('https://wa.me/11982595575','_blank')">💬</div>
 
 <footer>
-© 2025 MASTERY English - Todos os direitos reservados
+© 2025 MASTERY English
 </footer>
 
 <script>
 function enviar(){
 const n=nome.value,e=email.value,c=celular.value;
-if(!n||!e||!c||!check.checked){
-alert("Preencha todos os campos.");
-return;
-}
-window.location.href=`mailto:larimano74@gmail.com?subject=Contato MASTERY&body=Nome:${n}%0DEmail:${e}%0DCelular:${c}`;
+if(!n||!e||!c||!check.checked){alert("Preencha tudo.");return;}
+window.location.href=`mailto:larimano74@gmail.com?subject=Contato&body=Nome:${n}%0DEmail:${e}%0DCel:${c}`;
 }
 </script>
 
