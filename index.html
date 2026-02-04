@@ -189,7 +189,7 @@ gap:20px;
 .course-box h3{color:var(--accent);font-size:26px}
 .course-box p{font-size:16px;line-height:1.5}
 
-/* DEPOIMENTOS – CARROSSEL 3D */
+/* DEPOIMENTOS */
 .testimonials{
 padding:120px 60px;
 background:var(--gray);
@@ -200,77 +200,25 @@ font-size:42px;
 color:var(--primary);
 margin-bottom:40px;
 }
-.carousel-3d{
-perspective:1200px;
-position:relative;
+.carousel{
 max-width:900px;
 margin:0 auto;
-height:520px;
+display:flex;
+gap:20px;
+justify-content:center;
+flex-wrap:wrap;
 }
-.carousel-wrapper{
-position:relative;
-width:100%;
-height:100%;
-transform-style:preserve-3d;
-}
-.carousel-item{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%) scale(.6);
-opacity:.3;
-filter:blur(3px);
+.carousel video{
 width:260px;
 height:460px;
 border-radius:16px;
-overflow:hidden;
-transition:.6s;
-background:#000;
-cursor:pointer;
-}
-.carousel-item video{
-width:100%;
-height:100%;
 object-fit:cover;
 }
-.carousel-item.active{
-transform:translate(-50%,-50%) scale(1);
-opacity:1;
-filter:none;
-width:300px;
-height:520px;
-z-index:2;
-}
-.carousel-item.prev{
-transform:translate(calc(-50% - 220px),-50%) scale(.7);
-}
-.carousel-item.next{
-transform:translate(calc(-50% + 220px),-50%) scale(.7);
-}
-.carousel-controls{
-position:absolute;
-top:50%;
-left:0;
-right:0;
-display:flex;
-justify-content:space-between;
-padding:0 20px;
-transform:translateY(-50%);
-}
-.carousel-btn{
-width:42px;
-height:42px;
-border-radius:50%;
-border:none;
-background:rgba(0,0,0,.5);
-color:#fff;
-font-size:24px;
-cursor:pointer;
-}
 
-/* TEACHER */
+/* TEACHER LARI */
 .teacher{
 padding:120px 60px;
+background:#ffffff;
 }
 .teacher-container{
 max-width:1200px;
@@ -280,21 +228,40 @@ gap:60px;
 align-items:center;
 flex-wrap:wrap;
 }
-.teacher-text{flex:1;min-width:300px}
+.teacher-photo{
+width:440px;
+height:560px;
+border-radius:22px;
+background:url("images/teacher.png") center/cover no-repeat;
+position:relative;
+box-shadow:0 20px 60px rgba(0,0,0,.35);
+flex-shrink:0;
+}
+.teacher-label{
+position:absolute;
+bottom:0;
+left:0;
+right:0;
+padding:18px;
+font-size:20px;
+font-weight:700;
+color:#ffffff;
+background:linear-gradient(180deg, transparent, rgba(0,0,0,.7));
+border-radius:0 0 22px 22px;
+}
+.teacher-text{
+flex:1;
+min-width:300px;
+}
 .teacher-text h2{
 font-size:42px;
 color:var(--primary);
-margin-bottom:20px;
+margin-bottom:22px;
 }
 .teacher-text p{
 font-size:18px;
-line-height:1.7;
-}
-.teacher-photo{
-width:420px;
-height:520px;
-border-radius:18px;
-background:url("images/teacher.png") center/cover no-repeat;
+line-height:1.8;
+margin-bottom:16px;
 }
 
 /* WHATSAPP */
@@ -329,6 +296,11 @@ color:#ffffff;
 .hero-text h1{font-size:56px}
 .hero-text h1 span{font-size:72px}
 .teacher-container{flex-direction:column}
+.teacher-photo{
+width:100%;
+max-width:360px;
+height:440px;
+}
 }
 </style>
 </head>
@@ -336,7 +308,9 @@ color:#ffffff;
 <body>
 
 <header>
-<div class="logo"><img src="images/logo.png"></div>
+<div class="logo">
+<img src="images/logo.png" alt="MASTERY">
+</div>
 <nav>
 <ul>
 <li><a href="#cursos">Cursos</a></li>
@@ -372,12 +346,15 @@ color:#ffffff;
 <div class="master-text">
 <h2>Por que a MASTERY?</h2>
 <ul>
-<li>Inglês desde o primeiro dia</li>
-<li>Comunicação real e prática</li>
-<li>Método estruturado e mensurável</li>
-<li>Resultados claros e objetivos</li>
+<li>Fale inglês desde o primeiro dia</li>
+<li>Aulas práticas, dinâmicas e reais</li>
+<li>Comunicação aplicada ao mundo profissional</li>
+<li>Resultados claros e mensuráveis</li>
 </ul>
-<p>Inclui o programa exclusivo <strong>HealthTalk</strong>, voltado para profissionais da saúde.</p>
+<p>
+A MASTERY foi criada para quem não quer apenas estudar inglês, mas realmente
+<strong>usar o idioma com confiança</strong> no trabalho, nos estudos e na vida.
+</p>
 </div>
 <div class="cta-box">
 <h3>Pronto para começar?</h3>
@@ -393,71 +370,82 @@ color:#ffffff;
 <div class="course-box">
 <img src="images/course1.png">
 <h3>Master Journey</h3>
-<p>Do básico à fluência com método completo.</p>
+<p>Do básico à fluência com método estruturado e acompanhamento constante.</p>
 </div>
 <div class="course-box">
 <img src="images/course2.png">
 <h3>Master Talk</h3>
-<p>Conversação intensa e personalizada.</p>
+<p>Conversação intensiva, personalizada e focada em resultados reais.</p>
 </div>
 <div class="course-box">
 <img src="images/course3.png">
 <h3>HealthTalk</h3>
-<p>Inglês técnico para profissionais da saúde.</p>
+<p>Inglês técnico para profissionais da saúde, com simulações reais.</p>
 </div>
 </div>
 </section>
 
 <section class="testimonials">
 <h2>Nossos Alunos</h2>
-<div class="carousel-3d">
-<div class="carousel-wrapper" id="carousel">
-<div class="carousel-item active"><video src="videos/depo1.mp4" muted></video></div>
-<div class="carousel-item next"><video src="videos/depo2.mp4" muted></video></div>
-<div class="carousel-item prev"><video src="videos/depo3.mp4" muted></video></div>
-</div>
-<div class="carousel-controls">
-<button class="carousel-btn" onclick="prev()">‹</button>
-<button class="carousel-btn" onclick="next()">›</button>
-</div>
+<div class="carousel">
+<video src="videos/depo1.mp4" controls></video>
+<video src="videos/depo2.mp4" controls></video>
+<video src="videos/depo3.mp4" controls></video>
 </div>
 </section>
 
 <section class="teacher">
 <div class="teacher-container">
-<div class="teacher-text">
-<h2>Teacher Lari</h2>
-<p>Mais de 10 anos de experiência, método próprio e foco em resultados reais.</p>
+
+<div class="teacher-photo">
+<div class="teacher-label">Teacher Lari</div>
 </div>
-<div class="teacher-photo"></div>
+
+<div class="teacher-text">
+<h2>Quem está por trás da MASTERY</h2>
+
+<p>
+A MASTERY nasceu da experiência real em sala de aula e da necessidade de ensinar
+inglês de forma prática, eficiente e aplicável à vida real.
+</p>
+
+<p>
+Com mais de <strong>10 anos de experiência na educação</strong>, Teacher Lari desenvolveu
+um método próprio focado em comunicação, autonomia e uso real do inglês desde
+o primeiro dia.
+</p>
+
+<p>
+Formada na área da saúde e com vivência ensinando alunos universitários e profissionais
+de enfermagem, criou o <strong>HealthTalk</strong>, um programa exclusivo voltado para
+profissionais da saúde — ministrado por quem realmente entende do contexto.
+</p>
+
+<p>
+Hoje, a MASTERY atende alunos de diferentes níveis e objetivos, sempre com acompanhamento
+próximo, feedback constante e resultados claros.
+Aqui, o aluno não apenas estuda inglês: <strong>ele vive o inglês</strong>.
+</p>
+</div>
+
 </div>
 </section>
 
 <div id="whatsapp" onclick="window.open('https://wa.me/11982595575','_blank')">💬</div>
 
 <footer>
-© 2025 MASTERY English
+© 2025 MASTERY English - Todos os direitos reservados
 </footer>
 
 <script>
 function enviar(){
 const n=nome.value,e=email.value,c=celular.value;
-if(!n||!e||!c||!check.checked){alert("Preencha tudo.");return;}
-window.location.href=`mailto:larimano74@gmail.com?subject=Contato&body=Nome:${n}%0DEmail:${e}%0DCel:${c}`;
+if(!n||!e||!c||!check.checked){
+alert("Preencha todos os campos.");
+return;
 }
-
-const items=document.querySelectorAll(".carousel-item");
-let idx=0;
-function update(){
-items.forEach((el,i)=>{
-el.className="carousel-item";
-if(i===idx) el.classList.add("active");
-if(i===(idx+1)%items.length) el.classList.add("next");
-if(i===(idx-1+items.length)%items.length) el.classList.add("prev");
-});
+window.location.href=`mailto:larimano74@gmail.com?subject=Contato MASTERY&body=Nome:${n}%0DEmail:${e}%0DCelular:${c}`;
 }
-function next(){idx=(idx+1)%items.length;update();}
-function prev(){idx=(idx-1+items.length)%items.length;update();}
 </script>
 
 </body>
